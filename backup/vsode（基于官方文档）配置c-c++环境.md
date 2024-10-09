@@ -28,7 +28,8 @@ vscode的配置
 打开vscode随便创建一个cpp文件，直接build。**单击Terminal(终端)->Configure Default Build Task**
 随后在跳出的选择方框中点击C/C++: g++.exe build active file 以编译 helloworld.cpp 并创建可执行文件helloworld.exe
 这样，我们会发现在左侧的文件夹栏目中出现了.vscode文件夹，其中含有tasks.json文件，我们打开该文件，并输入如下代码：
-`{
+```
+{
   "tasks": [
     {
       "type": "cppbuild",
@@ -47,11 +48,13 @@ vscode的配置
     }
   ],
   "version": "2.0.0"
-}`
+}
+```
 注意：根据自己的路径进行相应的修改
 
 接下来，我们进一步进行配置。该配置是针对于程序运行的，点击Run（运行）->Add Configuration（添加配置），这样会在.vscode文件夹中生成launch.json文件
-`{
+```
+{
   "version": "0.2.0",
   "configurations": [
     {
@@ -76,13 +79,15 @@ vscode的配置
       "preLaunchTask": "C/C++: g++.exe build active file"
     }
   ]
-}`
+}
+```
 一样的，根据自己的实际情况进行相应的路径修改。
 
 接下来，我们进行最后一项的配置。该配置时针对于C/C++的相关拓展的，我们首先按下Ctrl+Shift+P以打开全局搜索，输入C/C++并在搜索结果中选择C/C++: Edit configurations(UI)
 点击该选项，我们会打开一个设置的图形界面，将其中Configuration name(配置名称)下的Select a configuration set to edit(选择要编辑的配置集)下的文本框，输入GCC；在IntelliSense mode(IntelliSense 模式)下的文本框中选择windows-gcc-x64。
 在进行上述操作之后，我们会发现在.vscode文件夹中出现了c_cpp_properties.json文件，打开后：
-`{
+```
+{
   "configurations": [
     {
       "name": "GCC",
@@ -96,7 +101,8 @@ vscode的配置
     }
   ],
   "version": 4
-}`
+}
+```
 根据自己的实际情况进行修改。
 
 
