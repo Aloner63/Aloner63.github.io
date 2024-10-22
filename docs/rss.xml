@@ -1,5 +1,21 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>博客</title><link>https://Aloner63.github.io</link><description>Blog description</description><copyright>博客</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/66707421?v=4</url><title>avatar</title><link>https://Aloner63.github.io</link></image><lastBuildDate>Thu, 10 Oct 2024 01:20:27 +0000</lastBuildDate><managingEditor>博客</managingEditor><ttl>60</ttl><webMaster>博客</webMaster><item><title>ubuntu笔记</title><link>https://Aloner63.github.io/post/ubuntu-bi-ji.html</link><description>ubuntu笔记&#13;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>博客</title><link>https://Aloner63.github.io</link><description>Blog description</description><copyright>博客</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://avatars.githubusercontent.com/u/66707421?v=4</url><title>avatar</title><link>https://Aloner63.github.io</link></image><lastBuildDate>Tue, 22 Oct 2024 03:26:32 +0000</lastBuildDate><managingEditor>博客</managingEditor><ttl>60</ttl><webMaster>博客</webMaster><item><title>apache反向代理（并启用https）</title><link>https://Aloner63.github.io/post/apache-fan-xiang-dai-li-%EF%BC%88-bing-qi-yong-https%EF%BC%89.html</link><description>#### apache反向代理(并启用https)&#13;
+&#13;
+安装apache&#13;
+&#13;
+```&#13;
+sudo apt update&#13;
+sudo apt install apache2&#13;
+```&#13;
+&#13;
+确保 Apache 服务器已经启用了反向代理相关的模块&#13;
+&#13;
+```&#13;
+a2enmod proxy&#13;
+a2enmod proxy_http&#13;
+```&#13;
+&#13;
+编辑 Apache 的虚拟主机配置文件。</description><guid isPermaLink="true">https://Aloner63.github.io/post/apache-fan-xiang-dai-li-%EF%BC%88-bing-qi-yong-https%EF%BC%89.html</guid><pubDate>Tue, 22 Oct 2024 03:26:05 +0000</pubDate></item><item><title>ubuntu笔记</title><link>https://Aloner63.github.io/post/ubuntu-bi-ji.html</link><description>ubuntu笔记&#13;
 &#13;
 **一切皆文件**&#13;
 &#13;
