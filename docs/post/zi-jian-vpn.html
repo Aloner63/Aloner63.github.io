@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="dark" data-light-theme="light" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
+    
+    <link rel="icon" href="https://github.githubassets.com/favicons/favicon.svg"><script>
+        let theme = localStorage.getItem("meek_theme") || "light";
+        document.documentElement.setAttribute("data-color-mode", theme);
+    </script>
+<meta name="description" content="第一步：获取vps服务器。">
+<meta property="og:title" content="自建vpn">
+<meta property="og:description" content="第一步：获取vps服务器。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://Aloner63.github.io/post/zi-jian-vpn.html">
+<meta property="og:image" content="https://github.githubassets.com/favicons/favicon.svg">
+<title>自建vpn</title>
+
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+
+</style>
+
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">自建vpn</h1>
+<div class="title-right">
+    <a href="https://Aloner63.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+    <a href="https://github.com/Aloner63/Aloner63.github.io/issues/5" target="_blank" class="btn btn-invisible circle" title="Issue">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathIssue" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><p>第一步：获取vps服务器。VPS服务器需要选择国外的，首选国际知名的vultr，速度不错、稳定且性价比高，按小时计费，能够随时开通和删除服务器，新服务器即是新ip。在<a href="https://www.vultr.com/" rel="nofollow">vultr</a>网站上，购买你觉得合适得vps（一般来说，个人用得话，就选低配置就行）<br>
+注册并邮件激活账号，充值后即可购买服务器。充值方式是支付宝或paypal，使用paypal有银行卡（包括信用卡）即可。paypal注册地址：<a href="https://www.paypal.com/" rel="nofollow">https://www.paypal.com/</a> （paypal是国际知名的第三方支付服务商，注册一下账号，绑定银行卡即可购买国外商品）<br>
+注意：2.5美元的套餐只提供ipv6，一般的电脑用不了，所以建议选择3.5美元以上的套餐<br>
+vultr实际上是折算成小时来计费的，比如服务器是5美元1个月，那么每小时收费为5/30/24=0.0069美元 会自动从账号中扣费，只要保证账号有钱即可。如果你部署的服务器实测后速度不理想，你可以把它删掉（destroy），重新换个地区的服务器来部署，方便且实用。因为新的服务器就是新的ip，所以当ip被墙时这个方法很有用。当ip被墙时，为了保证新开的服务器ip和原先的ip不一样，先开新服务器，开好后再删除旧服务器即可。在账号的Account——Make a payment选项里可以看到账户余额。</p>
+<ul>
+<li>充值<br>
+Account下的Make a Payment下的支付宝（Alipay），选择充值金额，充值即可。</li>
+</ul>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/bff67e2b-d191-4c13-8268-121a9ddf0492"><img width="926" alt="充值" src="https://github.com/user-attachments/assets/bff67e2b-d191-4c13-8268-121a9ddf0492" style="max-width: 100%;"></a></p>
+<ul>
+<li>购买vps<br>
+点击Deploy New Server</li>
+</ul>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/3fa70ae0-85c2-4140-bd20-9120dea7bfaf"><img width="251" alt="购买vps" src="https://github.com/user-attachments/assets/3fa70ae0-85c2-4140-bd20-9120dea7bfaf" style="max-width: 100%;"></a></p>
+<p>购买最便宜的类型<br>
+<a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/31917620-ce3a-4fa7-967f-2d1430a997c6"><img width="1007" alt="屏幕截图 2024-08-22 121722" src="https://github.com/user-attachments/assets/31917620-ce3a-4fa7-967f-2d1430a997c6" style="max-width: 100%;"></a></p>
+<p>选择服务器位置。不同的服务器位置速度会有所不同，有的服务器的最低价格会不同，一般纽约等位置的价格最低，可根据自己的需求来选择。推荐洛杉矶服务器，延迟较低且比较稳定。<br>
+<a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/dfb17c75-d0f9-480c-908a-c4ecbd8c1198"><img width="1003" alt="屏幕截图 2024-08-22 122122" src="https://github.com/user-attachments/assets/dfb17c75-d0f9-480c-908a-c4ecbd8c1198" style="max-width: 100%;"></a></p>
+<p>点击图中的系统名字，会弹出具体系统版本，推荐Debain11。当然其他也可以<br>
+<a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/ce44729d-2e71-49dd-88bd-9ed0def925e4"><img width="997" alt="屏幕截图 2024-08-22 122602" src="https://github.com/user-attachments/assets/ce44729d-2e71-49dd-88bd-9ed0def925e4" style="max-width: 100%;"></a></p>
+<p>选择服务器套餐。根据自己的需求来选择，如果服务器位置定了，套餐不影响速度，影响流量和配置，一般用的人数少，选择低配置就够了。便宜的套餐，点击Regular Cloud Compute，选择一个合适的套餐，提示升级选择No Thanks。<br>
+<a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/8931451c-f7c8-4053-931b-76dc5e93284c"><img width="1008" alt="屏幕截图 2024-08-22 122803" src="https://github.com/user-attachments/assets/8931451c-f7c8-4053-931b-76dc5e93284c" style="max-width: 100%;"></a></p>
+<p>关闭自动备份Auto Backups，这个是收费的。点击它，在右侧的I understand the risk前面选择勾，然后点击Disable Auto Backups即可关闭自动备份。（只是作为梯子使用，不需要自动备份）<br>
+<a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/237baca8-4be0-4049-8d5c-05e174e224f0"><img width="989" alt="屏幕截图 2024-08-22 122918" src="https://github.com/user-attachments/assets/237baca8-4be0-4049-8d5c-05e174e224f0" style="max-width: 100%;"></a></p>
+<p>上述步骤完成以后，即可进行购买。等6~10分钟就差不多了。一般5美元一下就够自己，以及朋友们快乐。</p>
+<p>第二步：购买域名<br>
+在著名的<a href="https://www.namesilo.com" rel="nofollow">namesilo</a>网站上购买域名<br>
+进入主页面，搜索自己意向的域名。<br>
+一般购买一年最划算的，到期后再重新购买。选一个最便宜的后缀名即可<br>
+<a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/407b43c1-ce85-4ad3-8a39-009847f5f0f7"><img width="617" alt="屏幕截图 2024-08-22 145645" src="https://github.com/user-attachments/assets/407b43c1-ce85-4ad3-8a39-009847f5f0f7" style="max-width: 100%;"></a></p>
+<p>进入购物车，去掉不必要的服务以后，价钱应该降到最低了。这时候点击checkout，结算。可以用paypal，也可以用支付宝。<br>
+<a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/81ce04b3-bb80-48b0-83f9-307e30716a33"><img width="630" alt="屏幕截图 2024-08-22 150627" src="https://github.com/user-attachments/assets/81ce04b3-bb80-48b0-83f9-307e30716a33" style="max-width: 100%;"></a></p>
+<p>购买完成后，配置域名解析。配置两个A类型，如下图<br>
+<a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/e24e1cdf-f0d3-4702-992e-e1383c7c925f"><img width="616" alt="屏幕截图 2024-08-22 150913" src="https://github.com/user-attachments/assets/e24e1cdf-f0d3-4702-992e-e1383c7c925f" style="max-width: 100%;"></a><br>
+配置好之后，等待20分钟左右。IP的DNS要全球解析，这个过程需要花费一段时间。检测是否配置好解析，打开本地的CMD，直接ping域名，如果出现了你的vps  ip就证明已经配置成功，如果没有ping成功，慢慢等待。</p>
+<p>目前为止，你已经拥有了自己的vps服务器和一个域名，并且他们两者已经进行绑定了。</p>
+<p>第三步：使用ProxySU一键部署</p>
+<p>由于手动配置较麻烦，这里我们选择使用大神的工具一键配置。<br>
+<a href="https://github.com/proxysu/ProxySU/releases">ProxySU最新版</a><br>
+下载本地，打开<br>
+<a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/a78f9074-576d-4930-a402-30fbc5f0d759"><img width="741" alt="屏幕截图 2024-08-22 151536" src="https://github.com/user-attachments/assets/a78f9074-576d-4930-a402-30fbc5f0d759" style="max-width: 100%;"></a></p>
+<p>点击右上角的添加主机，选择合适的类型添加，推荐Hysteria。（其他几个也使用过，容易被墙，个人观点）<br>
+<a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/1afd2dd1-27dd-4ee7-a8f5-87198a7206a5"><img width="735" alt="屏幕截图 2024-08-22 151610" src="https://github.com/user-attachments/assets/1afd2dd1-27dd-4ee7-a8f5-87198a7206a5" style="max-width: 100%;"></a></p>
+<p>下面以添加Hysteria为例（其他几种大同小异）<br>
+此处密码为vps的用户名和密码。<br>
+只需填红框部分即可，端口可改可不改。<br>
+<a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/8e3bf0b5-468a-4790-818a-b7d89826ad0b"><img width="741" alt="屏幕截图 2024-08-22 152155" src="https://github.com/user-attachments/assets/8e3bf0b5-468a-4790-818a-b7d89826ad0b" style="max-width: 100%;"></a></p>
+<p>点击一键安装，等待安装完成<br>
+<a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/48d5d862-2ddb-4e70-8b97-9185cafcf259"><img width="591" alt="屏幕截图 2024-08-22 152507" src="https://github.com/user-attachments/assets/48d5d862-2ddb-4e70-8b97-9185cafcf259" style="max-width: 100%;"></a><br>
+<a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/2276281d-373c-4447-b243-865efade57fd"><img width="591" alt="屏幕截图 2024-08-22 152620" src="https://github.com/user-attachments/assets/2276281d-373c-4447-b243-865efade57fd" style="max-width: 100%;"></a></p>
+<p>安装完成后，回到ProxySU主页面<br>
+<a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/6b670313-fd70-447b-a1f4-30791324f70a"><img width="741" alt="屏幕截图 2024-08-22 152722" src="https://github.com/user-attachments/assets/6b670313-fd70-447b-a1f4-30791324f70a" style="max-width: 100%;"></a></p>
+<p>点击配置，将全部文本内容储存在config.json中。</p>
+<p>第四步：使用<br>
+<a href="https://github.com/apernet/hysteria/releases">hysteria更新地址</a>进入下载，自己操作系统的版本。</p>
+<p>下载好以后，将它和刚才的config.json放到同一个文件夹下。<br>
+<a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/2e5a3c90-b3f2-4b2e-b532-0fe1a57ddb38"><img width="685" alt="屏幕截图 2024-08-22 153437" src="https://github.com/user-attachments/assets/2e5a3c90-b3f2-4b2e-b532-0fe1a57ddb38" style="max-width: 100%;"></a></p>
+<p>打开hysteria-windows-amd64.exe会出现一个命令行窗口，这时候就可以再浏览器配置相应的端口进行使用了（端口配置，要和config.json中的端口一样。如果不想使用config.json中的端口，可以自行修改，只要不和本机正在使用的端口冲突就行）</p>
+<p>至此，可以快乐学习知识了。</p>
+<p>补充：关于手机使用Hysteria的问题<br>
+<a href="https://github.com/MatsuriDayo/NekoBoxForAndroid">Nekobox</a>功能极强的网络代理app。<br>
+下载到手机，直接右上角，添加。可以复制config.json中的文字，选择直接从剪切板添加，也可以自己手动输入。输入完成，点击下面的小飞机符号，可以进行连接，如果不成功，请检查配置是否有误。</p>
+<p>服务器选择。<br>
+以下是一些提供价格相对便宜的国外云服务器商，适合不同需求和预算的用户：</p>
+<h3>1. <strong>Vultr</strong></h3>
+<ul>
+<li><strong>特点</strong>：提供按小时或按月计费，数据中心分布全球，支持一键部署多种操作系统和应用程序。</li>
+<li><strong>起价</strong>：$2.50/月（512MB RAM，1 CPU，10GB SSD）</li>
+<li><strong>适用场景</strong>：个人网站、小型应用、测试环境。</li>
+</ul>
+<p>网站：<a href="https://www.vultr.com" rel="nofollow">https://www.vultr.com</a></p>
+<h3>2. <strong>Linode</strong></h3>
+<ul>
+<li><strong>特点</strong>：历史悠久，稳定性好，全球多个数据中心，提供强大的 API 和简单易用的管理界面。</li>
+<li><strong>起价</strong>：$5/月（1GB RAM，1 CPU，25GB SSD）</li>
+<li><strong>适用场景</strong>：开发者项目、中小型网站、应用托管。</li>
+</ul>
+<p>网站：<a href="https://www.linode.com" rel="nofollow">https://www.linode.com</a></p>
+<h3>3. <strong>DigitalOcean</strong></h3>
+<ul>
+<li><strong>特点</strong>：用户界面友好，提供一键部署功能，支持按小时或按月计费，适合初学者使用。</li>
+<li><strong>起价</strong>：$5/月（1GB RAM，1 CPU，25GB SSD）</li>
+<li><strong>适用场景</strong>：个人项目、小型应用、初创企业。</li>
+</ul>
+<p>网站：<a href="https://www.digitalocean.com" rel="nofollow">https://www.digitalocean.com</a></p>
+<h3>4. <strong>Hetzner</strong></h3>
+<ul>
+<li><strong>特点</strong>：德国知名的低价云服务提供商，性价比非常高，适合需要较多资源但预算有限的用户。</li>
+<li><strong>起价</strong>：€4.15/月（2GB RAM，1 CPU，20GB SSD）</li>
+<li><strong>适用场景</strong>：中型网站、开发环境、游戏服务器。</li>
+</ul>
+<p>网站：<a href="https://www.hetzner.com" rel="nofollow">https://www.hetzner.com</a></p>
+<h3>5. <strong>UpCloud</strong></h3>
+<ul>
+<li><strong>特点</strong>：提供超快的服务器（使用 MaxIOPS 技术），数据中心遍布欧美和亚太地区，支持按小时计费。</li>
+<li><strong>起价</strong>：$5/月（1GB RAM，1 CPU，25GB SSD）</li>
+<li><strong>适用场景</strong>：高性能需求的应用、数据库托管、生产环境。</li>
+</ul>
+<p>网站：<a href="https://www.upcloud.com" rel="nofollow">https://www.upcloud.com</a></p>
+<h3>6. <strong>Hostwinds</strong></h3>
+<ul>
+<li><strong>特点</strong>：提供经济实惠的 VPS 和云服务器，支持灵活的按月或按小时计费，支持无限带宽。</li>
+<li><strong>起价</strong>：$4.99/月（1GB RAM，1 CPU，30GB SSD）</li>
+<li><strong>适用场景</strong>：小型企业网站、博客、个人项目。</li>
+</ul>
+<p>网站：<a href="https://www.hostwinds.com" rel="nofollow">https://www.hostwinds.com</a></p>
+<h3>7. <strong>Scaleway</strong></h3>
+<ul>
+<li><strong>特点</strong>：法国的云服务提供商，提供便宜的虚拟云服务器，支持灵活的计费方式和自动扩展。</li>
+<li><strong>起价</strong>：€3.00/月（1GB RAM，1 CPU，20GB SSD）</li>
+<li><strong>适用场景</strong>：轻量级应用、个人开发项目、临时测试环境。</li>
+</ul>
+<p>网站：<a href="https://www.scaleway.com" rel="nofollow">https://www.scaleway.com</a></p>
+<h3>8. <strong>Contabo</strong></h3>
+<ul>
+<li><strong>特点</strong>：提供非常实惠的大容量 VPS 和云服务器，支持高配置，性价比极高。</li>
+<li><strong>起价</strong>：$3.99/月（4GB RAM，2 CPU，50GB SSD）</li>
+<li><strong>适用场景</strong>：大流量网站、视频流、企业级应用。</li>
+</ul>
+<p>网站：<a href="https://www.contabo.com" rel="nofollow">https://www.contabo.com</a></p>
+<hr>
+<p>这些云服务器商各有特点，选择时可以根据你的需求（如性能、数据中心位置、计费方式等）以及预算来挑选合适的服务。</p></div>
+<div style="font-size:small;margin-top:8px;float:right;"></div>
+
+<button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
+<div class="comments" id="comments"></div>
+
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://Aloner63.github.io">Blog Title</a></div>
+<div id="footer2">
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if(""!=""){
+    var startSite=new Date("");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行"+diffDay+"天"+" • ";
+}
+</script></div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z'};
+var utterancesLoad=0;
+
+let themeSettings={
+    "dark": ["dark","moon","#00f0ff","dark-blue"],
+    "light": ["light","sun","#ff5000","github-light"],
+    "auto": ["auto","sync","","preferred-color-scheme"]
+};
+function changeTheme(mode, icon, color, utheme){
+    document.documentElement.setAttribute("data-color-mode",mode);
+    document.getElementById("themeSwitch").setAttribute("d",value=IconList[icon]);
+    document.getElementById("themeSwitch").parentNode.style.color=color;
+    if(utterancesLoad==1){utterancesTheme(utheme);}
+}
+function modeSwitch(){
+    let currentMode=document.documentElement.getAttribute('data-color-mode');
+    let newMode = currentMode === "light" ? "dark" : currentMode === "dark" ? "auto" : "light";
+    localStorage.setItem("meek_theme", newMode);
+    if(themeSettings[newMode]){
+        changeTheme(...themeSettings[newMode]);
+    }
+}
+function utterancesTheme(theme){
+    const message={type:'set-theme',theme: theme};
+    const iframe=document.getElementsByClassName('utterances-frame')[0];
+    iframe.contentWindow.postMessage(message,'https://utteranc.es');
+}
+if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
+console.log("\n %c Gmeek last https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
+
+
+
+function openComments(){
+    cm=document.getElementById("comments");
+    cmButton=document.getElementById("cmButton");
+    cmButton.innerHTML="loading";
+    span=document.createElement("span");
+    span.setAttribute("class","AnimatedEllipsis");
+    cmButton.appendChild(span);
+
+    script=document.createElement("script");
+    script.setAttribute("src","https://utteranc.es/client.js");
+    script.setAttribute("repo","Aloner63/Aloner63.github.io");
+    script.setAttribute("issue-term","title");
+    
+    if(localStorage.getItem("meek_theme")=="dark"){script.setAttribute("theme","dark-blue");}
+    else if(localStorage.getItem("meek_theme")=="light") {script.setAttribute("theme","github-light");}
+    else{script.setAttribute("theme","preferred-color-scheme");}
+    
+    script.setAttribute("crossorigin","anonymous");
+    script.setAttribute("async","");
+    cm.appendChild(script);
+
+    int=self.setInterval("iFrameLoading()",200);
+}
+
+function iFrameLoading(){
+    var utterances=document.getElementsByClassName('utterances');
+    if(utterances.length==1){
+        if(utterances[0].style.height!=""){
+            utterancesLoad=1;
+            int=window.clearInterval(int);
+            document.getElementById("cmButton").style.display="none";
+            console.log("utterances Load OK");
+        }
+    }
+}
+
+
+
+</script>
+
+
+</html>

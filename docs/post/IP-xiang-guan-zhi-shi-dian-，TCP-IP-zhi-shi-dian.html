@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="dark" data-light-theme="light" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
+    
+    <link rel="icon" href="https://github.githubassets.com/favicons/favicon.svg"><script>
+        let theme = localStorage.getItem("meek_theme") || "light";
+        document.documentElement.setAttribute("data-color-mode", theme);
+    </script>
+<meta name="description" content="IP地址的分类系统（A类、B类、C类、D类和E类）用于简化互联网中的地址分配。">
+<meta property="og:title" content="IP相关知识点，TCP/IP知识点">
+<meta property="og:description" content="IP地址的分类系统（A类、B类、C类、D类和E类）用于简化互联网中的地址分配。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://Aloner63.github.io/post/IP-xiang-guan-zhi-shi-dian-%EF%BC%8CTCP-IP-zhi-shi-dian.html">
+<meta property="og:image" content="https://github.githubassets.com/favicons/favicon.svg">
+<title>IP相关知识点，TCP/IP知识点</title>
+
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+.copy-feedback {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 50px;
+    color: var(--color-fg-on-emphasis);
+    background-color: var(--color-fg-muted);
+    border-radius: 3px;
+    padding: 5px 8px;
+    font-size: 12px;
+}
+</style>
+
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">IP相关知识点，TCP/IP知识点</h1>
+<div class="title-right">
+    <a href="https://Aloner63.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+    <a href="https://github.com/Aloner63/Aloner63.github.io/issues/4" target="_blank" class="btn btn-invisible circle" title="Issue">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathIssue" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><p>IP地址的分类系统（A类、B类、C类、D类和E类）用于简化互联网中的地址分配。每种地址类型有不同的用途和地址范围。让我们详细讨论每种类型的IP地址：</p>
+<h3>A类IP地址</h3>
+<ul>
+<li><strong>网络号</strong>：前8位（第一个字节）</li>
+<li><strong>主机号</strong>：后24位（后三个字节）</li>
+<li><strong>第一个字节范围</strong>：0 - 127</li>
+<li><strong>默认子网掩码</strong>：255.0.0.0</li>
+<li><strong>可用网络数</strong>：126（1 - 126）</li>
+<li><strong>每个网络可用主机数</strong>：16,777,214（2^24 - 2）</li>
+</ul>
+<h4>详细范围：</h4>
+<ul>
+<li><strong>0.0.0.0</strong>：保留地址，用于指定默认路由或特定网络。</li>
+<li><strong>10.0.0.0 - 10.255.255.255</strong>：私有网络，不在公共互联网中使用。</li>
+<li><strong>127.0.0.0 - 127.255.255.255</strong>：环回地址，用于本地计算机通信测试。</li>
+<li><strong>1.0.0.0 - 126.255.255.255</strong>：公共互联网可用地址。</li>
+</ul>
+<h3>B类IP地址</h3>
+<ul>
+<li><strong>网络号</strong>：前16位（前两个字节）</li>
+<li><strong>主机号</strong>：后16位（后两个字节）</li>
+<li><strong>第一个字节范围</strong>：128 - 191</li>
+<li><strong>默认子网掩码</strong>：255.255.0.0</li>
+<li><strong>可用网络数</strong>：16,384（128.0.0.0 - 191.255.0.0）</li>
+<li><strong>每个网络可用主机数</strong>：65,534（2^16 - 2）</li>
+</ul>
+<h4>详细范围：</h4>
+<ul>
+<li><strong>128.0.0.0 - 191.255.255.255</strong>：公共互联网可用地址。</li>
+<li><strong>172.16.0.0 - 172.31.255.255</strong>：私有网络，不在公共互联网中使用。</li>
+</ul>
+<h3>C类IP地址</h3>
+<ul>
+<li><strong>网络号</strong>：前24位（前三个字节）</li>
+<li><strong>主机号</strong>：后8位（最后一个字节）</li>
+<li><strong>第一个字节范围</strong>：192 - 223</li>
+<li><strong>默认子网掩码</strong>：255.255.255.0</li>
+<li><strong>可用网络数</strong>：2,097,152（192.0.0.0 - 223.255.255.0）</li>
+<li><strong>每个网络可用主机数</strong>：254（2^8 - 2）</li>
+</ul>
+<h4>详细范围：</h4>
+<ul>
+<li><strong>192.0.0.0 - 223.255.255.255</strong>：公共互联网可用地址。</li>
+<li><strong>192.168.0.0 - 192.168.255.255</strong>：私有网络，不在公共互联网中使用。</li>
+</ul>
+<h3>D类IP地址</h3>
+<ul>
+<li><strong>用于组播（Multicast）</strong>：发送数据到多个指定接收者</li>
+<li><strong>第一个字节范围</strong>：224 - 239</li>
+</ul>
+<h4>详细范围：</h4>
+<ul>
+<li><strong>224.0.0.0 - 239.255.255.255</strong>：组播地址，用于一次性向多个设备发送数据包，不用于常规主机通信。</li>
+</ul>
+<h3>E类IP地址</h3>
+<ul>
+<li><strong>保留地址</strong>：用于研究和实验</li>
+<li><strong>第一个字节范围</strong>：240 - 255</li>
+</ul>
+<h4>详细范围：</h4>
+<ul>
+<li><strong>240.0.0.0 - 255.255.255.255</strong>：保留地址，不用于公共互联网。</li>
+</ul>
+<h3>总结</h3>
+<h4>A类IP地址</h4>
+<ul>
+<li>用于大型网络</li>
+<li>第一个字节范围：1 - 126</li>
+<li>默认子网掩码：255.0.0.0</li>
+</ul>
+<h4>B类IP地址</h4>
+<ul>
+<li>用于中型网络</li>
+<li>第一个字节范围：128 - 191</li>
+<li>默认子网掩码：255.255.0.0</li>
+</ul>
+<h4>C类IP地址</h4>
+<ul>
+<li>用于小型网络</li>
+<li>第一个字节范围：192 - 223</li>
+<li>默认子网掩码：255.255.255.0</li>
+</ul>
+<h4>D类IP地址</h4>
+<ul>
+<li>用于组播</li>
+<li>第一个字节范围：224 - 239</li>
+</ul>
+<h4>E类IP地址</h4>
+<ul>
+<li>保留用于实验和研究</li>
+<li>第一个字节范围：240 - 255</li>
+</ul>
+<h3>私有地址和公共地址</h3>
+<ul>
+<li><strong>私有地址</strong>：A类（10.0.0.0/8）、B类（172.16.0.0/12）、C类（192.168.0.0/16）</li>
+<li><strong>公共地址</strong>：分配给设备在全球互联网中使用</li>
+</ul>
+<p>255.255.255.255<br>
+该ip时受限的广播地址。受限广播地址和一般广播地址的区别在于，受限广播地址只能用于本地网络，路由器不会转发以受限广播地址为目的地址的分组。是一个特殊的局部广播地址，用于网络中的所有设备。发送到这个地址的数据包会被发送到本地网络上的所有设备。</p>
+<p>0.0.0.0<br>
+常用于寻找自己的IP地址，例如在我们的RARP，BOOTP和DHCP协议中，若某个未知IP地址的无盘机想要知道自己的IP地址，它就以255.255.255.255为目的地址，向本地范围（具体而言是被各个路由器屏蔽的范围内）的服务器发送IP请求分组。</p>
+<p>回环地址<br>
+127.0.0.0/8被用作回环地址，回环地址表示本机的地址，常用于对本机的测试，用的最多的是127.0.0.1</p>
+<p>A，B，C类私有地址<br>
+私有地址(private address)也叫专用地址，它们不会在全球使用，只具有本地意义。<br>
+A类私有地址：10.0.0.0/8，范围是：10.0.0.0<del>10.255.255.255<br>
+B类私有地址：172.16.0.0/12，范围是：172.16.0.0</del>172.31.255.255<br>
+C类私有地址：192.168.0.0/16，范围是：192.168.0.0~192.168.255.255</p>
+<p>子网掩码<br>
+子网掩码是一个用于网络配置的工具，它帮助计算机知道在一个IP地址中，哪些部分代表网络地址，哪些部分代表主机地址。通俗地说，子网掩码就像是一个“筛子”，通过它我们可以把IP地址分成网络部分和主机部分。<br>
+子网掩码用于确定一个IP地址中的网络部分和主机部分。网络地址标识网络本身，而主机地址标识网络中的一个具体设备。<br>
+网络地址：网络的“名字”<br>
+主机地址：网络中某个设备的“身份”<br>
+工作原理<br>
+子网掩码的每一个位与IP地址的对应位进行“按位与”运算，得到网络地址。<br>
+192.168.1.10     : 11000000.10101000.00000001.00001010<br>
+255.255.255.0    : 11111111.11111111.11111111.00000000<br>
+-------------------------------------------<br>
+网络地址         : 11000000.10101000.00000001.00000000<br>
+网络地址：192.168.1.0<br>
+从网络地址中，可以计算出子网中可用的主机IP地址范围<br>
+起始IP地址：网络地址 + 1 （192.168.1.1）<br>
+结束IP地址：广播地址 - 1 （192.168.1.254）</p>
+<p>TCP的三次握手<br>
+第一次握手：客户端发起连接请求，发送 SYN 包。<br>
+第二次握手：服务器回应 SYN-ACK 包。<br>
+第三次握手：客户端确认连接，发送 ACK 包。</p>
+<p>为什么要进行三次握手呢？<br>
+第一次握手： 客户端向服务器端发送报文<br>
+证明客户端的发送能力正常<br>
+第二次握手：服务器端接收到报文并向客户端发送报文<br>
+证明服务器端的接收能力、发送能力正常<br>
+第三次握手：客户端向服务器发送报文<br>
+证明客户端的接收能力正常</p>
+<p>如果两次握手会出现什么情况呢？<br>
+在只有两次"握手"的情形下，假设Client想跟Server建立连接，但是却因为中途连接请求的数据报丢失了，故Client端不得不重新发送一遍；这个时候Server端仅收到一个连接请求，因此可以正常的建立连接。但是，有时候Client端重新发送请求不是因为数据报丢失了，而是有可能数据传输过程因为网络并发量很大在某结点被阻塞了，这种情形下Server端将先后收到2次请求，并持续等待两个Client请求向他发送数据...问题就在这里，Cient端实际上只有一次请求，而Server端却有2个响应，极端的情况可能由于Client端多次重新发送请求数据而导致Server端最后建立了N多个响应在等待，因而造成极大的资源浪费！所以，"三次握手"很有必要！<br>
+如果采用三次握手的话，就算那条失效的报文发送到服务器端，服务器端确认并向客户端发送报文，但此时客户端不会发出确认，由于客户端没有确认，由于服务器端没有接收到确认，就会知道客户端没有请求连接。</p>
+<p>TCP的四次握手</p>
+<p>客户端                   服务器<br>
+|                         |<br>
+| --- FIN ----&gt;           |  1. 客户端发起连接关闭请求<br>
+|                         |<br>
+| &lt;---- ACK ----          |  2. 服务器确认请求并准备关闭<br>
+|                         |<br>
+| &lt;---- FIN ----          |  3. 服务器发起连接关闭请求<br>
+|                         |<br>
+| --- ACK ----&gt;           |  4. 客户端确认关闭请求，连接释放完成<br>
+|                         |</p>
+<p>TCP 的四次挥手是确保双方在关闭连接时可以正确地释放所有资源并完成数据传输的过程。虽然它比三次握手多了一步，但这一步是为了保证双方都能安全地完成数据传输和关闭连接，避免在网络通信中出现未完成的数据传输或资源泄漏的问题。</p>
+<p>四次挥手和三次握手的对比</p>
+<pre class="notranslate"><code class="notranslate">三次握手（Three-Way Handshake）：用于建立连接
+    SYN → SYN-ACK → ACK
+
+四次挥手（Four-Way Handshake）：用于关闭连接
+    FIN → ACK → FIN → ACK
+</code></pre>
+<p>UDP协议<br>
+UDP用户数据报协议，是面向无连接的通讯协议，UDP数据包括目的端口号和源端口号信息，由于通讯不需要连接，所以可以实现广播发送。</p>
+<p>UDP通讯时不需要接收方确认，属于不可靠的传输，可能会出现丢包现象，实际应用中要求程序员编程验证。</p>
+<p>UDP与TCP位于同一层，但它不管数据包的顺序、错误或重发。因此，UDP不被应用于那些使用虚电路的面向连接的服务，UDP主要用于那些面向查询---应答的服务，例如NFS。相对于FTP或Telnet，这些服务需要交换的信息量较小。</p>
+<p>DNS协议<br>
+DNS是域名系统(DomainNameSystem)的缩写，该系统用于命名组织到域层次结构中的计算机和网络服务，可以简单地理解为将URL转换为IP地址。域名是由圆点分开一串单词或缩写组成的，每一个域名都对应一个惟一的IP地址，在Internet上域名与IP地址之间是一一对应的，DNS就是进行域名解析的服务器。DNS命名用于Internet等TCP/IP网络中，通过用户友好的名称查找计算机和服务。</p>
+<p>NAT协议<br>
+是一种用于修改网络数据包中的 IP 地址信息的技术。它的主要功能是允许多个设备通过一个公共 IP 地址共享网络访问，同时提高网络安全性和减少 IP 地址的需求。<br>
+在 NAT 的工作中，设备的私有 IP 地址在与外部网络（如互联网）通信时，会被转换为公共 IP 地址。这个转换可以在路由器、网关或防火墙等网络设备上进行。<br>
+NAT网络地址转换(Network Address Translation)属接入广域网(WAN)技术，是一种将私有（保留）地址转化为合法IP地址的转换技术，它被广泛应用于各种类型Internet接入方式和各种类型的网络中。原因很简单，NAT不仅完美地解决了lP地址不足的问题，而且还能够有效地避免来自网络外部的攻击，隐藏并保护网络内部的计算机。</p>
+<p>DHCP协议<br>
+DHCP动态主机设置协议（Dynamic Host Configuration Protocol）是一个局域网的网络协议，使用UDP协议工作，主要有两个用途：给内部网络或网络服务供应商自动分配IP地址，给用户或者内部网络管理员作为对所有计算机作中央管理的手段。</p>
+<p>一个网络连接的实例<br>
+1）客户端浏览器通过DNS解析到www.baidu.com的IP地址220.181.27.48，通过这个IP地址找到客户端到服务器的路径。客户端浏览器发起一个HTTP会话到220.161.27.48，然后通过TCP进行封装数据包，输入到网络层。<br>
+2）在客户端的传输层，把HTTP会话请求分成报文段，添加源和目的端口，如服务器使用80端口监听客户端的请求，客户端由系统随机选择一个端口如5000，与服务器进行交换，服务器把相应的请求返回给客户端的5000端口。然后使用IP层的IP地址查找目的端。<br>
+3）客户端的网络层不用关系应用层或者传输层的东西，主要做的是通过查找路由表确定如何到达服务器，期间可能经过多个路由器，这些都是由路由器来完成的工作，不作过多的描述，无非就是通过查找路由表决定通过那个路径到达服务器。<br>
+4）客户端的链路层，包通过链路层发送到路由器，通过邻居协议查找给定IP地址的MAC地址，然后发送ARP请求查找目的地址，如果得到回应后就可以使用ARP的请求应答交换的IP数据包现在就可以传输了，然后发送IP数据包到达服务器的地址。</p></div>
+<div style="font-size:small;margin-top:8px;float:right;"></div>
+
+<button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
+<div class="comments" id="comments"></div>
+
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://Aloner63.github.io">Blog Title</a></div>
+<div id="footer2">
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if(""!=""){
+    var startSite=new Date("");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行"+diffDay+"天"+" • ";
+}
+</script></div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z', 'copy': 'M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z', 'check': 'M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z'};
+var utterancesLoad=0;
+
+let themeSettings={
+    "dark": ["dark","moon","#00f0ff","dark-blue"],
+    "light": ["light","sun","#ff5000","github-light"],
+    "auto": ["auto","sync","","preferred-color-scheme"]
+};
+function changeTheme(mode, icon, color, utheme){
+    document.documentElement.setAttribute("data-color-mode",mode);
+    document.getElementById("themeSwitch").setAttribute("d",value=IconList[icon]);
+    document.getElementById("themeSwitch").parentNode.style.color=color;
+    if(utterancesLoad==1){utterancesTheme(utheme);}
+}
+function modeSwitch(){
+    let currentMode=document.documentElement.getAttribute('data-color-mode');
+    let newMode = currentMode === "light" ? "dark" : currentMode === "dark" ? "auto" : "light";
+    localStorage.setItem("meek_theme", newMode);
+    if(themeSettings[newMode]){
+        changeTheme(...themeSettings[newMode]);
+    }
+}
+function utterancesTheme(theme){
+    const message={type:'set-theme',theme: theme};
+    const iframe=document.getElementsByClassName('utterances-frame')[0];
+    iframe.contentWindow.postMessage(message,'https://utteranc.es');
+}
+if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
+console.log("\n %c Gmeek last https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
+
+
+
+function openComments(){
+    cm=document.getElementById("comments");
+    cmButton=document.getElementById("cmButton");
+    cmButton.innerHTML="loading";
+    span=document.createElement("span");
+    span.setAttribute("class","AnimatedEllipsis");
+    cmButton.appendChild(span);
+
+    script=document.createElement("script");
+    script.setAttribute("src","https://utteranc.es/client.js");
+    script.setAttribute("repo","Aloner63/Aloner63.github.io");
+    script.setAttribute("issue-term","title");
+    
+    if(localStorage.getItem("meek_theme")=="dark"){script.setAttribute("theme","dark-blue");}
+    else if(localStorage.getItem("meek_theme")=="light") {script.setAttribute("theme","github-light");}
+    else{script.setAttribute("theme","preferred-color-scheme");}
+    
+    script.setAttribute("crossorigin","anonymous");
+    script.setAttribute("async","");
+    cm.appendChild(script);
+
+    int=self.setInterval("iFrameLoading()",200);
+}
+
+function iFrameLoading(){
+    var utterances=document.getElementsByClassName('utterances');
+    if(utterances.length==1){
+        if(utterances[0].style.height!=""){
+            utterancesLoad=1;
+            int=window.clearInterval(int);
+            document.getElementById("cmButton").style.display="none";
+            console.log("utterances Load OK");
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const createClipboardHTML = (codeContent, additionalClasses = '') => `
+        <pre class="notranslate"><code class="notranslate">${codeContent}</code></pre>
+        <div class="clipboard-container position-absolute right-0 top-0 ${additionalClasses}">
+            <clipboard-copy class="ClipboardButton btn m-2 p-0" role="button" style="display: inherit;">
+                <svg height="16" width="16" class="octicon octicon-copy m-2"><path d="${IconList["copy"]}"></path></svg>
+                <svg height="16" width="16" class="octicon octicon-check color-fg-success m-2 d-none"><path d="${IconList["check"]}"></path></svg>
+            </clipboard-copy>
+            <div class="copy-feedback">Copied!</div>
+        </div>
+    `;
+
+    const handleCodeElements = (selector = '') => {
+        document.querySelectorAll(selector).forEach(codeElement => {
+            const codeContent = codeElement.innerHTML;
+            const newStructure = document.createElement('div');
+            newStructure.className = 'snippet-clipboard-content position-relative overflow-auto';
+            newStructure.innerHTML = createClipboardHTML(codeContent);
+
+            const parentElement = codeElement.parentElement;
+            if (selector.includes('highlight')) {
+                parentElement.insertBefore(newStructure, codeElement.nextSibling);
+                parentElement.removeChild(codeElement);
+            } else {
+                parentElement.parentElement.replaceChild(newStructure, parentElement);
+            }
+        });
+    };
+
+    handleCodeElements('pre.notranslate > code.notranslate');
+    handleCodeElements('div.highlight > pre.notranslate');
+
+    let currentFeedback = null;
+    document.querySelectorAll('clipboard-copy').forEach(copyButton => {
+        copyButton.addEventListener('click', () => {
+            const codeContent = copyButton.closest('.snippet-clipboard-content').innerText;
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = codeContent;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempTextArea);
+
+            const copyIcon = copyButton.querySelector('.octicon-copy');
+            const checkIcon = copyButton.querySelector('.octicon-check');
+            const copyFeedback = copyButton.nextElementSibling;
+
+            if (currentFeedback && currentFeedback !== copyFeedback) {currentFeedback.style.display = 'none';}
+            currentFeedback = copyFeedback;
+
+            copyIcon.classList.add('d-none');
+            checkIcon.classList.remove('d-none');
+            copyFeedback.style.display = 'block';
+            copyButton.style.borderColor = 'var(--color-success-fg)';
+
+            setTimeout(() => {
+                copyIcon.classList.remove('d-none');
+                checkIcon.classList.add('d-none');
+                copyFeedback.style.display = 'none';
+                copyButton.style.borderColor = '';
+            }, 2000);
+        });
+    });
+});
+
+</script>
+
+
+</html>

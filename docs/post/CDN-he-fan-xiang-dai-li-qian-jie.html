@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="dark" data-light-theme="light" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
+    
+    <link rel="icon" href="https://github.githubassets.com/favicons/favicon.svg"><script>
+        let theme = localStorage.getItem("meek_theme") || "light";
+        document.documentElement.setAttribute("data-color-mode", theme);
+    </script>
+<meta name="description" content="#### CDN
+
+CDN的全称为“Content Delivery Network”，及，内容分发网络。">
+<meta property="og:title" content="CDN和反向代理浅解">
+<meta property="og:description" content="#### CDN
+
+CDN的全称为“Content Delivery Network”，及，内容分发网络。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://Aloner63.github.io/post/CDN-he-fan-xiang-dai-li-qian-jie.html">
+<meta property="og:image" content="https://github.githubassets.com/favicons/favicon.svg">
+<title>CDN和反向代理浅解</title>
+
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+
+</style>
+
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">CDN和反向代理浅解</h1>
+<div class="title-right">
+    <a href="https://Aloner63.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+    <a href="https://github.com/Aloner63/Aloner63.github.io/issues/13" target="_blank" class="btn btn-invisible circle" title="Issue">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathIssue" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><h4>CDN</h4>
+<p>CDN的全称为“Content Delivery Network”，及，内容分发网络。</p>
+<p>它是建立并覆盖在承载网之上，由分布在不同区域的边缘节点服务器群组成的分布式网络。</p>
+<p>CDN应用广泛，支持多种行业、多种场景内容加速，例如：图片小文件、大文件下载、视音频点播、直播流媒体、全站加速、安全加速。</p>
+<p>CDN工作原理</p>
+<p>CDN的工作原理就是将源站的资源缓存到位于全国各地的CDN节点上，用户请求资源时，就近返回节点上缓存的资源，而不需要每个用户的请求都回您的源站获取，避免网络拥塞、分担源站压力，保证用户访问资源的速度和体验<br>
+<a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/689fd867-a8a4-4774-a1c5-ba40bbb9b2aa"><img src="https://github.com/user-attachments/assets/689fd867-a8a4-4774-a1c5-ba40bbb9b2aa" alt="图片" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/ac497753-91a5-4c95-8f81-bbd30101d250"><img src="https://github.com/user-attachments/assets/ac497753-91a5-4c95-8f81-bbd30101d250" alt="图片" style="max-width: 100%;"></a></p>
+<p>借用阿里云官网的例子，来简单介绍CDN的工作原理。假设通过CDN加速的域名为<code class="notranslate">www.a.com</code>，接入CDN网络，开始使用加速服务后，当终端用户（北京）发起HTTP请求时，处理流程如下：</p>
+<ol>
+<li>当终端用户（北京）向<code class="notranslate">www.a.com</code>下的指定资源发起请求时，首先向LDNS（本地DNS）发起域名解析请求。</li>
+<li>LDNS检查缓存中是否有<code class="notranslate">www.a.com</code>的IP地址记录。如果有，则直接返回给终端用户；如果没有，则向授权DNS查询。</li>
+<li>当授权DNS解析<code class="notranslate">www.a.com</code>时，返回域名CNAME <a href="https://github.com/Aloner63/Aloner63.github.io/issues/www.a.tbcdn.com">www.a.tbcdn.com</a>对应IP地址。</li>
+<li>域名解析请求发送至阿里云DNS调度系统，并为请求分配最佳节点IP地址。</li>
+<li>LDNS获取DNS返回的解析IP地址。</li>
+<li>用户获取解析IP地址。</li>
+<li>用户向获取的IP地址发起对该资源的访问请求。</li>
+</ol>
+<ul>
+<li>如果该IP地址对应的节点已缓存该资源，则会将数据直接返回给用户，例如，图中步骤7和8，请求结束。</li>
+<li>如果该IP地址对应的节点未缓存该资源，则节点向源站发起对该资源的请求。获取资源后，结合用户自定义配置的缓存策略，将资源缓存至节点，例如，图中的北京节点，并返回给用户，请求结束。</li>
+</ul>
+<p>从这个例子可以了解到：</p>
+<ol>
+<li>CDN的加速资源是跟域名绑定的。</li>
+<li>通过域名访问资源，首先是通过DNS分查找离用户最近的CDN节点（边缘服务器）的IP</li>
+<li>通过IP访问实际资源时，如果CDN上并没有缓存资源，则会到源站请求资源，并缓存到CDN节点上，这样，用户下一次访问时，该CDN节点就会有对应资源的缓存了。</li>
+</ol>
+<p>简单讲，CDN就是通过将站点内容发布至遍布全球的海量加速节点，使其用户可就近获取所需内容。</p>
+<p>CDN主要解决这么些问题:</p>
+<ul>
+<li>物理距离远，多次网络转发，延时高不稳定;</li>
+<li>所在运营商不同，需运营商之间转发绕行;</li>
+<li>网络带宽处理能力有限，海量请求时，响应速度与可用性降低。</li>
+</ul>
+<h5>为什么要用CDN？</h5>
+<p>如果你在经营一家网站，那你应该知道几点因素是你制胜的关键：</p>
+<ul>
+<li>内容有吸引力</li>
+<li>访问速度快</li>
+<li>支持频繁的用户互动</li>
+<li>可以在各处浏览无障碍</li>
+</ul>
+<p>另外，你的网站必须能在复杂的网络环境下运行，考虑到全球的用户访问体验。你的网站也会随着使用越来越多的对象（如图片、帧、CSS及APIs）和形形色色的动作（分享、跟踪）而系统逐渐庞大。所以，系统变慢带来用户的流失。</p>
+<p>Google及其它网站的研究表明，一个网站每慢一秒钟，就会丢失许多访客，甚至这些访客永远不会再次光顾这些网站。可以想像，如果网站是你的盈利渠道或是品牌窗口，那么网站速度慢将是一个致命的打击。</p>
+<p>这就是你使用CDN的第一个也是最重要的原因：<strong>为了加速网站的访问</strong></p>
+<h5>CDN与传统网站的区别</h5>
+<p>CDN主要功能是在不同的地点缓存内容，通过负载均衡技术，将用户的请求定向到最合适的缓存服务器上去获取内容，比如说，是北京的用户，我们让他访问北京的节点，深圳的用户，我们让他访问深圳的节点。通过就近访问，加速用户对网站的访问。解决Internet网络拥堵状况，提高用户访问网络的响应速度。</p>
+<h4>反向代理</h4>
+<p>幕后的“交通警察”</p>
+<p><strong>反向代理</strong> 就像一个位于服务器和客户端之间的“交通警察”，它接收来自客户端的请求，然后根据一定的规则将请求转发给内部网络上的服务器。对于客户端来说，它只知道反向代理的IP地址，并不知道在它背后的服务器集群的存在。</p>
+<h5>反向代理的工作原理</h5>
+<ol>
+<li><strong>接收请求：</strong> 客户端向反向代理服务器发送请求。</li>
+<li><strong>转发请求：</strong> 反向代理服务器根据配置的规则，将请求转发给相应的后端服务器。</li>
+<li><strong>接收响应：</strong> 后端服务器处理请求后，将响应返回给反向代理服务器。</li>
+<li><strong>返回响应：</strong> 反向代理服务器将收到的响应再转发给客户端。</li>
+</ol>
+<h3>反向代理的作用</h3>
+<ul>
+<li><strong>负载均衡：</strong> 将大量的请求分发到多个后端服务器上，提高系统的并发处理能力。</li>
+<li><strong>缓存静态内容：</strong> 缓存静态资源（如图片、CSS、JS文件），减少后端服务器的压力，提高响应速度。</li>
+<li><strong>隐藏后端服务器：</strong> 客户端只能看到反向代理服务器的IP地址，保护了后端服务器的真实IP。</li>
+<li><strong>增强安全性：</strong> 可以对请求进行过滤和防护，防止攻击。</li>
+<li><strong>实现虚拟主机：</strong> 一个反向代理服务器可以为多个域名提供服务。</li>
+</ul>
+<h5>反向代理的常见应用场景</h5>
+<ul>
+<li><strong>大型网站：</strong> 分散访问压力，提高网站的可用性。</li>
+<li><strong>CDN（内容分发网络）：</strong> 将静态内容缓存到离用户最近的服务器上，加速访问。</li>
+<li><strong>API网关：</strong> 统一管理和保护API接口。</li>
+<li><strong>微服务架构：</strong> 将请求路由到不同的微服务。</li>
+</ul>
+<h5>常用的反向代理软件</h5>
+<ul>
+<li><strong>Nginx：</strong> 高性能、轻量级，适合高并发场景。</li>
+<li><strong>Apache HTTP Server：</strong> 功能强大，模块丰富，适合传统Web应用。</li>
+<li><strong>HAProxy：</strong> 专注于TCP和HTTP负载均衡。</li>
+<li><strong>Varnish：</strong> 高性能HTTP加速器。</li>
+</ul>
+<h5>形象比喻</h5>
+<ul>
+<li>
+<p>反向代理就像一个酒店的前台</p>
+<p>：</p>
+<ul>
+<li>客人（客户端）向前台（反向代理）提出入住要求。</li>
+<li>前台根据客人的需求，安排客人入住不同的房间（后端服务器）。</li>
+<li>客人只知道前台，不知道房间的具体位置。</li>
+</ul>
+</li>
+</ul>
+<h4>反向代理和CDN的异同</h4>
+<h5><strong>工作原理的不同</strong></h5>
+<ul>
+<li>
+<p><strong>CDN（内容分发网络）</strong>：<br>
+CDN的主要目的是通过<strong>缓存静态内容</strong>（如图片、CSS、JS、视频等）到多个分布在全球或局部的节点服务器，让用户可以从<strong>最近的服务器</strong>获取这些内容，从而减少网络延迟、提高访问速度。CDN的节点服务器位于全球多个地点，用户的请求会被路由到<strong>最近的CDN节点</strong>，而不是直接访问网站的原始服务器。</p>
+<p><strong>工作机制：</strong></p>
+<ul>
+<li>网站的静态资源会被复制并分发到各地的CDN服务器。</li>
+<li>当用户访问网站时，CDN会根据用户所在的地理位置，将其请求路由到最近的节点，从缓存中获取内容并返回给用户。</li>
+<li>如果CDN节点上没有缓存的资源，才会去原始服务器请求并缓存。</li>
+</ul>
+</li>
+</ul>
+<p><strong>反向代理</strong>：<br>
+反向代理服务器是位于<strong>用户和原始服务器之间</strong>的中间服务器。它主要的任务是<strong>代替原始服务器接收用户请求</strong>，然后将请求转发给原始服务器处理，原始服务器返回数据后，反向代理再将数据返回给用户。反向代理一般放置在与原始服务器比较接近的地方（通常是同一个数据中心），它不存储数据，只是作为请求的中转站。</p>
+<p><strong>工作机制：</strong></p>
+<ul>
+<li>当用户访问一个网站时，用户的请求首先到达反向代理服务器。</li>
+<li>反向代理服务器根据请求的内容，将请求转发给适当的原始服务器。</li>
+<li>原始服务器处理完请求后，将响应结果返回给反向代理，反向代理再返回给用户。</li>
+</ul>
+<h5><strong>主要用途的不同</strong></h5>
+<ul>
+<li><strong>CDN的主要用途</strong>：
+<ul>
+<li><strong>加速静态内容的传输</strong>：CDN通过将静态资源（如图片、视频等）缓存到多个分布式节点，可以让用户从最近的节点获取资源，从而加快访问速度。</li>
+<li><strong>减轻原始服务器的负担</strong>：CDN缓存静态资源后，大量的用户请求都能从CDN获取，减少了对原始服务器的直接访问，降低服务器的压力。</li>
+<li><strong>全球加速</strong>：CDN可以让不同地理位置的用户都能快速访问内容，解决跨国、跨地区访问慢的问题。</li>
+</ul>
+</li>
+<li><strong>反向代理的主要用途</strong>：
+<ul>
+<li><strong>隐藏原始服务器的真实IP</strong>：通过反向代理，用户只会看到代理服务器的IP地址，原始服务器的IP可以被隐藏，增加安全性。</li>
+<li><strong>负载均衡</strong>：反向代理可以将用户的请求分配到不同的原始服务器上，确保每台服务器的负载是均衡的，提高系统的整体性能。</li>
+<li><strong>安全防护</strong>：反向代理可以充当一个防护屏障，通过限制或过滤恶意请求，保护后端的原始服务器免受攻击。</li>
+<li><strong>SSL卸载</strong>：反向代理服务器可以处理SSL加密/解密的任务，减轻原始服务器的负担。</li>
+</ul>
+</li>
+</ul>
+<h5><strong>缓存机制的不同</strong></h5>
+<ul>
+<li><strong>CDN</strong>：<br>
+CDN的核心机制是缓存。CDN节点会将静态内容缓存起来，当用户访问这些内容时，可以直接从缓存中获取，而不需要每次都请求原始服务器。这是CDN加速的关键所在。</li>
+<li><strong>反向代理</strong>：<br>
+反向代理服务器一般<strong>不主动缓存</strong>数据，它的主要作用是<strong>中转请求</strong>。但在某些情况下，反向代理也可以配置缓存功能，尤其是对某些静态资源或重复的动态请求进行缓存，以进一步减轻原始服务器的压力。</li>
+</ul>
+<h5><strong>部署位置的不同</strong></h5>
+<ul>
+<li><strong>CDN</strong>：<br>
+CDN的节点服务器通常<strong>分布在全球或区域的多个地方</strong>，越靠近用户的节点越有利于加速。因此，CDN是一个全球分布的网络。</li>
+<li><strong>反向代理</strong>：<br>
+反向代理服务器通常<strong>位于原始服务器的前端</strong>，可以在同一个数据中心或距离原始服务器较近的地方部署。它的目的是作为一个网关来接收所有的用户请求，并根据需要将这些请求转发给后端的原始服务器。</li>
+</ul></div>
+<div style="font-size:small;margin-top:8px;float:right;"></div>
+
+<button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
+<div class="comments" id="comments"></div>
+
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://Aloner63.github.io">Blog Title</a></div>
+<div id="footer2">
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if(""!=""){
+    var startSite=new Date("");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行"+diffDay+"天"+" • ";
+}
+</script></div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z'};
+var utterancesLoad=0;
+
+let themeSettings={
+    "dark": ["dark","moon","#00f0ff","dark-blue"],
+    "light": ["light","sun","#ff5000","github-light"],
+    "auto": ["auto","sync","","preferred-color-scheme"]
+};
+function changeTheme(mode, icon, color, utheme){
+    document.documentElement.setAttribute("data-color-mode",mode);
+    document.getElementById("themeSwitch").setAttribute("d",value=IconList[icon]);
+    document.getElementById("themeSwitch").parentNode.style.color=color;
+    if(utterancesLoad==1){utterancesTheme(utheme);}
+}
+function modeSwitch(){
+    let currentMode=document.documentElement.getAttribute('data-color-mode');
+    let newMode = currentMode === "light" ? "dark" : currentMode === "dark" ? "auto" : "light";
+    localStorage.setItem("meek_theme", newMode);
+    if(themeSettings[newMode]){
+        changeTheme(...themeSettings[newMode]);
+    }
+}
+function utterancesTheme(theme){
+    const message={type:'set-theme',theme: theme};
+    const iframe=document.getElementsByClassName('utterances-frame')[0];
+    iframe.contentWindow.postMessage(message,'https://utteranc.es');
+}
+if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
+console.log("\n %c Gmeek last https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
+
+
+
+function openComments(){
+    cm=document.getElementById("comments");
+    cmButton=document.getElementById("cmButton");
+    cmButton.innerHTML="loading";
+    span=document.createElement("span");
+    span.setAttribute("class","AnimatedEllipsis");
+    cmButton.appendChild(span);
+
+    script=document.createElement("script");
+    script.setAttribute("src","https://utteranc.es/client.js");
+    script.setAttribute("repo","Aloner63/Aloner63.github.io");
+    script.setAttribute("issue-term","title");
+    
+    if(localStorage.getItem("meek_theme")=="dark"){script.setAttribute("theme","dark-blue");}
+    else if(localStorage.getItem("meek_theme")=="light") {script.setAttribute("theme","github-light");}
+    else{script.setAttribute("theme","preferred-color-scheme");}
+    
+    script.setAttribute("crossorigin","anonymous");
+    script.setAttribute("async","");
+    cm.appendChild(script);
+
+    int=self.setInterval("iFrameLoading()",200);
+}
+
+function iFrameLoading(){
+    var utterances=document.getElementsByClassName('utterances');
+    if(utterances.length==1){
+        if(utterances[0].style.height!=""){
+            utterancesLoad=1;
+            int=window.clearInterval(int);
+            document.getElementById("cmButton").style.display="none";
+            console.log("utterances Load OK");
+        }
+    }
+}
+
+
+
+</script>
+
+
+</html>

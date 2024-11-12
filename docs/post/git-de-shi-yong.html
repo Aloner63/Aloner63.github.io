@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="dark" data-light-theme="light" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
+    
+    <link rel="icon" href="https://github.githubassets.com/favicons/favicon.svg"><script>
+        let theme = localStorage.getItem("meek_theme") || "light";
+        document.documentElement.setAttribute("data-color-mode", theme);
+    </script>
+<meta name="description" content="### git
+
+所有的版本控制系统，其实只能跟踪文本文件的改动，比如TXT文件，网页，所有的程序代码等等，Git也不例外。">
+<meta property="og:title" content="git的使用">
+<meta property="og:description" content="### git
+
+所有的版本控制系统，其实只能跟踪文本文件的改动，比如TXT文件，网页，所有的程序代码等等，Git也不例外。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://Aloner63.github.io/post/git-de-shi-yong.html">
+<meta property="og:image" content="https://github.githubassets.com/favicons/favicon.svg">
+<title>git的使用</title>
+
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+.copy-feedback {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 50px;
+    color: var(--color-fg-on-emphasis);
+    background-color: var(--color-fg-muted);
+    border-radius: 3px;
+    padding: 5px 8px;
+    font-size: 12px;
+}
+</style>
+
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">git的使用</h1>
+<div class="title-right">
+    <a href="https://Aloner63.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+    <a href="https://github.com/Aloner63/Aloner63.github.io/issues/8" target="_blank" class="btn btn-invisible circle" title="Issue">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathIssue" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><h3>git</h3>
+<p>所有的版本控制系统，其实只能跟踪文本文件的改动，比如TXT文件，网页，所有的程序代码等等，Git也不例外。版本控制系统可以告诉你每次的改动，比如在第5行加了一个单词“Linux”，在第8行删了一个单词“Windows”。而图片、视频这些二进制文件，虽然也能由版本控制系统管理，但没法跟踪文件的变化，只能把二进制文件每次改动串起来，也就是只知道图片从100KB改成了120KB，但到底改了啥，版本控制系统不知道，也没法知道。</p>
+<p>不幸的是，Microsoft的Word格式是二进制格式，因此，版本控制系统是没法跟踪Word文件的改动的，前面我们举的例子只是为了演示，如果要真正使用版本控制系统，就要以纯文本方式编写文件。</p>
+<p>使用统一UTF-8编码，所有语言使用同一编码，既没有冲突，又被所有平台支持。</p>
+<p>使用Windows的童鞋要特别注意：千万不要使用Windows自带的<strong>记事本</strong>编辑任何文本文件。原因是Microsoft开发记事本的团队使用了一个非常弱智的行为来保存UTF-8编码的文件，他们自作聪明地在每个文件开头添加了0xefbbbf（十六进制）的字符，你会遇到很多不可思议的问题，比如，网页第一行可能会显示一个“?”，明明正确的程序一编译就报语法错误，等等，都是由记事本的弱智行为带来的。建议你下载[<a href="https://code.visualstudio.com/" rel="nofollow">Visual Studio Code</a>](<a href="https://code.visualstudio.com/)%E4%BB%A3%E6%9B%BF%E8%AE%B0%E4%BA%8B%E6%9C%AC%EF%BC%8C%E4%B8%8D%E4%BD%86%E5%8A%9F%E8%83%BD%E5%BC%BA%E5%A4%A7%EF%BC%8C%E8%80%8C%E4%B8%94%E5%85%8D%E8%B4%B9%EF%BC%81" rel="nofollow">https://code.visualstudio.com/)代替记事本，不但功能强大，而且免费！</a></p>
+<p><strong>版本管理的核心</strong>：Git 的版本控制管理的是一系列提交（commits），每个提交形成一个快照（snapshot），记录了项目在某个时间点的状态。这些提交通过父子关系构成了一个链条，形成了分支。</p>
+<p><strong><code class="notranslate">HEAD</code> 的作用</strong>：<code class="notranslate">HEAD</code> 指向的是当前检出的分支的最新提交。也就是说，Git 知道你当前工作在哪个版本上是通过 <code class="notranslate">HEAD</code> 指针实现的。当你进行 <code class="notranslate">commit</code>、<code class="notranslate">checkout</code>、<code class="notranslate">reset</code> 等操作时，<code class="notranslate">HEAD</code> 的位置会改变，以反映你当前的工作状态。</p>
+<p><strong>举例</strong>：</p>
+<ul>
+<li><strong>提交</strong>：当你提交更改时，Git 会在当前分支的末尾生成一个新的提交，并将 <code class="notranslate">HEAD</code> 移动到该新的提交。</li>
+<li><strong>分支切换</strong>：当你切换到另一个分支时，<code class="notranslate">HEAD</code> 也会移动到该分支的最新提交点。</li>
+<li><strong>回滚</strong>：当你使用 <code class="notranslate">reset</code> 或 <code class="notranslate">checkout</code> 回滚到某个提交时，<code class="notranslate">HEAD</code> 会指向那个提交。</li>
+</ul>
+<h5>本地仓库</h5>
+<p>git	init	：	初始化仓库</p>
+<p>git 	add	*/文件名	:	把文件添加到仓库</p>
+<p>Unix的哲学是“没有消息就是好消息”，说明添加成功。</p>
+<p>git	commit 	-m	"第一次提交"	:	把文件提交到仓库</p>
+<p>虽然Git告诉我们<code class="notranslate">readme.txt</code>被修改了，但如果能看看具体修改了什么内容，自然是很好的。比如你休假两周从国外回来，第一天上班时，已经记不清上次怎么修改的<code class="notranslate">readme.txt</code></p>
+<p>git	diff	文件名	:	查看文件修改了什么</p>
+<p>用<code class="notranslate">git diff HEAD -- readme.txt</code>命令可以查看工作区和版本库里面最新版本的区别</p>
+<p>知道了对<code class="notranslate">readme.txt</code>作了什么修改后，再把它提交到仓库就放心多了。</p>
+<p>像这样，你不断对文件进行修改，然后不断提交修改到版本库里，就好比玩RPG游戏时，每通过一关就会自动把游戏状态存盘，如果某一关没过去，你还可以选择读取前一关的状态。有些时候，在打Boss之前，你会手动存盘，以便万一打Boss失败了，可以从最近的地方重新开始。Git也是一样，每当你觉得文件修改到一定程度的时候，就可以“保存一个快照”，这个快照在Git中被称为<code class="notranslate">commit</code>。一旦你把文件改乱了，或者误删了文件，还可以从最近的一个<code class="notranslate">commit</code>恢复，然后继续工作，而不是把几个月的工作成果全部丢失。</p>
+<p>git	log	：	显示从最近到最远的提交日志</p>
+<p>如果嫌输出信息太多，看得眼花缭乱的，可以试试加上<code class="notranslate">--pretty=oneline</code>参数</p>
+<pre lang="plain" class="notranslate"><code class="notranslate">git log --pretty=oneline
+</code></pre>
+<p>如何进行版本回退？</p>
+<p>在Git中，用<code class="notranslate">HEAD</code>表示当前版本。上一个版本就是<code class="notranslate">HEAD^</code>，上上一个版本就是<code class="notranslate">HEAD^^</code>，当然往上100个版本写100个<code class="notranslate">^</code>比较容易数不过来，所以写成<code class="notranslate">HEAD~100</code></p>
+<pre lang="plain" class="notranslate"><code class="notranslate">git reset --hard HEAD^	回退到上一个版本
+</code></pre>
+<p>--hard<code class="notranslate">参数有啥意义？</code>--hard<code class="notranslate">会回退到上个版本的已提交状态，而</code>--soft<code class="notranslate">会回退到上个版本的未提交状态，</code>--mixed<code class="notranslate">会回退到上个版本已添加但未提交的状态。现在，先放心使用</code>--hard</p>
+<p>当我们回退了版本以后，想再回到最新的版本，就需要最新版本的版本号了。怎么办呢？</p>
+<p>git	reflog	：	用来记录你的每一条命令</p>
+<p><strong>版本号没必要写全，前几位就可以了，Git会自动去找。当然也不能只写前一两位，因为Git可能会找到多个版本号，就无法确定是哪一个了。</strong></p>
+<p>Git和其他版本控制系统如SVN的一个不同之处就是有暂存区的概念。</p>
+<p>工作区：就是电脑上能看到的本地目录</p>
+<p>版本库：工作区的一个.git文件夹</p>
+<p>版本库中有很多东西，其中最重要的就是被称为stage（或index）的暂存区，还有git为我们自动创建的第一个分支master，以及指向master的一个指针叫HEAD。</p>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/780c970d-2502-466f-9ab9-c4ae5a1693a1"><img src="https://github.com/user-attachments/assets/780c970d-2502-466f-9ab9-c4ae5a1693a1" alt="repo" style="max-width: 100%;"></a></p>
+<p>当我们使用git	add将文件添加进来的时候，实际上就是把文件修改添加到暂存区。</p>
+<p>当我们进行git	commit提交修改的时候，实际上就是把暂存区中的所有内容提交到当前分支。</p>
+<p>可以简单的理解为，需要提交的文件修改都放到暂存区（git add），然后一次性提交暂存区的所有修改（git commit）。</p>
+<p>如果你没有对工作区进行任何修改，那么工作区是干净的。</p>
+<p>这里我们要提到一点，为什么git会比其他版本管理工具要优秀呢？</p>
+<p>那是因为，git跟踪并管理的是修改，并非文件。</p>
+<p>当我们进行以下操作时（实验：为了理解修改）：第一次修改 -&gt; <code class="notranslate">git add</code> -&gt; 第二次修改 -&gt; <code class="notranslate">git commit</code></p>
+<p>第一次修改将被提交到分支，但是，第二次修改并不会被提交到分支。因为第二次修改并没有被放到暂存区。</p>
+<p>那么如何提交第二次修改呢？</p>
+<p>可以继续git add再git commit。也可以在将第一次修改提交前，将第一次修改和第二次修改一块放到暂存区，然后一块提交。</p>
+<p>那么如何撤销修改呢？</p>
+<p><code class="notranslate">git checkout -- file</code>可以丢弃工作区的修改。</p>
+<p>放弃对工作区的修改有两种情况：第一种，修改后还没有被放到暂存区（没有add，只对文件进行了修改），这时候撤销修改就会回到和版本库一样的状态，也就是说，这个修改直接被忽略了。第二种，已经将文件添加到了暂存区（进行了add），又做出了修改，这时候撤销修改的话，文件会回到添加到暂存区的状态。</p>
+<p>删除文件呢（这里指的是commit后的文件，因为commit之前删除不会导致工作区和版本库不同）？</p>
+<p>删除文件有两种情况</p>
+<p>第一种，自己主动删除。一般情况下，你通常直接在文件管理器中把没用的文件删了，或者用<code class="notranslate">rm</code>命令删了 rm   test.txt  .这个时候，git知道你删除了文件，因此工作区和版本库不一致。一般需要先从版本库中删除文件（git	rm	文件），然后git	commit	-m	"remove   文件"提交这个删除操作</p>
+<p>第二种，误删。这时候使用（git checkout -- test.txt）恢复误删文件。其实是用版本库里的版本替换工作区的版本，<strong>无论工作区是修改还是删除</strong>，都可以“一键还原”。</p>
+<p>需要注意的是，从来没有被添加到版本库就被删除的文件（没有commit的），是无法恢复的！</p>
+<h5>远程仓库</h5>
+<p>添加远程仓库</p>
+<p>第1步：创建SSH Key。在用户主目录下，看看有没有.ssh目录，如果有，再看看这个目录下有没有<code class="notranslate">id_rsa</code>和<code class="notranslate">id_rsa.pub</code>这两个文件，如果已经有了，可直接跳到下一步。如果没有，打开Shell（Windows下打开Git Bash），创建SSH Key:</p>
+<pre class="notranslate"><code class="notranslate">ssh-keygen -t rsa -C "youremail@example.com"
+</code></pre>
+<p>如果一切顺利的话，可以在用户主目录里找到<code class="notranslate">.ssh</code>目录，里面有<code class="notranslate">id_rsa</code>和<code class="notranslate">id_rsa.pub</code>两个文件，这两个就是SSH Key的秘钥对，<code class="notranslate">id_rsa</code>是私钥，不能泄露出去，<code class="notranslate">id_rsa.pub</code>是公钥，可以放心地告诉任何人。</p>
+<p>第2步：登陆GitHub，打开“Account settings”，“SSH Keys”页面：</p>
+<p>然后，点“Add SSH Key”，填上任意Title，在Key文本框里粘贴<code class="notranslate">id_rsa.pub</code>文件的内容</p>
+<p>为什么GitHub需要SSH Key呢？因为GitHub需要识别出你推送的提交确实是你推送的，而不是别人冒充的，而Git支持SSH协议，所以，GitHub只要知道了你的公钥，就可以确认只有你自己才能推送。</p>
+<p>当然，GitHub允许你添加多个Key。假定你有若干电脑，你一会儿在公司提交，一会儿在家里提交，只要把每台电脑的Key都添加到GitHub，就可以在每台电脑上往GitHub推送了。</p>
+<p>在github上创建一个仓库后。</p>
+<p>先关联仓库</p>
+<pre class="notranslate"><code class="notranslate">git remote add origin git@github.com:example/example.git
+</code></pre>
+<p>这里的origin是一个常用的默认习惯命名。当然，也可以起其他的名字。</p>
+<p>将本地仓库推从到远程仓库</p>
+<pre class="notranslate"><code class="notranslate">git push -u origin master
+</code></pre>
+<p>把本地库的内容推送到远程，用<code class="notranslate">git push</code>命令，实际上是把当前分支<code class="notranslate">master</code>推送到远程。</p>
+<p>为什么第一次推送要加 -u</p>
+<p>由于远程库是空的，我们第一次推送<code class="notranslate">master</code>分支时，加上了<code class="notranslate">-u</code>参数，Git不但会把本地的<code class="notranslate">master</code>分支内容推送的远程新的<code class="notranslate">master</code>分支，还会把本地的<code class="notranslate">master</code>分支和远程的<code class="notranslate">master</code>分支关联起来，在以后的推送或者拉取时就可以简化命令</p>
+<p>第一次提交以后，就可以用</p>
+<pre class="notranslate"><code class="notranslate">git push origin master
+</code></pre>
+<p>来进行推送了</p>
+<p>如果，远程仓库添加错了，怎么办？</p>
+<p>使用<code class="notranslate">git remote -v</code>查看远程库信息</p>
+<p>根据具体的名字来删除远程仓库</p>
+<pre class="notranslate"><code class="notranslate">git remote rm origin
+</code></pre>
+<p>此处的“删除”其实是解除了本地和远程的绑定关系，并不是物理上删除了远程库。远程库本身并没有任何改动。要真正删除远程库，需要登录到GitHub，在后台页面找到删除按钮再删除。</p>
+<p>从远程库克隆</p>
+<p>直接使用</p>
+<pre class="notranslate"><code class="notranslate">git clone git@github.com:example/example.git
+</code></pre>
+<p>将远程仓库克隆到本地。</p>
+<p>值得注意的是，GitHub给出的地址不止一个，还可以用<code class="notranslate">https://github.com/michaelliao/gitskills.git</code>这样的地址。实际上，Git支持多种协议，默认的<code class="notranslate">git://</code>使用<code class="notranslate">ssh</code>，但也可以使用<code class="notranslate">https</code>等其他协议。</p>
+<p>使用<code class="notranslate">https</code>除了速度慢以外，还有个最大的麻烦是每次推送都必须输入口令，但是在某些只开放<code class="notranslate">http</code>端口的公司内部就无法使用<code class="notranslate">ssh</code>协议而只能用<code class="notranslate">https</code>。</p>
+<h5>分支管理</h5>
+<h6>创建和合并分支</h6>
+<p>根本原理是什么样呢？</p>
+<p>在版本回退里，我们已经知道，在每次进行提交之后，git都会把它们串成一条时间线，这条时间线就是一个分支。这条分支就是我们所说的主分支，也就是master分支。严格来说，HEAD并不是指向提交的，而是指向master的，master才指向提交。</p>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/f2c86e4c-caa5-4440-ac36-3488c17db60c"><img src="https://github.com/user-attachments/assets/f2c86e4c-caa5-4440-ac36-3488c17db60c" alt="HEAD指向master1 drawio" style="max-width: 100%;"></a></p>
+<p>当我们每进行一次提交，master就会向前移动一步，随着不断地提交，master分支的线越来越长。</p>
+<p>当我们创建了一个新的分支dev后，git会新建一个指针，这个指针会指向master当前的提交，然后再把HEAD指向dev。</p>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/ac6a669a-285f-4672-81e0-509200425ce9"><img src="https://github.com/user-attachments/assets/ac6a669a-285f-4672-81e0-509200425ce9" alt="dev指向master当前 drawio" style="max-width: 100%;"></a></p>
+<p>注意：在进行上述操作时，工作区没有任何变化</p>
+<p>从现在开始，工作区的修改和提交就是针对dev分支的了。如果进行了新的提交。那么会出现HEAD指向的dev往后移动一步，而master不变。</p>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/7088d676-6246-4cc2-be97-b8ae2e386107"><img src="https://github.com/user-attachments/assets/7088d676-6246-4cc2-be97-b8ae2e386107" alt="HEAD指向dev向后移动一步 drawio" style="max-width: 100%;"></a></p>
+<p>当我们在dev上的工作完成以后，就可以把dev合并到master上去了。怎么合并呢？就是让master直接指向dev的当前提交。</p>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/c19225b3-cf51-4fdd-8702-ca5b63c670d6"><img src="https://github.com/user-attachments/assets/c19225b3-cf51-4fdd-8702-ca5b63c670d6" alt="master指向dev当前提交 drawio" style="max-width: 100%;"></a></p>
+<p>git合并是非常快的。本质上就是修改指针。</p>
+<p>合并完成后，dev分支的作用就没有了。可以删除dev分支。</p>
+<p>具体操作</p>
+<pre class="notranslate"><code class="notranslate">git checkout -b dev	：	创建分支并切换
+git switch -c dev	：	创建分支并切换
+
+git branch dev		：创建分支
+git checkout dev	：切换分支
+git switch dev		：切换分支
+
+git branch			：查看当前分支
+
+git switch master	：切换回master分支
+发现在dev分支上添加的内容不见了。不要着急，现在将dev分支合并到master分支上去。
+git merge dev		：将dev分支合并到当前的分支
+注意：如果同一个文件来说，内容不一样，进行合并会覆盖掉master中的原有内容
+</code></pre>
+<h6>解决冲突</h6>
+<p>当分支冲突时，也就是说，当我们修改过dev分支后，没有在master分支上提交。然后在master上进行了修改之后，进行了合并。这时候，两个分支的文件内容会冲突。</p>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/b4cc3d8e-edda-423e-8382-8da79bc03067"><img src="https://github.com/user-attachments/assets/b4cc3d8e-edda-423e-8382-8da79bc03067" alt="分支冲突 drawio" style="max-width: 100%;"></a></p>
+<p>文件存在冲突，必须手动解决冲突后再提交。<code class="notranslate">git status</code>也可以告诉我们冲突的文件。</p>
+<p>Git用<code class="notranslate">&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>，<code class="notranslate">=======</code>，<code class="notranslate">&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>标记出不同分支的内容，我们修改如下后保存。</p>
+<p>再进行提交，就变成正常了。</p>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/5e5596f6-3b55-46cf-98cc-ce5d1c58cb87"><img src="https://github.com/user-attachments/assets/5e5596f6-3b55-46cf-98cc-ce5d1c58cb87" alt="冲突解决 drawio" style="max-width: 100%;"></a></p>
+<h6>分支管理策略（能看到分支合并历史）</h6>
+<p>当我们进行实际开发的时候，master一般作为发布版本的主分支。一般不在上面进行开发。在那干活呢？在副分支上干活，dev上。如果是多人共同合作的话，还会有很多很多分支。每个人都有自己的分支。</p>
+<pre class="notranslate"><code class="notranslate">git merge --no-ff -m "merge with no-ff" dev
+</code></pre>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/b37ef7de-ad86-4bd0-ab35-9f65c8291d6c"><img src="https://github.com/user-attachments/assets/b37ef7de-ad86-4bd0-ab35-9f65c8291d6c" alt="branches" style="max-width: 100%;"></a></p>
+<p>合并分支时，加上<code class="notranslate">--no-ff</code>参数就可以用普通模式合并，合并后的历史有分支，能看出来曾经做过合并，而<code class="notranslate">fast forward</code>合并就看不出来曾经做过合并（git默认是<code class="notranslate">fast forward</code>合并分支）</p>
+<h6>bug分支</h6>
+<p>现在有一个bug任务比较紧急。目前来看，需要创建一个分支来修复它，但是dev分支上的工作还没有提交。dev上的工作至少还需要两天才能完成，但是bug比较急，需要5分钟之内解决。这时候该怎么办？</p>
+<p>git提供一个stash功能，可以把工作现场储藏起来，等以后恢复现场后继续工作。</p>
+<pre class="notranslate"><code class="notranslate">git stash
+</code></pre>
+<p>用git  status查看工作区，是干净的。</p>
+<p>这时候就可以想办法修复bug了。首先要确认在哪个分支上修改bug，如果是master，就从master上创建分支。在新创建的分支上修复好bug以后，合并到master分支，删除新分支。</p>
+<p>这时候要继续进行dev分支上的工作了，恢复工作内容一般有两个办法。</p>
+<p>先查看工作现场在哪</p>
+<pre class="notranslate"><code class="notranslate">git stash list
+</code></pre>
+<p>第一种，使用</p>
+<pre class="notranslate"><code class="notranslate">git stash apply
+</code></pre>
+<p>恢复以后，stash内容不会删除，需要手动使用git stash drop删除。</p>
+<p>第二种，使用</p>
+<pre class="notranslate"><code class="notranslate">git stash pop
+</code></pre>
+<p>恢复的同时会把stash也删除了。</p>
+<p>在master上修复bug以后，又出现了一个新问题，master上有的问题，dev分支上应该也有。这时候难道需要在dev上进行一遍相同的操作？</p>
+<p>大可不必。git提供一个</p>
+<pre class="notranslate"><code class="notranslate">git cherry-pick	版本号（提交的时候出现）
+</code></pre>
+<p>切换到dev分支，执行上面的命令。git会自动给dev分支做一次提交，相当于复制了修复bug的分支在dev提交。</p>
+<p>开发一个新功能，最好新建一个分支；</p>
+<p>如果要丢弃一个没有被合并过的分支，可以通过</p>
+<pre class="notranslate"><code class="notranslate">git branch -D &lt;name&gt;`
+</code></pre>
+<p>强行删除。</p>
+<h6>多人协作</h6></div>
+<div style="font-size:small;margin-top:8px;float:right;"></div>
+
+<button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
+<div class="comments" id="comments"></div>
+
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://Aloner63.github.io">Blog Title</a></div>
+<div id="footer2">
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if(""!=""){
+    var startSite=new Date("");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行"+diffDay+"天"+" • ";
+}
+</script></div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z', 'copy': 'M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z', 'check': 'M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z'};
+var utterancesLoad=0;
+
+let themeSettings={
+    "dark": ["dark","moon","#00f0ff","dark-blue"],
+    "light": ["light","sun","#ff5000","github-light"],
+    "auto": ["auto","sync","","preferred-color-scheme"]
+};
+function changeTheme(mode, icon, color, utheme){
+    document.documentElement.setAttribute("data-color-mode",mode);
+    document.getElementById("themeSwitch").setAttribute("d",value=IconList[icon]);
+    document.getElementById("themeSwitch").parentNode.style.color=color;
+    if(utterancesLoad==1){utterancesTheme(utheme);}
+}
+function modeSwitch(){
+    let currentMode=document.documentElement.getAttribute('data-color-mode');
+    let newMode = currentMode === "light" ? "dark" : currentMode === "dark" ? "auto" : "light";
+    localStorage.setItem("meek_theme", newMode);
+    if(themeSettings[newMode]){
+        changeTheme(...themeSettings[newMode]);
+    }
+}
+function utterancesTheme(theme){
+    const message={type:'set-theme',theme: theme};
+    const iframe=document.getElementsByClassName('utterances-frame')[0];
+    iframe.contentWindow.postMessage(message,'https://utteranc.es');
+}
+if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
+console.log("\n %c Gmeek last https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
+
+
+
+function openComments(){
+    cm=document.getElementById("comments");
+    cmButton=document.getElementById("cmButton");
+    cmButton.innerHTML="loading";
+    span=document.createElement("span");
+    span.setAttribute("class","AnimatedEllipsis");
+    cmButton.appendChild(span);
+
+    script=document.createElement("script");
+    script.setAttribute("src","https://utteranc.es/client.js");
+    script.setAttribute("repo","Aloner63/Aloner63.github.io");
+    script.setAttribute("issue-term","title");
+    
+    if(localStorage.getItem("meek_theme")=="dark"){script.setAttribute("theme","dark-blue");}
+    else if(localStorage.getItem("meek_theme")=="light") {script.setAttribute("theme","github-light");}
+    else{script.setAttribute("theme","preferred-color-scheme");}
+    
+    script.setAttribute("crossorigin","anonymous");
+    script.setAttribute("async","");
+    cm.appendChild(script);
+
+    int=self.setInterval("iFrameLoading()",200);
+}
+
+function iFrameLoading(){
+    var utterances=document.getElementsByClassName('utterances');
+    if(utterances.length==1){
+        if(utterances[0].style.height!=""){
+            utterancesLoad=1;
+            int=window.clearInterval(int);
+            document.getElementById("cmButton").style.display="none";
+            console.log("utterances Load OK");
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const createClipboardHTML = (codeContent, additionalClasses = '') => `
+        <pre class="notranslate"><code class="notranslate">${codeContent}</code></pre>
+        <div class="clipboard-container position-absolute right-0 top-0 ${additionalClasses}">
+            <clipboard-copy class="ClipboardButton btn m-2 p-0" role="button" style="display: inherit;">
+                <svg height="16" width="16" class="octicon octicon-copy m-2"><path d="${IconList["copy"]}"></path></svg>
+                <svg height="16" width="16" class="octicon octicon-check color-fg-success m-2 d-none"><path d="${IconList["check"]}"></path></svg>
+            </clipboard-copy>
+            <div class="copy-feedback">Copied!</div>
+        </div>
+    `;
+
+    const handleCodeElements = (selector = '') => {
+        document.querySelectorAll(selector).forEach(codeElement => {
+            const codeContent = codeElement.innerHTML;
+            const newStructure = document.createElement('div');
+            newStructure.className = 'snippet-clipboard-content position-relative overflow-auto';
+            newStructure.innerHTML = createClipboardHTML(codeContent);
+
+            const parentElement = codeElement.parentElement;
+            if (selector.includes('highlight')) {
+                parentElement.insertBefore(newStructure, codeElement.nextSibling);
+                parentElement.removeChild(codeElement);
+            } else {
+                parentElement.parentElement.replaceChild(newStructure, parentElement);
+            }
+        });
+    };
+
+    handleCodeElements('pre.notranslate > code.notranslate');
+    handleCodeElements('div.highlight > pre.notranslate');
+
+    let currentFeedback = null;
+    document.querySelectorAll('clipboard-copy').forEach(copyButton => {
+        copyButton.addEventListener('click', () => {
+            const codeContent = copyButton.closest('.snippet-clipboard-content').innerText;
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = codeContent;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempTextArea);
+
+            const copyIcon = copyButton.querySelector('.octicon-copy');
+            const checkIcon = copyButton.querySelector('.octicon-check');
+            const copyFeedback = copyButton.nextElementSibling;
+
+            if (currentFeedback && currentFeedback !== copyFeedback) {currentFeedback.style.display = 'none';}
+            currentFeedback = copyFeedback;
+
+            copyIcon.classList.add('d-none');
+            checkIcon.classList.remove('d-none');
+            copyFeedback.style.display = 'block';
+            copyButton.style.borderColor = 'var(--color-success-fg)';
+
+            setTimeout(() => {
+                copyIcon.classList.remove('d-none');
+                checkIcon.classList.add('d-none');
+                copyFeedback.style.display = 'none';
+                copyButton.style.borderColor = '';
+            }, 2000);
+        });
+    });
+});
+
+</script>
+
+
+</html>

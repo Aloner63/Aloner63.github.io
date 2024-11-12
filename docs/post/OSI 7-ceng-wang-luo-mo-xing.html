@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="dark" data-light-theme="light" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
+    
+    <link rel="icon" href="https://github.githubassets.com/favicons/favicon.svg"><script>
+        let theme = localStorage.getItem("meek_theme") || "light";
+        document.documentElement.setAttribute("data-color-mode", theme);
+    </script>
+<meta name="description" content="1，OSI 7层网络模型
+  OSI（Open System Interconnect）七层模型是一种将计算机网络通信协议划分为七个不同层次的标准化框架。">
+<meta property="og:title" content="OSI 7层网络模型">
+<meta property="og:description" content="1，OSI 7层网络模型
+  OSI（Open System Interconnect）七层模型是一种将计算机网络通信协议划分为七个不同层次的标准化框架。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://Aloner63.github.io/post/OSI%207-ceng-wang-luo-mo-xing.html">
+<meta property="og:image" content="https://github.githubassets.com/favicons/favicon.svg">
+<title>OSI 7层网络模型</title>
+
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+
+</style>
+
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">OSI 7层网络模型</h1>
+<div class="title-right">
+    <a href="https://Aloner63.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+    <a href="https://github.com/Aloner63/Aloner63.github.io/issues/7" target="_blank" class="btn btn-invisible circle" title="Issue">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathIssue" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><p>1，OSI 7层网络模型<br>
+OSI（Open System Interconnect）七层模型是一种将计算机网络通信协议划分为七个不同层次的标准化框架。每一层都负责不同的功能，从物理连接到应用程序的处理。这种模型有助于不同的系统之间进行通信时，更好地理解和管理网络通信的过程。<br>
+OSI定义了网络互连的七层框架（物理层、数据链路层、网络层、传输层、会话层、表示层、应用层），即ISO开放互连系统参考模型。<br>
+<a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/076b0bea-1ddb-45d1-a103-3c3b5fc0d079"><img src="https://github.com/user-attachments/assets/076b0bea-1ddb-45d1-a103-3c3b5fc0d079" alt="9481c2ea36e46c1ca02befe740a4489d" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/ee1bd8ff-82cd-4b77-917c-2f4815417448"><img src="https://github.com/user-attachments/assets/ee1bd8ff-82cd-4b77-917c-2f4815417448" alt="64ee1bbf8dbec49d9437ebb5493cff16" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/7a1e905c-8d8a-41a2-8699-4c829c76024c"><img src="https://github.com/user-attachments/assets/7a1e905c-8d8a-41a2-8699-4c829c76024c" alt="02086911423c8c80b7566b9c1f668eba" style="max-width: 100%;"></a></p>
+<p><strong>应用层（Application Layer）</strong>：这是网络体系结构中的最顶层，提供用户接口和应用程序之间的通信服务。在这一层，用户可以访问各种网络应用程序，如电子邮件、文件传输和远程登录。<br>
+<strong>表示层（Presentation Layer）</strong>：该层负责数据的格式化、加密和压缩，以确保数据在不同系统之间的交换是有效的和安全的。它还提供了数据格式转换和语法转换的功能。<br>
+<strong>会话层（Session Layer）</strong>：会话层管理应用程序之间的通信会话，负责建立、维护和终止会话。它还提供了数据的同步和检查点恢复功能，以确保通信的完整性和持续性。<br>
+<strong>传输层（Transport Layer）</strong>：传输层为应用程序提供端到端的数据传输服务，负责数据的分段、传输控制、错误恢复和流量控制。它主要使用 TCP（传输控制协议）和 UDP（用户数据报协议）来实现这些功能。<br>
+<strong>网络层（Network Layer）</strong>：网络层负责数据包的路由和转发，以及网络中的寻址和拥塞控制。它选择最佳的路径来传输数据包，以确保它们能够从源主机到目标主机进行传输。<br>
+<strong>数据链路层（Data Link Layer）</strong>：数据链路层提供点对点的数据传输服务，负责将原始比特流转换为数据帧，并检测和纠正传输中出现的错误。它还控制访问物理媒介的方式，以及数据帧的传输和接收。<br>
+<strong>物理层（Physical Layer）</strong>：物理层在物理媒介上传输原始比特流，定义了连接主机的硬件设备和传输媒介的规范。它确保比特流能够在网络中准确地传输，例如通过以太网、光纤和无线电波等媒介。</p>
+<p>2，TCP/IP 4层网络模型<br>
+TCP/IP 四层模型是目前被广泛采用的一种模型，由以下 4 层组成：应用层、传输层、网络层、网络接口层<br>
+<a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/dc491431-91d6-4823-b05b-a4c15cada4b5"><img src="https://github.com/user-attachments/assets/dc491431-91d6-4823-b05b-a4c15cada4b5" alt="819b681c5b69b33aeb221276a0b0a8d6" style="max-width: 100%;"></a></p>
+<p><strong>应用层（Application Layer）</strong>：类似于 OSI 模型中的应用层，负责处理用户与网络应用程序之间的通信。它包括诸如 HTTP、FTP、SMTP 等协议，用于实现不同类型的网络服务和应用。<br>
+<strong>传输层（Transport Layer）</strong>：与 OSI 模型中的传输层相对应，提供端到端的数据传输服务。在 TCP/IP 模型中，主要有两个协议：TCP（传输控制协议）和 UDP（用户数据报协议），用于确保可靠的数据传输和简单的数据传输。<br>
+<strong>网络层（Internet Layer）</strong>：相当于 OSI 模型中的网络层，负责数据包的路由和转发。它使用 IP（Internet Protocol）协议来定义数据包的传输路径，并处理不同网络之间的通信。<br>
+<strong>网络接口层（Link Layer）</strong>：与 OSI 模型中的数据链路层和物理层相对应，负责管理网络硬件设备和物理媒介之间的通信。它包括以太网、Wi-Fi、蓝牙等各种物理层和数据链路层协议。</p>
+<p>应用层常见的协议<br>
+HTTP（HyperText Transfer Protocol）：用于在客户端和服务器之间传输超文本数据，通常用于 Web 浏览器和 Web 服务器之间的通信。</p>
+<p>FTP（File Transfer Protocol）：用于在客户端和服务器之间传输文件，支持上传和下载文件的功能。</p>
+<p>SMTP（Simple Mail Transfer Protocol）：用于在邮件服务器之间传输电子邮件，负责发送邮件。</p>
+<p>POP3（Post Office Protocol version 3）：用于从邮件服务器上下载邮件到本地计算机，负责接收邮件。</p>
+<p>IMAP（Internet Message Access Protocol）：也是用于接收邮件的协议，与 POP3 类似，但提供了更丰富的功能，如在服务器上管理邮件等。</p>
+<p>DNS（Domain Name System）：用于将域名解析为对应的 IP 地址，从而实现域名和 IP 地址之间的映射。</p>
+<p>HTTPS（HyperText Transfer Protocol Secure）：是 HTTP 的安全版本，通过 SSL/TLS 加密传输数据，保证通信过程中的安全性。</p>
+<p>SSH（Secure Shell）：用于远程登录和执行命令，提供了加密的网络连接，保证了通信的安全性。</p>
+<p>SNMP（Simple Network Management Protocol）：用于网络设备之间的管理和监控，可以实现对网络设备的远程配置和监控。</p>
+<p>Telnet：用于远程登录和执行命令，类似于 SSH，但不提供加密功能，通信数据不安全。</p>
+<p>传输层常见的协议<br>
+TCP（Transmission Control Protocol）：提供可靠的、面向连接的数据传输服务，确保数据的可靠性、顺序性和完整性。TCP适用于对数据传输质量要求较高的场景，如文件传输、网页浏览等。</p>
+<p>UDP（User Datagram Protocol）：提供无连接的数据传输服务，不保证数据的可靠性，也不保证数据的顺序性和完整性。UDP适用于实时性要求较高、对数据传输质量要求不那么严格的场景，如音视频传输、在线游戏等。</p>
+<p>网络层常见的协议<br>
+IP（Internet Protocol）：是互联网中最基本的协议，用于在网络中传输数据包。IP协议定义了数据包的格式、寻址方式和路由选择等信息，是整个互联网的基础。</p>
+<p>ICMP（Internet Control Message Protocol）：用于在IP网络中传递控制消息和错误信息。ICMP通常用于网络设备之间的通信，如路由器和主机之间的通信，以及用于检测网络连通性和故障诊断。</p>
+<p>ARP（Address Resolution Protocol）：用于将IP地址映射为MAC地址（物理地址）。ARP协议在局域网内部使用，通过发送ARP请求获取目标设备的MAC地址，从而实现数据包的传输。</p>
+<p>RARP（Reverse Address Resolution Protocol）：与ARP相反，用于将MAC地址映射为IP地址。RARP协议通常用于无盘工作站等设备，可以根据MAC地址获取对应的IP地址。</p>
+<p>IPv6（Internet Protocol version 6）：是IP协议的下一代版本，用于解决IPv4地址空间不足的问题。IPv6采用128位地址长度，提供了更大的地址空间，支持更多的设备连接到互联网。</p>
+<p>网络接口层常见的协议<br>
+以太网协议（Ethernet）：是一种常见的局域网技术，使用MAC地址进行帧的传输和接收。<br>
+无线局域网协议（Wi-Fi）：用于无线局域网的数据传输，通常基于IEEE 802.11标准。<br>
+点对点协议（PPP）：用于建立点对点连接的协议，通常用于拨号连接和虚拟专用网（VPN）等场景。<br>
+数据链路层交换协议（DLC）：用于在数据链路层进行数据交换和管理的协议，如HDLC、SLIP和PPP等。<br>
+<a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/4567234d-46e3-4d08-a72e-1ed08f8a54d2"><img src="https://github.com/user-attachments/assets/4567234d-46e3-4d08-a72e-1ed08f8a54d2" alt="2e924a64d9950604cc97e5c20922e39d" style="max-width: 100%;"></a></p></div>
+<div style="font-size:small;margin-top:8px;float:right;"></div>
+
+<button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
+<div class="comments" id="comments"></div>
+
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://Aloner63.github.io">Blog Title</a></div>
+<div id="footer2">
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if(""!=""){
+    var startSite=new Date("");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行"+diffDay+"天"+" • ";
+}
+</script></div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z'};
+var utterancesLoad=0;
+
+let themeSettings={
+    "dark": ["dark","moon","#00f0ff","dark-blue"],
+    "light": ["light","sun","#ff5000","github-light"],
+    "auto": ["auto","sync","","preferred-color-scheme"]
+};
+function changeTheme(mode, icon, color, utheme){
+    document.documentElement.setAttribute("data-color-mode",mode);
+    document.getElementById("themeSwitch").setAttribute("d",value=IconList[icon]);
+    document.getElementById("themeSwitch").parentNode.style.color=color;
+    if(utterancesLoad==1){utterancesTheme(utheme);}
+}
+function modeSwitch(){
+    let currentMode=document.documentElement.getAttribute('data-color-mode');
+    let newMode = currentMode === "light" ? "dark" : currentMode === "dark" ? "auto" : "light";
+    localStorage.setItem("meek_theme", newMode);
+    if(themeSettings[newMode]){
+        changeTheme(...themeSettings[newMode]);
+    }
+}
+function utterancesTheme(theme){
+    const message={type:'set-theme',theme: theme};
+    const iframe=document.getElementsByClassName('utterances-frame')[0];
+    iframe.contentWindow.postMessage(message,'https://utteranc.es');
+}
+if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
+console.log("\n %c Gmeek last https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
+
+
+
+function openComments(){
+    cm=document.getElementById("comments");
+    cmButton=document.getElementById("cmButton");
+    cmButton.innerHTML="loading";
+    span=document.createElement("span");
+    span.setAttribute("class","AnimatedEllipsis");
+    cmButton.appendChild(span);
+
+    script=document.createElement("script");
+    script.setAttribute("src","https://utteranc.es/client.js");
+    script.setAttribute("repo","Aloner63/Aloner63.github.io");
+    script.setAttribute("issue-term","title");
+    
+    if(localStorage.getItem("meek_theme")=="dark"){script.setAttribute("theme","dark-blue");}
+    else if(localStorage.getItem("meek_theme")=="light") {script.setAttribute("theme","github-light");}
+    else{script.setAttribute("theme","preferred-color-scheme");}
+    
+    script.setAttribute("crossorigin","anonymous");
+    script.setAttribute("async","");
+    cm.appendChild(script);
+
+    int=self.setInterval("iFrameLoading()",200);
+}
+
+function iFrameLoading(){
+    var utterances=document.getElementsByClassName('utterances');
+    if(utterances.length==1){
+        if(utterances[0].style.height!=""){
+            utterancesLoad=1;
+            int=window.clearInterval(int);
+            document.getElementById("cmButton").style.display="none";
+            console.log("utterances Load OK");
+        }
+    }
+}
+
+
+
+</script>
+
+
+</html>
