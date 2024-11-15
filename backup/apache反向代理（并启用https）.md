@@ -1,4 +1,16 @@
+
+
+```
+2024/11/15 更新
+
+可以使用cloudfare启用https(较为简单，更新后的DNS可能需要1天到两天更新。chenhaohan.top实际用了20分钟左右)
+```
+
+
+
 #### apache反向代理(并启用https)
+
+
 
 安装apache
 
