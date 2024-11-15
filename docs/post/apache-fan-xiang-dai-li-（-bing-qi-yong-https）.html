@@ -129,17 +129,21 @@ a2enmod proxy_http
 </code></pre>
 <p>假设你要将访问 <code class="notranslate">www.example.com</code> 的请求反向代理到 <code class="notranslate">localhost:1234</code></p>
 <pre class="notranslate"><code class="notranslate">&lt;VirtualHost *:80&gt;
-    ServerName www.example.com
+    ServerName www.chenhaohan.help
 
     # 启用反向代理
     ProxyPreserveHost On
-    ProxyPass / http://localhost:1234/
-    ProxyPassReverse / http://localhost:1234/
+    ProxyPass / http://localhost:5244/
+    ProxyPassReverse / http://localhost:5244/
 
     # 日志配置
-    ErrorLog ${APACHE_LOG_DIR}/example.com_error.log
-    CustomLog ${APACHE_LOG_DIR}/example.com_access.log combined
+    ErrorLog ${APACHE_LOG_DIR}/www.chenhaohan.help_error.log
+    CustomLog ${APACHE_LOG_DIR}/www.chenhaohan.help_access.log combined
+RewriteEngine on
+RewriteCond %{SERVER_NAME} =www.chenhaohan.help
+RewriteRule ^ https://%{SERVER_NAME}%{REQUEST_URI} [END,NE,R=permanent]
 &lt;/VirtualHost&gt;
+
 
 </code></pre>
 <p><code class="notranslate">ServerName example.com</code>：指定要处理的域名。</p>

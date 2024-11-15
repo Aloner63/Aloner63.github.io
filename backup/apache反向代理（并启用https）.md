@@ -24,17 +24,21 @@ sudo nano /etc/apache2/sites-available/5244.conf
 
 ```
 <VirtualHost *:80>
-    ServerName www.example.com
+    ServerName www.chenhaohan.help
 
     # 启用反向代理
     ProxyPreserveHost On
-    ProxyPass / http://localhost:1234/
-    ProxyPassReverse / http://localhost:1234/
+    ProxyPass / http://localhost:5244/
+    ProxyPassReverse / http://localhost:5244/
 
     # 日志配置
-    ErrorLog ${APACHE_LOG_DIR}/example.com_error.log
-    CustomLog ${APACHE_LOG_DIR}/example.com_access.log combined
+    ErrorLog ${APACHE_LOG_DIR}/www.chenhaohan.help_error.log
+    CustomLog ${APACHE_LOG_DIR}/www.chenhaohan.help_access.log combined
+RewriteEngine on
+RewriteCond %{SERVER_NAME} =www.chenhaohan.help
+RewriteRule ^ https://%{SERVER_NAME}%{REQUEST_URI} [END,NE,R=permanent]
 </VirtualHost>
+
 
 ```
 
