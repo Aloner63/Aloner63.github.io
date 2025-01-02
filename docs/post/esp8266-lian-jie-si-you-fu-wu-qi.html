@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="dark" data-light-theme="light" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
+    
+    <link rel="icon" href="https://github.githubassets.com/favicons/favicon.svg"><script>
+        let theme = localStorage.getItem("meek_theme") || "light";
+        document.documentElement.setAttribute("data-color-mode", theme);
+    </script>
+<meta name="description" content="ESP-01S 基本参数
+![img](https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/222a8a308874efa976dbd68125140a57.png)
+
+![img](https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/ab7b3ba25b06f9e259135eb4b087300d.png)
+
+环境：win11 ，Arduous版本2.3.4   ， ESP01S ，USB to TTL
+
+1，安装好Arduous IDE（这个没什么好说的，修改一下安装路径。">
+<meta property="og:title" content="esp8266连接私有服务器">
+<meta property="og:description" content="ESP-01S 基本参数
+![img](https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/222a8a308874efa976dbd68125140a57.png)
+
+![img](https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/ab7b3ba25b06f9e259135eb4b087300d.png)
+
+环境：win11 ，Arduous版本2.3.4   ， ESP01S ，USB to TTL
+
+1，安装好Arduous IDE（这个没什么好说的，修改一下安装路径。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://Aloner63.github.io/post/esp8266-lian-jie-si-you-fu-wu-qi.html">
+<meta property="og:image" content="https://github.githubassets.com/favicons/favicon.svg">
+<title>esp8266连接私有服务器</title>
+<link href="//unpkg.com/@wooorm/starry-night@2.1.1/style/both.css" rel="stylesheet" />
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+.copy-feedback {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 50px;
+    color: var(--color-fg-on-emphasis);
+    background-color: var(--color-fg-muted);
+    border-radius: 3px;
+    padding: 5px 8px;
+    font-size: 12px;
+}
+</style>
+
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">esp8266连接私有服务器</h1>
+<div class="title-right">
+    <a href="https://Aloner63.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+    <a href="https://github.com/Aloner63/Aloner63.github.io/issues/20" target="_blank" class="btn btn-invisible circle" title="Issue">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathIssue" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><p>ESP-01S 基本参数<br>
+<a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/222a8a308874efa976dbd68125140a57.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/222a8a308874efa976dbd68125140a57.png" alt="img" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/ab7b3ba25b06f9e259135eb4b087300d.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/ab7b3ba25b06f9e259135eb4b087300d.png" alt="img" style="max-width: 100%;"></a></p>
+<p>环境：win11 ，Arduous版本2.3.4   ， ESP01S ，USB to TTL</p>
+<p>1，安装好Arduous IDE（这个没什么好说的，修改一下安装路径。无脑下一步。使用2.3.4  注：版本不同，页面可能不同，操作大同小异。 ）</p>
+<p>2，添加开发包地址，老版的Anderson自带，新版不带。进入 【文件 &gt; 首选项】 下的其他开发板管理器地址添加8266的官方地址 。使用其他的开发板是同样的方式。添加之后，重启Arduous</p>
+<pre class="notranslate"><code class="notranslate">http://arduino.esp8266.com/stable/package_esp8266com_index.json
+</code></pre>
+<p>3，重启以后，【工具 &gt; 管理库】，搜索esp8266，添加 ESP8266 Community。安装以后，【工具】一栏会出现相关的参数。一般默认的都是可以正常使用的，也可以根据自己的需求调整。</p>
+<p>4，硬件连接方式</p>
+<p>这里有两个接口需要连VCC，而且为esp供电需要一个稳定的电源。TTL的电源不太稳定。建议用st-link中的3.3V和面包板结合。</p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/image-20250102221811554.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/image-20250102221811554.png" alt="image-20250102221811554" style="max-width: 100%;"></a></p>
+<p>网上教程还有这样连接的（TX 连 TX，RX 连 RX。给出的解释是：搭建的环境是用来编译和烧录ESP8266 01S程序的。写好的程序只会借道arduino的串口线写进ESP8266中去运行，并不会写进arduino。）本人使用上面的连线成功烧录，如果不成功，可以试试下面的连线方式。</p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/image-20250102221923000.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/image-20250102221923000.png" alt="image-20250102221923000" style="max-width: 100%;"></a></p>
+<p>5，烧录（本方式适用第一种接线方式，第二种没试）</p>
+<p>（1）当出现  Connecting........___ 的时候。这时候说明Arduous在连接串口，将VCC拔掉再插上（重启esp）</p>
+<p>（2）重启之后出现  百分比  ，等待烧录成功即可。</p>
+<p>（3）烧录成功后，拔掉GPIO0，然后将VCC拔掉再插上（重启esp）</p>
+<p>这时程序已经成功烧录进了esp8266.</p>
+<p>注：出现奇奇怪怪的错误，一般都是线没插好。</p>
+<h5>一个简单的STA模式测试</h5>
+<pre class="notranslate"><code class="notranslate">#include &lt;ESP8266WiFi.h&gt;
+
+const char* ssid = "1111";  // 填写你的WiFi SSID
+const char* password = "12341234";  // 填写你的WiFi密码
+
+void setup() {
+  Serial.begin(115200);  // 初始化串口，波特率设置为115200
+  delay(10);  // 延时，确保串口初始化完成
+  
+  Serial.println("\n正在连接WiFi...");
+
+  WiFi.begin(ssid, password);  // 开始连接WiFi
+
+  // 等待WiFi连接成功
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");  // 打印点来指示连接尝试
+  }
+
+  // WiFi连接成功后输出WiFi相关信息
+  Serial.println("\nWiFi连接成功！");
+  Serial.print("IP 地址: ");
+  Serial.println(WiFi.localIP());  // 获取并打印ESP8266的IP地址
+  Serial.print("子网掩码: ");
+  Serial.println(WiFi.subnetMask());  // 获取并打印子网掩码
+  Serial.print("网关 IP: ");
+  Serial.println(WiFi.gatewayIP());  // 获取并打印网关IP地址
+  Serial.print("DNS: ");
+  Serial.println(WiFi.dnsIP());  // 获取并打印DNS
+}
+
+void loop() {
+  // 可以根据需要在这里执行其他操作
+  // 比如在连接成功后定时打印WiFi信息
+  
+  // wifi断开以后，尝试重连
+  if (WiFi.status() != WL_CONNECTED) 
+  {
+    Serial.println("WiFi断开，正在重新连接...");
+    WiFi.begin(ssid, password);
+  }
+
+
+  Serial.println("----------------------------");
+  delay(10000);  // 延时10秒
+}
+
+</code></pre>
+<h5>简单实现esp8266发送信息到私有云服务器</h5>
+<p>（待完善）</p>
+<p>注：要保证服务器防火墙允许端口的通过</p>
+<pre class="notranslate"><code class="notranslate">sudo ufw allow 5000
+</code></pre>
+<p>服务器端代码esp_server.py</p>
+<div class="highlight highlight-source-c++"><pre class="notranslate">from http.server import HTTPServer, BaseHTTPRequestHandler
+import json
+from datetime import datetime
+
+<span class="pl-k">class</span> <span class="pl-en">SimpleHTTPRequestHandler</span>(BaseHTTPRequestHandler):
+    def <span class="pl-en">do_POST</span>(self):
+        # 获取POST数据的长度
+        content_length = <span class="pl-k">int</span>(self.headers[<span class="pl-s"><span class="pl-pds">'</span>Content-Length<span class="pl-pds">'</span></span>])
+        # 读取POST数据
+        post_data = self.rfile.read(content_length)
+        
+        <span class="pl-k">try</span>:
+            # 解析JSON数据
+            data = json.loads(post_data.decode(<span class="pl-s"><span class="pl-pds">'</span>utf-8<span class="pl-pds">'</span></span>))
+            # 添加时间戳
+            data[<span class="pl-s"><span class="pl-pds">'</span>timestamp<span class="pl-pds">'</span></span>] = datetime.now().strftime(<span class="pl-s"><span class="pl-pds">'</span>%Y-%m-%d %H:%M:%S<span class="pl-pds">'</span></span>)
+            
+            <span class="pl-en">print</span>(<span class="pl-s"><span class="pl-pds">"</span>收到数据:<span class="pl-pds">"</span></span>, data)  # 打印接收到的数据
+            
+            # 保存数据到文件（可选）
+            with <span class="pl-en">open</span>(<span class="pl-s"><span class="pl-pds">'</span>esp8266_data.txt<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>a<span class="pl-pds">'</span></span>) as f:
+                f.write(json.dumps(data) + '\n')
+            
+            # 发送响应
+            self.send_response(<span class="pl-c1">200</span>)
+            self.send_header(<span class="pl-s"><span class="pl-pds">'</span>Content-type<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>application/json<span class="pl-pds">'</span></span>)
+            self.end_headers()
+            response = {<span class="pl-s"><span class="pl-pds">"</span>status<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>success<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>message<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>数据已接收<span class="pl-pds">"</span></span>}
+            self.wfile.write(json.dumps(response).encode())
+            
+        except Exception as e:
+            <span class="pl-en">print</span>(<span class="pl-s"><span class="pl-pds">"</span>错误:<span class="pl-pds">"</span></span>, str(e))
+            self.send_response(<span class="pl-c1">400</span>)
+            self.send_header(<span class="pl-s"><span class="pl-pds">'</span>Content-type<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>application/json<span class="pl-pds">'</span></span>)
+            self.end_headers()
+            response = {<span class="pl-s"><span class="pl-pds">"</span>status<span class="pl-pds">"</span></span>: <span class="pl-s"><span class="pl-pds">"</span>error<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>message<span class="pl-pds">"</span></span>: <span class="pl-c1">str</span>(e)}
+            self.wfile.write(json.dumps(response).encode())
+    
+    def <span class="pl-en">do_GET</span>(self):
+        # 处理GET请求（用于测试服务器是否运行）
+        self.send_response(<span class="pl-c1">200</span>)
+        self.send_header(<span class="pl-s"><span class="pl-pds">'</span>Content-type<span class="pl-pds">'</span></span>, <span class="pl-s"><span class="pl-pds">'</span>text/plain<span class="pl-pds">'</span></span>)
+        self.end_headers()
+        self.wfile.write(<span class="pl-s"><span class="pl-pds">"</span>服务器正在运行！<span class="pl-pds">"</span></span>.encode())
+
+def <span class="pl-en">run_server</span>(port=<span class="pl-c1">5000</span>):
+    server_address = (<span class="pl-s"><span class="pl-pds">'</span><span class="pl-pds">'</span></span>, port)
+    httpd = HTTPServer(server_address, SimpleHTTPRequestHandler)
+    print(f<span class="pl-s"><span class="pl-pds">'</span>启动服务器在端口 {port}...<span class="pl-pds">'</span></span>)
+    httpd.serve_forever()
+
+if __name__ == '__main__':
+    run_server()</pre></div>
+<p>服务器端代码（能够处理任何格式的数据）</p>
+<pre class="notranslate"><code class="notranslate">from http.server import HTTPServer, BaseHTTPRequestHandler
+from datetime import datetime
+
+class SimpleHTTPRequestHandler(BaseHTTPRequestHandler):
+    def do_POST(self):
+        try:
+            # 获取POST数据的长度
+            content_length = int(self.headers['Content-Length'])
+            # 读取POST数据
+            post_data = self.rfile.read(content_length)
+            
+            # 尝试解码数据
+            try:
+                decoded_data = post_data.decode('utf-8')
+            except UnicodeDecodeError:
+                # 如果无法解码为UTF-8，则使用原始数据的十六进制表示
+                decoded_data = post_data.hex()
+            
+            # 创建包含时间戳的日志条目
+            timestamp = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+            log_entry = f"[{timestamp}] {decoded_data}"
+            
+            print("收到数据:", log_entry)  # 打印接收到的数据
+            
+            # 保存数据到文件
+            with open('esp8266_data.txt', 'a', encoding='utf-8') as f:
+                f.write(log_entry + '\n')
+            
+            # 发送响应
+            self.send_response(200)
+            self.send_header('Content-type', 'text/plain')
+            self.end_headers()
+            self.wfile.write("数据已接收".encode())
+            
+        except Exception as e:
+            print("错误:", str(e))
+            self.send_response(400)
+            self.send_header('Content-type', 'text/plain')
+            self.end_headers()
+            self.wfile.write(f"错误: {str(e)}".encode())
+    
+    def do_GET(self):
+        # 处理GET请求（用于测试服务器是否运行）
+        self.send_response(200)
+        self.send_header('Content-type', 'text/plain')
+        self.end_headers()
+        self.wfile.write("服务器正在运行！".encode())
+
+def run_server(port=5000):
+    server_address = ('', port)
+    httpd = HTTPServer(server_address, SimpleHTTPRequestHandler)
+    print(f'启动服务器在端口 {port}...')
+    httpd.serve_forever()
+
+if __name__ == '__main__':
+    run_server()
+</code></pre>
+<p>esp_test.ino代码（能够将接收的任何数据发送到服务器）</p>
+<pre class="notranslate"><code class="notranslate">#include &lt;ESP8266WiFi.h&gt;
+#include &lt;ESP8266HTTPClient.h&gt;
+
+const char* ssid = "1111";
+const char* password = "12341234";
+const char* serverUrl = "http://123.56.141.154:5000";
+
+void setup() {
+  Serial.begin(9600);
+  Serial.println("\n开始连接WiFi...");
+  
+  WiFi.begin(ssid, password);
+  
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+  
+  Serial.println("\nWiFi连接成功！");
+  Serial.print("IP地址: ");
+  Serial.println(WiFi.localIP());
+}
+
+void loop() {
+  // 如果WiFi连接断开，则尝试重新连接
+  if (WiFi.status() != WL_CONNECTED) 
+  {
+    Serial.println("WiFi连接已断开，尝试重连...");
+    WiFi.begin(ssid, password);
+    unsigned long startMillis = millis();
+    while (WiFi.status() != WL_CONNECTED) {
+      if (millis() - startMillis &gt; 10000) {
+        Serial.println("WiFi连接超时！");
+        break;
+      }
+      delay(500);
+      Serial.print(".");
+    }
+  } else {
+    // 检查是否有串口数据
+    if (Serial.available()) {
+      // 给一点时间让数据完全到达
+      delay(100);
+      
+      // 读取所有可用数据
+      String receivedData = "";
+      while (Serial.available()) {
+        receivedData += (char)Serial.read();
+      }
+      
+      // 发送数据到服务器
+      WiFiClient client;
+      HTTPClient http;
+      
+      if (http.begin(client, serverUrl)) {
+        http.addHeader("Content-Type", "text/plain"); // 改为普通文本格式
+        
+        // 发送POST请求
+        int httpCode = http.POST(receivedData);
+        
+        if (httpCode &gt; 0) {
+          if (httpCode == HTTP_CODE_OK) {
+            String response = http.getString();
+            Serial.println("发送成功，服务器响应：" + response);
+          } else {
+            Serial.printf("HTTP错误代码: %d\n", httpCode);
+          }
+        } else {
+          Serial.println("发送失败");
+        }
+        
+        http.end();
+      } else {
+        Serial.println("无法连接到服务器");
+      }
+    }
+  }
+  
+  delay(100); // 短暂延时，避免过于频繁的检查
+}
+</code></pre>
+<p>esp_test.ino代码</p>
+<div class="highlight highlight-source-c++"><pre class="notranslate">#<span class="pl-k">include</span> <span class="pl-s"><span class="pl-pds">&lt;</span>ESP8266WiFi.h<span class="pl-pds">&gt;</span></span>
+#<span class="pl-k">include</span> <span class="pl-s"><span class="pl-pds">&lt;</span>ESP8266HTTPClient.h<span class="pl-pds">&gt;</span></span>
+#<span class="pl-k">include</span> <span class="pl-s"><span class="pl-pds">&lt;</span>ArduinoJson.h<span class="pl-pds">&gt;</span></span>
+
+<span class="pl-k">const</span> <span class="pl-k">char</span>* ssid = <span class="pl-s"><span class="pl-pds">"</span>1111<span class="pl-pds">"</span></span>;
+<span class="pl-k">const</span> <span class="pl-k">char</span>* password = <span class="pl-s"><span class="pl-pds">"</span>12341234<span class="pl-pds">"</span></span>;
+<span class="pl-k">const</span> <span class="pl-k">char</span>* serverUrl = <span class="pl-s"><span class="pl-pds">"</span>http://123.56.141.154:5000<span class="pl-pds">"</span></span>;
+
+<span class="pl-k">void</span> <span class="pl-en">setup</span>() {
+  Serial.<span class="pl-c1">begin</span>(<span class="pl-c1">9600</span>);
+  Serial.<span class="pl-c1">println</span>(<span class="pl-s"><span class="pl-pds">"</span><span class="pl-cce">\n</span>开始连接WiFi...<span class="pl-pds">"</span></span>);
+  
+  WiFi.<span class="pl-c1">begin</span>(ssid, password);
+  
+  <span class="pl-c"><span class="pl-c">//</span> 等待连接成功</span>
+  <span class="pl-k">while</span> (WiFi.<span class="pl-c1">status</span>() != WL_CONNECTED) {
+    <span class="pl-c1">delay</span>(<span class="pl-c1">500</span>);
+    Serial.<span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">"</span>.<span class="pl-pds">"</span></span>);
+  }
+  
+  Serial.<span class="pl-c1">println</span>(<span class="pl-s"><span class="pl-pds">"</span><span class="pl-cce">\n</span>WiFi连接成功！<span class="pl-pds">"</span></span>);
+  Serial.<span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">"</span>IP地址: <span class="pl-pds">"</span></span>);
+  Serial.<span class="pl-c1">println</span>(WiFi.<span class="pl-c1">localIP</span>());
+  Serial.<span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">"</span>子网掩码: <span class="pl-pds">"</span></span>);
+  Serial.<span class="pl-c1">println</span>(WiFi.<span class="pl-c1">subnetMask</span>());
+  Serial.<span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">"</span>网关IP: <span class="pl-pds">"</span></span>);
+  Serial.<span class="pl-c1">println</span>(WiFi.<span class="pl-c1">gatewayIP</span>());
+  Serial.<span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">"</span>DNS: <span class="pl-pds">"</span></span>);
+  Serial.<span class="pl-c1">println</span>(WiFi.<span class="pl-c1">dnsIP</span>());
+}
+
+<span class="pl-k">void</span> <span class="pl-en">loop</span>() {
+  <span class="pl-c"><span class="pl-c">//</span> 如果WiFi连接断开，则尝试重新连接</span>
+  <span class="pl-k">if</span> (WiFi.<span class="pl-c1">status</span>() != WL_CONNECTED) {
+    Serial.<span class="pl-c1">println</span>(<span class="pl-s"><span class="pl-pds">"</span>WiFi连接已断开，尝试重连...<span class="pl-pds">"</span></span>);
+    WiFi.<span class="pl-c1">begin</span>(ssid, password);  <span class="pl-c"><span class="pl-c">//</span> 重新开始连接</span>
+    <span class="pl-k">unsigned</span> <span class="pl-k">long</span> startMillis = <span class="pl-c1">millis</span>();  <span class="pl-c"><span class="pl-c">//</span> 记录连接起始时间</span>
+    <span class="pl-k">while</span> (WiFi.<span class="pl-c1">status</span>() != WL_CONNECTED) {
+      <span class="pl-k">if</span> (<span class="pl-c1">millis</span>() - startMillis &gt; <span class="pl-c1">10000</span>) { <span class="pl-c"><span class="pl-c">//</span> 连接超时10秒</span>
+        Serial.<span class="pl-c1">println</span>(<span class="pl-s"><span class="pl-pds">"</span>WiFi连接超时，无法连接到WiFi！<span class="pl-pds">"</span></span>);
+        <span class="pl-k">break</span>; <span class="pl-c"><span class="pl-c">//</span> 连接超时退出</span>
+      }
+      <span class="pl-c1">delay</span>(<span class="pl-c1">500</span>);
+      Serial.<span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">"</span>.<span class="pl-pds">"</span></span>);
+    }
+  } <span class="pl-k">else</span> {
+    <span class="pl-c"><span class="pl-c">//</span> WiFi已连接，发送数据</span>
+    <span class="pl-c1">sendDataToServer</span>();
+  }
+
+  <span class="pl-c"><span class="pl-c">//</span> 每隔30秒检查一次WiFi状态</span>
+  <span class="pl-c1">delay</span>(<span class="pl-c1">30000</span>);
+}
+
+<span class="pl-k">void</span> <span class="pl-en">sendDataToServer</span>() {
+  WiFiClient client;
+  HTTPClient http;
+  
+  <span class="pl-c"><span class="pl-c">//</span> 创建JSON数据</span>
+  StaticJsonDocument&lt;<span class="pl-c1">200</span>&gt; doc;
+  doc[<span class="pl-s"><span class="pl-pds">"</span>device_id<span class="pl-pds">"</span></span>] = <span class="pl-s"><span class="pl-pds">"</span>ESP8266_001<span class="pl-pds">"</span></span>;
+  doc[<span class="pl-s"><span class="pl-pds">"</span>temperature<span class="pl-pds">"</span></span>] = <span class="pl-c1">random</span>(<span class="pl-c1">20</span>, <span class="pl-c1">30</span>);
+  doc[<span class="pl-s"><span class="pl-pds">"</span>humidity<span class="pl-pds">"</span></span>] = <span class="pl-c1">random</span>(<span class="pl-c1">40</span>, <span class="pl-c1">60</span>);
+  
+  String jsonString;
+  <span class="pl-c1">serializeJson</span>(doc, jsonString);
+  
+  Serial.<span class="pl-c1">println</span>(<span class="pl-s"><span class="pl-pds">"</span><span class="pl-cce">\n</span>准备发送数据...<span class="pl-pds">"</span></span>);
+  Serial.<span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">"</span>服务器地址: <span class="pl-pds">"</span></span>);
+  Serial.<span class="pl-c1">println</span>(serverUrl);
+  Serial.<span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">"</span>发送的数据: <span class="pl-pds">"</span></span>);
+  Serial.<span class="pl-c1">println</span>(jsonString);
+  
+  <span class="pl-c"><span class="pl-c">//</span> 尝试连接服务器</span>
+  Serial.<span class="pl-c1">println</span>(<span class="pl-s"><span class="pl-pds">"</span>连接服务器...<span class="pl-pds">"</span></span>);
+  <span class="pl-k">if</span> (http.<span class="pl-c1">begin</span>(client, serverUrl)) {
+    http.<span class="pl-c1">addHeader</span>(<span class="pl-s"><span class="pl-pds">"</span>Content-Type<span class="pl-pds">"</span></span>, <span class="pl-s"><span class="pl-pds">"</span>application/json<span class="pl-pds">"</span></span>);
+    
+    <span class="pl-c"><span class="pl-c">//</span> 发送POST请求</span>
+    Serial.<span class="pl-c1">println</span>(<span class="pl-s"><span class="pl-pds">"</span>发送POST请求...<span class="pl-pds">"</span></span>);
+    <span class="pl-k">int</span> httpCode = http.<span class="pl-c1">POST</span>(jsonString);
+    
+    <span class="pl-c"><span class="pl-c">//</span> 检查响应</span>
+    Serial.<span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">"</span>HTTP响应代码: <span class="pl-pds">"</span></span>);
+    Serial.<span class="pl-c1">println</span>(httpCode);
+    
+    <span class="pl-k">if</span> (httpCode &gt; <span class="pl-c1">0</span>) {
+      <span class="pl-k">if</span> (httpCode == HTTP_CODE_OK) {
+        String response = http.<span class="pl-c1">getString</span>();
+        Serial.<span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">"</span>服务器响应: <span class="pl-pds">"</span></span>);
+        Serial.<span class="pl-c1">println</span>(response);
+      } <span class="pl-k">else</span> {
+        Serial.<span class="pl-c1">printf</span>(<span class="pl-s"><span class="pl-pds">"</span>HTTP错误代码: %d<span class="pl-cce">\n</span><span class="pl-pds">"</span></span>, httpCode);
+      }
+    } <span class="pl-k">else</span> {
+      Serial.<span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">"</span>发送失败，错误: <span class="pl-pds">"</span></span>);
+      Serial.<span class="pl-c1">println</span>(http.<span class="pl-c1">errorToString</span>(httpCode));
+    }
+    
+    http.<span class="pl-c1">end</span>();
+  } <span class="pl-k">else</span> {
+    Serial.<span class="pl-c1">println</span>(<span class="pl-s"><span class="pl-pds">"</span>无法连接到服务器<span class="pl-pds">"</span></span>);
+  }
+  
+  <span class="pl-c"><span class="pl-c">//</span> 测试网络连接</span>
+  Serial.<span class="pl-c1">println</span>(<span class="pl-s"><span class="pl-pds">"</span><span class="pl-cce">\n</span>测试网络连通性...<span class="pl-pds">"</span></span>);
+  IPAddress serverIP;
+  <span class="pl-k">if</span> (WiFi.<span class="pl-c1">hostByName</span>(serverUrl, serverIP)) {
+    Serial.<span class="pl-c1">print</span>(<span class="pl-s"><span class="pl-pds">"</span>服务器IP: <span class="pl-pds">"</span></span>);
+    Serial.<span class="pl-c1">println</span>(serverIP);
+  } <span class="pl-k">else</span> {
+    Serial.<span class="pl-c1">println</span>(<span class="pl-s"><span class="pl-pds">"</span>无法解析服务器IP<span class="pl-pds">"</span></span>);
+  }
+}
+</pre></div>
+<p>待更新。。。</p></div>
+<div style="font-size:small;margin-top:8px;float:right;"></div>
+
+<button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
+<div class="comments" id="comments"></div>
+
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://Aloner63.github.io">Blog Title</a></div>
+<div id="footer2">
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if(""!=""){
+    var startSite=new Date("");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行"+diffDay+"天"+" • ";
+}
+</script></div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z', 'copy': 'M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z', 'check': 'M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z'};
+var utterancesLoad=0;
+
+let themeSettings={
+    "dark": ["dark","moon","#00f0ff","dark-blue"],
+    "light": ["light","sun","#ff5000","github-light"],
+    "auto": ["auto","sync","","preferred-color-scheme"]
+};
+function changeTheme(mode, icon, color, utheme){
+    document.documentElement.setAttribute("data-color-mode",mode);
+    document.getElementById("themeSwitch").setAttribute("d",value=IconList[icon]);
+    document.getElementById("themeSwitch").parentNode.style.color=color;
+    if(utterancesLoad==1){utterancesTheme(utheme);}
+}
+function modeSwitch(){
+    let currentMode=document.documentElement.getAttribute('data-color-mode');
+    let newMode = currentMode === "light" ? "dark" : currentMode === "dark" ? "auto" : "light";
+    localStorage.setItem("meek_theme", newMode);
+    if(themeSettings[newMode]){
+        changeTheme(...themeSettings[newMode]);
+    }
+}
+function utterancesTheme(theme){
+    const message={type:'set-theme',theme: theme};
+    const iframe=document.getElementsByClassName('utterances-frame')[0];
+    iframe.contentWindow.postMessage(message,'https://utteranc.es');
+}
+if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
+console.log("\n %c Gmeek last https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
+
+
+
+function openComments(){
+    cm=document.getElementById("comments");
+    cmButton=document.getElementById("cmButton");
+    cmButton.innerHTML="loading";
+    span=document.createElement("span");
+    span.setAttribute("class","AnimatedEllipsis");
+    cmButton.appendChild(span);
+
+    script=document.createElement("script");
+    script.setAttribute("src","https://utteranc.es/client.js");
+    script.setAttribute("repo","Aloner63/Aloner63.github.io");
+    script.setAttribute("issue-term","title");
+    
+    if(localStorage.getItem("meek_theme")=="dark"){script.setAttribute("theme","dark-blue");}
+    else if(localStorage.getItem("meek_theme")=="light") {script.setAttribute("theme","github-light");}
+    else{script.setAttribute("theme","preferred-color-scheme");}
+    
+    script.setAttribute("crossorigin","anonymous");
+    script.setAttribute("async","");
+    cm.appendChild(script);
+
+    int=self.setInterval("iFrameLoading()",200);
+}
+
+function iFrameLoading(){
+    var utterances=document.getElementsByClassName('utterances');
+    if(utterances.length==1){
+        if(utterances[0].style.height!=""){
+            utterancesLoad=1;
+            int=window.clearInterval(int);
+            document.getElementById("cmButton").style.display="none";
+            console.log("utterances Load OK");
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const createClipboardHTML = (codeContent, additionalClasses = '') => `
+        <pre class="notranslate"><code class="notranslate">${codeContent}</code></pre>
+        <div class="clipboard-container position-absolute right-0 top-0 ${additionalClasses}">
+            <clipboard-copy class="ClipboardButton btn m-2 p-0" role="button" style="display: inherit;">
+                <svg height="16" width="16" class="octicon octicon-copy m-2"><path d="${IconList["copy"]}"></path></svg>
+                <svg height="16" width="16" class="octicon octicon-check color-fg-success m-2 d-none"><path d="${IconList["check"]}"></path></svg>
+            </clipboard-copy>
+            <div class="copy-feedback">Copied!</div>
+        </div>
+    `;
+
+    const handleCodeElements = (selector = '') => {
+        document.querySelectorAll(selector).forEach(codeElement => {
+            const codeContent = codeElement.innerHTML;
+            const newStructure = document.createElement('div');
+            newStructure.className = 'snippet-clipboard-content position-relative overflow-auto';
+            newStructure.innerHTML = createClipboardHTML(codeContent);
+
+            const parentElement = codeElement.parentElement;
+            if (selector.includes('highlight')) {
+                parentElement.insertBefore(newStructure, codeElement.nextSibling);
+                parentElement.removeChild(codeElement);
+            } else {
+                parentElement.parentElement.replaceChild(newStructure, parentElement);
+            }
+        });
+    };
+
+    handleCodeElements('pre.notranslate > code.notranslate');
+    handleCodeElements('div.highlight > pre.notranslate');
+
+    let currentFeedback = null;
+    document.querySelectorAll('clipboard-copy').forEach(copyButton => {
+        copyButton.addEventListener('click', () => {
+            const codeContent = copyButton.closest('.snippet-clipboard-content').innerText;
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = codeContent;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempTextArea);
+
+            const copyIcon = copyButton.querySelector('.octicon-copy');
+            const checkIcon = copyButton.querySelector('.octicon-check');
+            const copyFeedback = copyButton.nextElementSibling;
+
+            if (currentFeedback && currentFeedback !== copyFeedback) {currentFeedback.style.display = 'none';}
+            currentFeedback = copyFeedback;
+
+            copyIcon.classList.add('d-none');
+            checkIcon.classList.remove('d-none');
+            copyFeedback.style.display = 'block';
+            copyButton.style.borderColor = 'var(--color-success-fg)';
+
+            setTimeout(() => {
+                copyIcon.classList.remove('d-none');
+                checkIcon.classList.add('d-none');
+                copyFeedback.style.display = 'none';
+                copyButton.style.borderColor = '';
+            }, 2000);
+        });
+    });
+});
+
+</script>
+
+
+</html>
