@@ -27,7 +27,7 @@
 <meta property="og:url" content="https://Aloner63.github.io/post/da-bao-python.html">
 <meta property="og:image" content="https://github.githubassets.com/favicons/favicon.svg">
 <title>打包python</title>
-
+<link href="//unpkg.com/@wooorm/starry-night@2.1.1/style/both.css" rel="stylesheet" />
 
 
 </head>
@@ -127,7 +127,121 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 </code></pre>
 <p>（有自定义图标）</p>
 <pre class="notranslate"><code class="notranslate">pyinstaller --name=TSS --windowed --clean --icon=your_icon.ico main.py
-</code></pre></div>
+</code></pre>
+<hr>
+<p>上述打包方式，只会在exe上显示图标。并不会在程序运行时，在状态栏和程序头部显示图标。以下是实现上述缺陷的办法。</p>
+<p>1，首先在 ThymomaSegmentationApp 类中添加图标设置:</p>
+<p>（程序运行时，显示在头部）</p>
+<p><a target="_blank" rel="noopener noreferrer" href=""><img alt="image-20250118204903403" style="max-width: 100%;"></a></p>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-c"># thymoma_segmentation_app.py</span>
+<span class="pl-k">from</span> <span class="pl-v">PyQt5</span>.<span class="pl-v">QtGui</span> <span class="pl-k">import</span> <span class="pl-v">QIcon</span>
+<span class="pl-k">from</span> <span class="pl-v">PyQt5</span>.<span class="pl-v">QtWidgets</span> <span class="pl-k">import</span> <span class="pl-v">QMainWindow</span>, <span class="pl-v">QPushButton</span>, <span class="pl-v">QVBoxLayout</span>, <span class="pl-v">QHBoxLayout</span>, <span class="pl-v">QWidget</span>, <span class="pl-v">QFileDialog</span>, <span class="pl-v">QLabel</span>, <span class="pl-v">QProgressBar</span>
+
+<span class="pl-k">class</span> <span class="pl-v">ThymomaSegmentationApp</span>(<span class="pl-v">QMainWindow</span>):
+    <span class="pl-k">def</span> <span class="pl-en">__init__</span>(<span class="pl-s1">self</span>):
+        <span class="pl-en">super</span>().<span class="pl-c1">__init__</span>()
+        <span class="pl-s1">self</span>.<span class="pl-c1">output_dir</span> <span class="pl-c1">=</span> <span class="pl-c1">None</span>
+        <span class="pl-s1">self</span>.<span class="pl-c1">image_files</span> <span class="pl-c1">=</span> []
+        <span class="pl-s1">self</span>.<span class="pl-c1">current_index</span> <span class="pl-c1">=</span> <span class="pl-c1">0</span>
+        <span class="pl-s1">self</span>.<span class="pl-c1">zoom_factor</span> <span class="pl-c1">=</span> <span class="pl-c1">1.0</span>
+        
+        <span class="pl-c"># 设置应用程序图标</span>
+        <span class="pl-s1">icon_path</span> <span class="pl-c1">=</span> <span class="pl-s">"path/to/your/icon.ico"</span>  <span class="pl-c"># 替换为您的图标路径</span>
+        <span class="pl-s1">self</span>.<span class="pl-c1">setWindowIcon</span>(<span class="pl-en">QIcon</span>(<span class="pl-s1">icon_path</span>))  <span class="pl-c"># 设置窗口图标</span>
+        
+        <span class="pl-s1">self</span>.<span class="pl-c1">initUI</span>()
+        <span class="pl-s1">self</span>.<span class="pl-c1">loadModel</span>()
+
+    <span class="pl-k">def</span> <span class="pl-en">initUI</span>(<span class="pl-s1">self</span>):
+        <span class="pl-c"># 现有的 initUI 代码...</span></pre></div>
+<p>2，在打包时设置图标:</p>
+<pre class="notranslate"><code class="notranslate">pyinstaller --name=ThymomaSegmentation ^
+            --windowed ^
+            --icon=path/to/your/icon.ico ^
+            --add-data "path/to/your/icon.ico;." ^
+            main.py
+</code></pre>
+<p>3，在主程序入口点设置任务栏图标:</p>
+<p>（保证任务栏显示图标）</p>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-c"># main.py</span>
+<span class="pl-k">import</span> <span class="pl-s1">sys</span>
+<span class="pl-k">import</span> <span class="pl-s1">ctypes</span>
+<span class="pl-k">from</span> <span class="pl-v">PyQt5</span>.<span class="pl-v">QtWidgets</span> <span class="pl-k">import</span> <span class="pl-v">QApplication</span>
+<span class="pl-k">from</span> <span class="pl-v">PyQt5</span>.<span class="pl-v">QtGui</span> <span class="pl-k">import</span> <span class="pl-v">QIcon</span>
+<span class="pl-k">from</span> <span class="pl-s1">thymoma_segmentation_app</span> <span class="pl-k">import</span> <span class="pl-v">ThymomaSegmentationApp</span>
+
+<span class="pl-k">def</span> <span class="pl-en">main</span>():
+    <span class="pl-s1">app</span> <span class="pl-c1">=</span> <span class="pl-en">QApplication</span>(<span class="pl-s1">sys</span>.<span class="pl-c1">argv</span>)
+    
+    <span class="pl-c"># 设置应用程序 ID（Windows）</span>
+    <span class="pl-k">if</span> <span class="pl-s1">sys</span>.<span class="pl-c1">platform</span> <span class="pl-c1">==</span> <span class="pl-s">'win32'</span>:
+        <span class="pl-s1">myappid</span> <span class="pl-c1">=</span> <span class="pl-s">'company.product.subproduct.version'</span>  <span class="pl-c"># 自定义的应用程序 ID</span>
+        <span class="pl-s1">ctypes</span>.<span class="pl-c1">windll</span>.<span class="pl-c1">shell32</span>.<span class="pl-c1">SetCurrentProcessExplicitAppUserModelID</span>(<span class="pl-s1">myappid</span>)
+    
+    <span class="pl-c"># 设置应用程序图标</span>
+    <span class="pl-s1">app_icon</span> <span class="pl-c1">=</span> <span class="pl-en">QIcon</span>(<span class="pl-s">"path/to/your/icon.ico"</span>)
+    <span class="pl-s1">app</span>.<span class="pl-c1">setWindowIcon</span>(<span class="pl-s1">app_icon</span>)
+    
+    <span class="pl-s1">window</span> <span class="pl-c1">=</span> <span class="pl-en">ThymomaSegmentationApp</span>()
+    <span class="pl-s1">window</span>.<span class="pl-c1">show</span>()
+    <span class="pl-s1">sys</span>.<span class="pl-c1">exit</span>(<span class="pl-s1">app</span>.<span class="pl-c1">exec_</span>())
+
+<span class="pl-k">if</span> <span class="pl-s1">__name__</span> <span class="pl-c1">==</span> <span class="pl-s">'__main__'</span>:
+    <span class="pl-en">main</span>()</pre></div>
+<p>4，为了确保图标文件被正确打包和加载，您可以创建一个资源文件:</p>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-c"># resources.py</span>
+<span class="pl-k">import</span> <span class="pl-s1">os</span>
+<span class="pl-k">import</span> <span class="pl-s1">sys</span>
+
+<span class="pl-k">def</span> <span class="pl-en">get_resource_path</span>(<span class="pl-s1">relative_path</span>):
+    <span class="pl-s">"""获取资源文件的绝对路径"""</span>
+    <span class="pl-k">if</span> <span class="pl-en">hasattr</span>(<span class="pl-s1">sys</span>, <span class="pl-s">'_MEIPASS'</span>):
+        <span class="pl-c"># PyInstaller 创建临时文件夹，将路径存储在 _MEIPASS 中</span>
+        <span class="pl-s1">base_path</span> <span class="pl-c1">=</span> <span class="pl-s1">sys</span>.<span class="pl-c1">_MEIPASS</span>
+    <span class="pl-k">else</span>:
+        <span class="pl-s1">base_path</span> <span class="pl-c1">=</span> <span class="pl-s1">os</span>.<span class="pl-c1">path</span>.<span class="pl-c1">abspath</span>(<span class="pl-s">"."</span>)
+    
+    <span class="pl-k">return</span> <span class="pl-s1">os</span>.<span class="pl-c1">path</span>.<span class="pl-c1">join</span>(<span class="pl-s1">base_path</span>, <span class="pl-s1">relative_path</span>)</pre></div>
+<p>5，然后在应用程序中使用这个函数:</p>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-c"># thymoma_segmentation_app.py</span>
+<span class="pl-k">from</span> <span class="pl-s1">resources</span> <span class="pl-k">import</span> <span class="pl-s1">get_resource_path</span>
+
+<span class="pl-k">class</span> <span class="pl-v">ThymomaSegmentationApp</span>(<span class="pl-v">QMainWindow</span>):
+    <span class="pl-k">def</span> <span class="pl-en">__init__</span>(<span class="pl-s1">self</span>):
+        <span class="pl-en">super</span>().<span class="pl-c1">__init__</span>()
+        <span class="pl-c"># ...</span>
+        
+        <span class="pl-c"># 使用资源路径加载图标</span>
+        <span class="pl-s1">icon_path</span> <span class="pl-c1">=</span> <span class="pl-en">get_resource_path</span>(<span class="pl-s">"icon.ico"</span>)
+        <span class="pl-s1">self</span>.<span class="pl-c1">setWindowIcon</span>(<span class="pl-en">QIcon</span>(<span class="pl-s1">icon_path</span>))
+        
+        <span class="pl-c"># ...</span></pre></div>
+<p>6，如果您想要更完整的图标支持，可以创建一个 .rc 文件:</p>
+<pre class="notranslate"><code class="notranslate">// app.rc
+IDI_ICON1               ICON    DISCARDABLE     "icon.ico"
+</code></pre>
+<p>然后使用 pyrcc5 将其编译为 Python 模块：</p>
+<pre class="notranslate"><code class="notranslate">pyrcc5 app.rc -o app_rc.py
+</code></pre>
+<p>7，最后，在打包时包含所有必要的文件:</p>
+<div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-s1">pyinstaller</span> <span class="pl-c1">-</span><span class="pl-c1">-</span><span class="pl-s1">name</span><span class="pl-c1">=</span><span class="pl-v">ThymomaSegmentation</span> <span class="pl-c1">^</span>
+            <span class="pl-c1">-</span><span class="pl-c1">-</span><span class="pl-s1">windowed</span> <span class="pl-c1">^</span>
+            <span class="pl-c1">-</span><span class="pl-c1">-</span><span class="pl-s1">icon</span><span class="pl-c1">=</span><span class="pl-s1">icon</span>.<span class="pl-c1">ico</span> <span class="pl-c1">^</span>
+            <span class="pl-c1">-</span><span class="pl-c1">-</span><span class="pl-s1">add</span><span class="pl-c1">-</span><span class="pl-s1">data</span> <span class="pl-s">"icon.ico;."</span> <span class="pl-c1">^</span>
+            <span class="pl-c1">-</span><span class="pl-c1">-</span><span class="pl-s1">add</span><span class="pl-c1">-</span><span class="pl-s1">data</span> <span class="pl-s">"app_rc.py;."</span> <span class="pl-c1">^</span>
+            <span class="pl-s1">main</span>.<span class="pl-c1">py</span></pre></div>
+<p>完整目录结构</p>
+<p>your_project/<br>
+│<br>
+├── main.py<br>
+├── thymoma_segmentation_app.py<br>
+├── resources.py<br>
+├── icon.ico<br>
+├── app.rc<br>
+├── app_rc.py<br>
+└── utils/<br>
+└── utils.py</p>
+<p>perfect！</p></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
