@@ -7,24 +7,23 @@
 
 **1.单个文件的打包**
 
-**简单打包：**不创建虚拟环境进行打包，这样会把一些不相关的包打包进去，导致打包文件较大，不推荐。
+**单独虚拟环境打包**：创建一个单独的虚拟环境，只将文件需要的包进行打包。打包之后的exe相对较小
 
-打开安装好的Anaconda Prompt（用管理员命令打开）。
-使用cd命令移动到存放py文件的文件夹下。
-
-基础打包（生成一个文件夹）：
+创建虚拟环境：
 
 ```
-pyinstaller converter.py
+conda create -n “name” python=3.9
 ```
 
-打包成单个文件：
+安装相关的包(程序中用到的包)
 
 ```
-pyinstaller --onefile converter.py
+pip install ”name“
 ```
 
-打包成单个文件且不显示控制台窗口（最推荐）：
+再进行打包就可以了。
+
+打包成单个文件且不显示控制台窗口：
 
 ```
 pyinstaller --onefile --windowed converter.py
@@ -37,29 +36,23 @@ pyinstaller --onefile --windowed --icon=your_icon.ico converter.py
 ```
 
 如果你想让生成的文件更小，可以使用以下命令：
-
+（这条命令的作用是将 converter.py 脚本打包成一个单独的、无控制台窗口的可执行文件，并在打包过程中不使用 UPX 压缩，同时清理掉旧的构建文件。这样生成的可执行文件适合用于 GUI 应用程序，并且在某些情况下可能更稳定（因为没有使用 UPX 压缩））
 ```
 pyinstaller --onefile --windowed --clean --noupx converter.py
 ```
-
-**单独虚拟环境打包**：创建一个单独的虚拟环境，只将文件需要的包进行打包。打包之后的exe相对较小
-
-打包过程和上述一样，在打包之前，多了一个创建单独虚拟环境的步骤
-
-创建虚拟环境：
-
-```
-conda create -n “name”
-```
-
-安装相关的包
-
-```
-pip install ”name“
-```
-
-再进行上述的打包就可以了。
-
 **2.打包多个文件**
 
-待更新
+默认情况下，PyInstaller 会创建一个包含多个文件的输出，而不是单个 .exe 文件。您只需不使用 --onefile 选项即可。
+
+会在 dist 目录中创建一个名为 TSS的文件夹，其中包含所有必要的文件和库。代码中使用到的库不会被打包到exe中，这大大减少了exe的体积。
+**注意：保证你打包的.py为程序的入口**
+（无自定义图标）
+```
+pyinstaller --name=TSS --windowed main.py
+```
+
+（有自定义图标）
+
+```
+pyinstaller --name=TSS --windowed --clean --icon=your_icon.ico main.py
+```
