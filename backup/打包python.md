@@ -66,7 +66,7 @@ pyinstaller --name=TSS --windowed --clean --icon=your_icon.ico main.py
 
 （程序运行时，显示在头部）
 
-![image-20250118204903403](E:%5Ctypora%E5%9B%BE%E7%89%87%E6%96%87%E4%BB%B6%5Cimage-20250118204903403.png)
+![](https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/image-20250118204903403.png)
 
 ```python
 # thymoma_segmentation_app.py
