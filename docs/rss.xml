@@ -1,5 +1,40 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Aloner63 的个人博客</title><link>https://Aloner63.github.io</link><description>分享技术，记录生活，探索未知</description><copyright>Aloner63 的个人博客</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/1340761045.jpeg</url><title>avatar</title><link>https://Aloner63.github.io</link></image><lastBuildDate>Sun, 02 Mar 2025 09:35:47 +0000</lastBuildDate><managingEditor>Aloner63 的个人博客</managingEditor><ttl>60</ttl><webMaster>Aloner63 的个人博客</webMaster><item><title>FreeRTOS_1</title><link>https://Aloner63.github.io/post/FreeRTOS_1.html</link><description>## 目录
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Aloner63 的个人博客</title><link>https://Aloner63.github.io</link><description>分享技术，记录生活，探索未知</description><copyright>Aloner63 的个人博客</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/1340761045.jpeg</url><title>avatar</title><link>https://Aloner63.github.io</link></image><lastBuildDate>Sun, 02 Mar 2025 09:40:21 +0000</lastBuildDate><managingEditor>Aloner63 的个人博客</managingEditor><ttl>60</ttl><webMaster>Aloner63 的个人博客</webMaster><item><title>测试1111</title><link>https://Aloner63.github.io/post/ce-shi-1111.html</link><description>## 目录
+
+&lt;details&gt;
+&lt;summary&gt;概述&lt;/summary&gt;
+
+- [概述](#概述)
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;1.基础知识&lt;/summary&gt;
+
+- [1.基础知识](#1基础知识)
+  - [一.任务调度器简述](#一任务调度器简述)
+    - [1.什么是任务调度器](#1什么是任务调度器)
+    - [2.freertos的调度方式](#2freertos的调度方式)
+&lt;/details&gt;
+
+---
+
+## FreeRTOS
+
+## 概述
+
+随着产品实现的功能越来越多...
+
+## 1.基础知识
+
+### 一.任务调度器简述
+
+#### 1.什么是任务调度器
+
+任务调度器是 FreeRTOS 的“大脑”...
+
+#### 2.freertos的调度方式
+
+- **抢占式调度**：主要是针对优先级不同的任务...。</description><guid isPermaLink="true">https://Aloner63.github.io/post/ce-shi-1111.html</guid><pubDate>Sun, 02 Mar 2025 09:39:57 +0000</pubDate></item><item><title>FreeRTOS_1</title><link>https://Aloner63.github.io/post/FreeRTOS_1.html</link><description>## 目录
 
 - [概述](#概述)
 - [1.基础知识](#1基础知识)
