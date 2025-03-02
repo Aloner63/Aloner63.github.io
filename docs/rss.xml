@@ -1,40 +1,187 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Aloner63 的个人博客</title><link>https://Aloner63.github.io</link><description>分享技术，记录生活，探索未知</description><copyright>Aloner63 的个人博客</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/1340761045.jpeg</url><title>avatar</title><link>https://Aloner63.github.io</link></image><lastBuildDate>Sun, 02 Mar 2025 09:45:53 +0000</lastBuildDate><managingEditor>Aloner63 的个人博客</managingEditor><ttl>60</ttl><webMaster>Aloner63 的个人博客</webMaster><item><title>测试1111</title><link>https://Aloner63.github.io/post/ce-shi-1111.html</link><description>## 目录
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Aloner63 的个人博客</title><link>https://Aloner63.github.io</link><description>分享技术，记录生活，探索未知</description><copyright>Aloner63 的个人博客</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/1340761045.jpeg</url><title>avatar</title><link>https://Aloner63.github.io</link></image><lastBuildDate>Sun, 02 Mar 2025 10:01:14 +0000</lastBuildDate><managingEditor>Aloner63 的个人博客</managingEditor><ttl>60</ttl><webMaster>Aloner63 的个人博客</webMaster><item><title>测试1111</title><link>https://Aloner63.github.io/post/ce-shi-1111.html</link><description>
+
+## 目录
 
 &lt;details&gt;
 &lt;summary&gt;概述&lt;/summary&gt;
 
-- [概述](#概述)
+- [概述](#overview)
 &lt;/details&gt;
 
 &lt;details&gt;
 &lt;summary&gt;1.基础知识&lt;/summary&gt;
 
-- [1.基础知识](#1基础知识)
-  - [一.任务调度器简述](#一任务调度器简述)
-    - [1.什么是任务调度器](#1什么是任务调度器)
-    - [2.freertos的调度方式](#2freertos的调度方式)
+- [1.基础知识](#basic-knowledge)
+  - [一.任务调度器简述](#task-scheduler-overview)
+    - [1.什么是任务调度器](#what-is-task-scheduler)
+    - [2.freertos的调度方式](#freertos-scheduling-methods)
+    - [3.抢占式调度过程](#preemptive-scheduling-process)
+    - [4.时间片是什么](#what-is-time-slice)
+    - [5.时间片调度过程](#time-slice-scheduling-process)
+  - [二.任务状态](#task-states)
+    - [1.freertos的任务状态](#freertos-task-states)
+    - [2.四种状态之间的转换关系](#task-state-transitions)
+    - [3.任务状态列表](#task-state-list)
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;2.freertos系统配置文件详解&lt;/summary&gt;
+
+- [2.freertos系统配置文件详解](#freertos-config-details)
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;3.任务的创建和删除&lt;/summary&gt;
+
+- [3.任务的创建和删除](#task-creation-and-deletion)
+  - [一.任务创建和删除API函数](#task-creation-deletion-api)
+    - [1.任务创建和删除的本质](#task-creation-deletion-essence)
+    - [2.任务动态创建和静态创建的区别](#dynamic-vs-static-task-creation)
+    - [3.任务控制块结构体成员介绍](#task-control-block-members)
+    - [4.什么是临界保护区](#what-is-critical-section)
+    - [5.动态创建的优点](#dynamic-creation-advantages)
+    - [6.静态创建的优点](#static-creation-advantages)
+  - [二.任务的创建（动态）](#dynamic-task-creation)
+    - [1.动态函数的创建](#dynamic-function-creation)
+    - [2.什么是句柄](#what-is-handle)
+    - [3.实现动态创建任务流程](#dynamic-task-creation-process)
+    - [4.动态任务创建函数内部实现简述](#dynamic-task-creation-internal)
+  - [三.任务的创建（静态）](#static-task-creation)
+    - [1.静态函数的创建](#static-function-creation)
+    - [2.实现静态创建任务流程](#static-task-creation-process)
+    - [3.静态任务创建函数内部实现简述](#static-task-creation-internal)
+  - [四.任务的删除](#task-deletion)
+    - [1.任务删除函数](#task-deletion-function)
+    - [2.删除任务流程](#task-deletion-process)
+    - [3.删除任务函数内部实现简述](#task-deletion-internal)
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;4.任务的挂起和恢复&lt;/summary&gt;
+
+- [4.任务的挂起和恢复](#task-suspension-and-resumption)
+  - [一.任务的挂起和恢复介绍](#task-suspension-resumption-intro)
+  - [二.任务的挂起](#task-suspension)
+    - [1.挂起函数介绍](#suspension-function-intro)
+    - [2.任务挂起函数内部实现](#suspension-function-internal)
+  - [三.任务的恢复](#task-resumption)
+    - [1.任务恢复函数介绍（任务中）](#resumption-function-task-intro)
+    - [2.任务回复函数的实现（任务中）](#resumption-function-task-internal)
+    - [3.任务恢复函数介绍（中断中）](#resumption-function-isr-intro)
+    - [4.任务恢复函数内部实现（中断中）](#resumption-function-isr-internal)
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;5.中断管理&lt;/summary&gt;
+
+- [5.中断管理](#interrupt-management)
+  - [一.中断介绍](#interrupt-intro)
+    - [1.什么是中断](#what-is-interrupt)
+    - [2.中断执行机制](#interrupt-execution-mechanism)
+  - [二.中断优先级分组设置](#interrupt-priority-grouping)
+    - [1.中断优先级分组介绍](#priority-grouping-intro)
+    - [2.什么是去抢占优先级什么是子优先级](#preemption-vs-subpriority)
+    - [3.中断优先级配置方式](#priority-configuration-methods)
+    - [4.freertos中对中断优先级的管理](#freertos-interrupt-priority-management)
+  - [三.中断相关寄存器](#interrupt-related-registers)
+    - [1.系统中断优先级配置寄存器](#system-interrupt-priority-registers)
+    - [2.FreeRTOS如何配置PendSV和Systick中断优先级](#freertos-pendsv-systick-config)
+    - [3.为什么将PendSV和SysTick设置最低优先级](#why-lowest-pendsv-systick)
+    - [4.中断屏蔽寄存器](#interrupt-mask-registers)
+    - [5.BASEPRI中断屏蔽寄存器](#basepri-interrupt-mask)
+    - [6.freertos的关闭中断程序](#freertos-disable-interrupts)
+    - [7.freertos的开中断程序](#freertos-enable-interrupts)
+    - [8.中断服务函数调用FreeRTOS的API函数需注意](#freertos-isr-api-notes)
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;6.freertos临界段代码保护&lt;/summary&gt;
+
+- [6.freertos临界段代码保护](#freertos-critical-section-protection)
+  - [1.什么是临界段](#what-is-critical-section-1)
+  - [2.适用什么场合](#critical-section-use-cases)
+  - [3.什么可以打断当前程序的运行](#what-interrupts-program)
+  - [4.临界段代码保护函数](#critical-section-protection-functions)
+  - [5.临界段代码保护函数使用特点](#critical-section-function-features)
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;7.任务调度器挂起和恢复函数&lt;/summary&gt;
+
+- [7.任务调度器挂起和恢复函数](#scheduler-suspend-resume-functions)
+  - [1.任务调度器挂起和恢复函数](#scheduler-suspend-resume-functions-1)
+  - [2.任务调度器挂起和恢复的特点](#scheduler-suspend-resume-features)
+  - [3.挂起任务调度器vTaskSuspendAll](#suspend-scheduler-vtasksuspendall)
+  - [4.恢复任务调度器xTaskResumeAll](#resume-scheduler-xtaskresumeall)
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;8.freertos的列表和列表项&lt;/summary&gt;
+
+- [8.freertos的列表和列表项](#freertos-lists-and-items)
+  - [一.列表和列表项的简介](#list-and-item-intro)
+    - [1.什么是列表](#what-is-list)
+    - [2.什么是列表项](#what-is-list-item)
+    - [3.列表和列表项的关系](#list-and-item-relationship)
+    - [4.列表链表和数组的区别](#list-vs-array)
+    - [5.OS中为什么使用列表](#why-use-lists-in-os)
+    - [6.列表结构体介绍](#list-structure-intro)
+    - [7.列表项结构体介绍](#list-item-structure-intro)
+    - [8.迷你列表项](#mini-list-item)
+    - [9.列表和列表项关系事例](#list-and-item-example)
+  - [二.列表相关的API函数介绍](#list-related-api-intro)
+    - [1.列表API函数](#list-api-functions)
+    - [2.初始化列表函数vListInitialise](#init-list-vlistinitialise)
+    - [3.初始化列表项函数vListInitialiseItem](#init-list-item-vlistinitialiseitem)
+    - [4.列表插入列表项函数vListInsert](#insert-list-vlistinsert)
+    - [5.列表末尾插入列表项vListInsertEnd](#insert-end-vlistinsertend)
+    - [6.列表项移除函数uxListRemove](#remove-list-uxlistremove)
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;9.freertos任务调度&lt;/summary&gt;
+
+- [9.freertos任务调度](#freertos-task-scheduling)
+  - [一.开启任务调度器熟悉](#start-scheduler-overview)
+    - [1.开启任务调度器函数vTaskStartScheduler](#start-scheduler-vtaskstartscheduler)
+    - [2.配置硬件架构及启动第一个任务函数xPortStartScheduler](#config-hardware-xportstartscheduler)
+    - [3.SysTick滴答定时器](#systick-timer)
+    - [4.堆和栈的地址生长方向](#heap-stack-growth)
+    - [5.压栈和出栈的地址增长方向](#stack-push-pop-direction)
+    - [6.知识补充](#knowledge-supplement)
+  - [二.启动第一个任务熟悉](#start-first-task-overview)
+    - [1.启动第一个任务涉及的关键函数](#start-first-task-key-functions)
+    - [2.想象一下应该如何启动第一个任务](#how-to-start-first-task)
+    - [3.prvStartFirstTask 介绍](#prvstartfirsttask-intro)
+    - [4.什么是MSP指针](#what-is-msp-pointer)
+    - [5.为什么汇编代码要PRESERVE8八字节对齐](#why-preserve8-alignment)
+    - [6.prvStartFirstTask为什么要操作0XE00ED08](#prvstartfirsttask-0xe00ed08)
+    - [7.vPortSVCHandle介绍](#vportsvchandle-intro)
+    - [8.出栈压栈汇编指令详解](#stack-instruction-details)
+  - [三.任务切换掌握](#task-switching-mastery)
+    - [1.任务切换的本质](#task-switching-essence)
+    - [2.任务切换过程](#task-switching-process)
+    - [3.PendSV中断是如何触发的](#pendsv-trigger)
+    - [4.在PendSV中断中PSP和MSP](#pendsv-psp-msp)
+    - [5.查找最高优先级任务](#find-highest-priority-task)
+    - [6.前导置零指令](#leading-zero-instruction)
+&lt;/details&gt;
+
+&lt;details&gt;
+&lt;summary&gt;10.FreeRTOS时间片轮询&lt;/summary&gt;
+
+- [10.FreeRTOS时间片轮询](#freertos-timeslice-polling)
+  - [一.时间片轮询简介](#timeslice-polling-intro)
 &lt;/details&gt;
 
 ---
 
-## FreeRTOS
+## &lt;a id='freertos'&gt;&lt;/a&gt;FreeRTOS
 
-## 概述
+## &lt;a id='overview'&gt;&lt;/a&gt;概述
 
-随着产品实现的功能越来越多...
-
-## 1.基础知识
-
-### 一.任务调度器简述
-
-#### 1.什么是任务调度器
-
-任务调度器是 FreeRTOS 的“大脑”...
-
-#### 2.freertos的调度方式
-
-- **抢占式调度**：主要是针对优先级不同的任务...。</description><guid isPermaLink="true">https://Aloner63.github.io/post/ce-shi-1111.html</guid><pubDate>Sun, 02 Mar 2025 09:39:57 +0000</pubDate></item><item><title>FreeRTOS_1</title><link>https://Aloner63.github.io/post/FreeRTOS_1.html</link><description>## 目录
+随着产品实现的功能越来越多，单纯的裸机系统已经不能完美的解决问题了，反而会使程序边的更加复杂，如果想降低编程的难度，我们可以考虑引入RTOS实现多任务管理。</description><guid isPermaLink="true">https://Aloner63.github.io/post/ce-shi-1111.html</guid><pubDate>Sun, 02 Mar 2025 09:39:57 +0000</pubDate></item><item><title>FreeRTOS_1</title><link>https://Aloner63.github.io/post/FreeRTOS_1.html</link><description>## 目录
 
 &lt;details&gt;
 &lt;summary&gt;概述&lt;/summary&gt;
