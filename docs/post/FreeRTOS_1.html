@@ -10,8 +10,7 @@
         let theme = localStorage.getItem("meek_theme") || "light";
         document.documentElement.setAttribute("data-color-mode", theme);
     </script>
-<meta name="description" content="
-## 目录
+<meta name="description" content="## 目录
 
 - [概述](#概述)
 - [1.基础知识](#1基础知识)
@@ -76,16 +75,16 @@
     - [7.freertos的开中断程序](#7freertos的开中断程序)
     - [8.中断服务函数调用FreeRTOS的API函数需注意](#8中断服务函数调用freertos的api函数需注意)
 - [6.freertos临界段代码保护](#6freertos临界段代码保护)
-    - [1.什么是临界段](#1什么是临界段)
-    - [2.适用什么场合](#2适用什么场合)
-    - [3.什么可以打断当前程序的运行](#3什么可以打断当前程序的运行)
-    - [4.临界段代码保护函数](#4临界段代码保护函数)
-    - [5.临界段代码保护函数使用特点](#5临界段代码保护函数使用特点)
+  - [1.什么是临界段](#1什么是临界段)
+  - [2.适用什么场合](#2适用什么场合)
+  - [3.什么可以打断当前程序的运行](#3什么可以打断当前程序的运行)
+  - [4.临界段代码保护函数](#4临界段代码保护函数)
+  - [5.临界段代码保护函数使用特点](#5临界段代码保护函数使用特点)
 - [7.任务调度器挂起和恢复函数](#7任务调度器挂起和恢复函数)
-    - [1.任务调度器挂起和恢复函数](#1任务调度器挂起和恢复函数)
-    - [2.任务调度器挂起和恢复的特点](#2任务调度器挂起和恢复的特点)
-    - [3.挂起任务调度器：vTaskSuspendAll()](#3挂起任务调度器vtasksuspendall)
-    - [4.恢复任务调度器：xTaskResumeAll()](#4恢复任务调度器xtaskresumeall)
+  - [1.任务调度器挂起和恢复函数](#1任务调度器挂起和恢复函数)
+  - [2.任务调度器挂起和恢复的特点](#2任务调度器挂起和恢复的特点)
+  - [3.挂起任务调度器：vTaskSuspendAll()](#3挂起任务调度器vtasksuspendall)
+  - [4.恢复任务调度器：xTaskResumeAll()](#4恢复任务调度器xtaskresumeall)
 - [8.freertos的列表和列表项](#8freertos的列表和列表项)
   - [一.列表和列表项的简介](#一列表和列表项的简介)
     - [1.什么是列表](#1什么是列表)
@@ -139,8 +138,7 @@
 
 随着产品实现的功能越来越多，单纯的裸机系统已经不能完美的解决问题了，反而会使程序边的更加复杂，如果想降低编程的难度，我们可以考虑引入RTOS实现多任务管理。">
 <meta property="og:title" content="FreeRTOS_1">
-<meta property="og:description" content="
-## 目录
+<meta property="og:description" content="## 目录
 
 - [概述](#概述)
 - [1.基础知识](#1基础知识)
@@ -205,16 +203,16 @@
     - [7.freertos的开中断程序](#7freertos的开中断程序)
     - [8.中断服务函数调用FreeRTOS的API函数需注意](#8中断服务函数调用freertos的api函数需注意)
 - [6.freertos临界段代码保护](#6freertos临界段代码保护)
-    - [1.什么是临界段](#1什么是临界段)
-    - [2.适用什么场合](#2适用什么场合)
-    - [3.什么可以打断当前程序的运行](#3什么可以打断当前程序的运行)
-    - [4.临界段代码保护函数](#4临界段代码保护函数)
-    - [5.临界段代码保护函数使用特点](#5临界段代码保护函数使用特点)
+  - [1.什么是临界段](#1什么是临界段)
+  - [2.适用什么场合](#2适用什么场合)
+  - [3.什么可以打断当前程序的运行](#3什么可以打断当前程序的运行)
+  - [4.临界段代码保护函数](#4临界段代码保护函数)
+  - [5.临界段代码保护函数使用特点](#5临界段代码保护函数使用特点)
 - [7.任务调度器挂起和恢复函数](#7任务调度器挂起和恢复函数)
-    - [1.任务调度器挂起和恢复函数](#1任务调度器挂起和恢复函数)
-    - [2.任务调度器挂起和恢复的特点](#2任务调度器挂起和恢复的特点)
-    - [3.挂起任务调度器：vTaskSuspendAll()](#3挂起任务调度器vtasksuspendall)
-    - [4.恢复任务调度器：xTaskResumeAll()](#4恢复任务调度器xtaskresumeall)
+  - [1.任务调度器挂起和恢复函数](#1任务调度器挂起和恢复函数)
+  - [2.任务调度器挂起和恢复的特点](#2任务调度器挂起和恢复的特点)
+  - [3.挂起任务调度器：vTaskSuspendAll()](#3挂起任务调度器vtasksuspendall)
+  - [4.恢复任务调度器：xTaskResumeAll()](#4恢复任务调度器xtaskresumeall)
 - [8.freertos的列表和列表项](#8freertos的列表和列表项)
   - [一.列表和列表项的简介](#一列表和列表项的简介)
     - [1.什么是列表](#1什么是列表)
@@ -648,7 +646,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 </ol>
 <h3>二.任务的创建（动态）</h3>
 <h4>1.动态函数的创建</h4>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%8A%A8%E6%80%81%E4%BB%BB%E5%8A%A1%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0-1740895436704.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%8A%A8%E6%80%81%E4%BB%BB%E5%8A%A1%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0-1740895436704.png" alt="动态任务创建函数参数" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%8A%A8%E6%80%81%E4%BB%BB%E5%8A%A1%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%8A%A8%E6%80%81%E4%BB%BB%E5%8A%A1%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png" alt="动态任务创建函数参数" style="max-width: 100%;"></a></p>
 <p>函数返回值</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%8A%A8%E6%80%81%E4%BB%BB%E5%8A%A1%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%8A%A8%E6%80%81%E4%BB%BB%E5%8A%A1%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png" alt="动态任务创建函数返回值" style="max-width: 100%;"></a></p>
 <h4>2.什么是句柄？（加）</h4>
@@ -780,7 +778,7 @@ xTaskCreate(taskFunc, "Worker", 1000, NULL, 1, &amp;worker2Handle);
 </ol>
 <h3>三.任务的恢复</h3>
 <h4>1.任务恢复函数介绍（任务中）</h4>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E6%81%A2%E5%A4%8D%E5%87%BD%E6%95%B0(%E4%BB%BB%E5%8A%A1%E4%B8%AD%E4%BD%BF%E7%94%A8)-1740897585357.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E6%81%A2%E5%A4%8D%E5%87%BD%E6%95%B0(%E4%BB%BB%E5%8A%A1%E4%B8%AD%E4%BD%BF%E7%94%A8)-1740897585357.png" alt="任务恢复函数(任务中使用)" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E6%81%A2%E5%A4%8D%E5%87%BD%E6%95%B0(%E4%BB%BB%E5%8A%A1%E4%B8%AD%E4%BD%BF%E7%94%A8).png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E6%81%A2%E5%A4%8D%E5%87%BD%E6%95%B0(%E4%BB%BB%E5%8A%A1%E4%B8%AD%E4%BD%BF%E7%94%A8).png" alt="任务恢复函数(任务中使用)" style="max-width: 100%;"></a></p>
 <p>使用该函数时需要将FreeRTOSConfig.h文件中宏INCLUDE_vTaskSuspend配置为1。</p>
 <p>注意：任务无论被vTaskSuspend()挂起多少次，只需在任务中调用vTaskResume()恢复一次就能继续运行，且被恢复的任务会进入就绪态。</p>
 <h4>2.任务回复函数的实现（任务中）</h4>
@@ -841,7 +839,7 @@ xTaskCreate(taskFunc, "Worker", 1000, NULL, 1, &amp;worker2Handle);
 <li>SHPR2寄存器地址：0xE000ED1C~0xE000ED1F</li>
 <li>SHPR3寄存器地址：0xE000ED20~0xE000ED23</li>
 </ul>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E7%B3%BB%E7%BB%9F%E4%B8%AD%E6%96%AD%E9%85%8D%E7%BD%AE%E5%AF%84%E5%AD%98%E5%99%A8-1740899257858.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E7%B3%BB%E7%BB%9F%E4%B8%AD%E6%96%AD%E9%85%8D%E7%BD%AE%E5%AF%84%E5%AD%98%E5%99%A8-1740899257858.png" alt="系统中断配置寄存器" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E7%B3%BB%E7%BB%9F%E4%B8%AD%E6%96%AD%E9%85%8D%E7%BD%AE%E5%AF%84%E5%AD%98%E5%99%A8.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E7%B3%BB%E7%BB%9F%E4%B8%AD%E6%96%AD%E9%85%8D%E7%BD%AE%E5%AF%84%E5%AD%98%E5%99%A8.png" alt="系统中断配置寄存器" style="max-width: 100%;"></a></p>
 <p>FreeRTOS主要是使用SHPR3寄存器对<strong>PendSV</strong>和<strong>Systick</strong>中断优先级进行设置(设置为最低优先级)</p>
 <h4>2.FreeRTOS如何配置PendSV和Systick中断优先级</h4>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/PendSV%E5%92%8CSystick%E4%B8%AD%E6%96%AD%E4%BC%98%E5%85%88%E7%BA%A71.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/PendSV%E5%92%8CSystick%E4%B8%AD%E6%96%AD%E4%BC%98%E5%85%88%E7%BA%A71.png" alt="PendSV和Systick中断优先级1" style="max-width: 100%;"></a></p>
@@ -880,7 +878,7 @@ xTaskCreate(taskFunc, "Worker", 1000, NULL, 1, &amp;worker2Handle);
 <h4>3.什么可以打断当前程序的运行</h4>
 <p>中断、任务调度。</p>
 <h4>4.临界段代码保护函数</h4>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%B8%B4%E7%95%8C%E6%AE%B5%E4%BF%9D%E6%8A%A4%E5%87%BD%E6%95%B0-1740899808489.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%B8%B4%E7%95%8C%E6%AE%B5%E4%BF%9D%E6%8A%A4%E5%87%BD%E6%95%B0-1740899808489.png" alt="临界段保护函数" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%B8%B4%E7%95%8C%E6%AE%B5%E4%BF%9D%E6%8A%A4%E5%87%BD%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%B8%B4%E7%95%8C%E6%AE%B5%E4%BF%9D%E6%8A%A4%E5%87%BD%E6%95%B0.png" alt="临界段保护函数" style="max-width: 100%;"></a></p>
 <p>任务级临界区调用格式示例：</p>
 <div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-en">taskENTER_CRITICAL</span>();
 {
@@ -1156,13 +1154,13 @@ xTaskCreate(taskFunc, "Worker", 1000, NULL, 1, &amp;worker2Handle);
 <p>taskSELECT_HIGHEST_PRIORITY_TASK( )    /* 通过这个函数完成 */</p>
 <h4>6.前导置零指令</h4>
 <p>答：</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%89%8D%E5%AF%BC%E7%BD%AE%E9%9B%B6%E6%8C%87%E4%BB%A4.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%89%8D%E5%AF%BC%E7%BD%AE%E9%9B%B6%E6%8C%87%E4%BB%A4.png" alt="前导置零指令" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%89%8D%E5%AF%BC%E7%BD%AE0%E6%8C%87%E4%BB%A4.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%89%8D%E5%AF%BC%E7%BD%AE0%E6%8C%87%E4%BB%A4.png" alt="前导置零指令" style="max-width: 100%;"></a></p>
 <p>所谓的前导置零指令，大家可以简单理解为计算一个 32位数，出现第一个1前头部 0 的个数。</p>
 <hr>
 <h2>10.FreeRTOS时间片轮询</h2>
 <h4>一.时间片轮询简介</h4>
 <p>答：同等优先级任务轮流享有相同的CPU时间(可设置)，叫<strong>时间片</strong>，在FreeRTOS中，一个时间片就等于SysTick中断周期。</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E6%97%B6%E9%97%B4%E7%89%87%E8%B0%83%E5%BA%A6-1740904235640.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E6%97%B6%E9%97%B4%E7%89%87%E8%B0%83%E5%BA%A6-1740904235640.png" alt="时间片调度" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E6%97%B6%E9%97%B4%E7%89%87%E8%B0%83%E5%BA%A6.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E6%97%B6%E9%97%B4%E7%89%87%E8%B0%83%E5%BA%A6.png" alt="时间片调度" style="max-width: 100%;"></a></p>
 <p>运行过程如下：</p>
 <ol>
 <li>首先Task1运行完一个时间片后，切换至Task2运行。</li>

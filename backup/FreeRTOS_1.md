@@ -1,4 +1,3 @@
-
 ## 目录
 
 - [概述](#概述)
@@ -64,16 +63,16 @@
     - [7.freertos的开中断程序](#7freertos的开中断程序)
     - [8.中断服务函数调用FreeRTOS的API函数需注意](#8中断服务函数调用freertos的api函数需注意)
 - [6.freertos临界段代码保护](#6freertos临界段代码保护)
-    - [1.什么是临界段](#1什么是临界段)
-    - [2.适用什么场合](#2适用什么场合)
-    - [3.什么可以打断当前程序的运行](#3什么可以打断当前程序的运行)
-    - [4.临界段代码保护函数](#4临界段代码保护函数)
-    - [5.临界段代码保护函数使用特点](#5临界段代码保护函数使用特点)
+  - [1.什么是临界段](#1什么是临界段)
+  - [2.适用什么场合](#2适用什么场合)
+  - [3.什么可以打断当前程序的运行](#3什么可以打断当前程序的运行)
+  - [4.临界段代码保护函数](#4临界段代码保护函数)
+  - [5.临界段代码保护函数使用特点](#5临界段代码保护函数使用特点)
 - [7.任务调度器挂起和恢复函数](#7任务调度器挂起和恢复函数)
-    - [1.任务调度器挂起和恢复函数](#1任务调度器挂起和恢复函数)
-    - [2.任务调度器挂起和恢复的特点](#2任务调度器挂起和恢复的特点)
-    - [3.挂起任务调度器：vTaskSuspendAll()](#3挂起任务调度器vtasksuspendall)
-    - [4.恢复任务调度器：xTaskResumeAll()](#4恢复任务调度器xtaskresumeall)
+  - [1.任务调度器挂起和恢复函数](#1任务调度器挂起和恢复函数)
+  - [2.任务调度器挂起和恢复的特点](#2任务调度器挂起和恢复的特点)
+  - [3.挂起任务调度器：vTaskSuspendAll()](#3挂起任务调度器vtasksuspendall)
+  - [4.恢复任务调度器：xTaskResumeAll()](#4恢复任务调度器xtaskresumeall)
 - [8.freertos的列表和列表项](#8freertos的列表和列表项)
   - [一.列表和列表项的简介](#一列表和列表项的简介)
     - [1.什么是列表](#1什么是列表)
@@ -275,7 +274,7 @@ freertosconfig.h配置文件的作用
 
 #### 1.动态函数的创建
 
-![动态任务创建函数参数](https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/动态任务创建函数参数-1740895436704.png)
+![动态任务创建函数参数](https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/动态任务创建函数参数.png)
 
 函数返回值
 
@@ -410,7 +409,7 @@ xTaskCreate(taskFunc, "Worker", 1000, NULL, 1, &worker2Handle);
 
 #### 1.任务恢复函数介绍（任务中）
 
-![任务恢复函数(任务中使用)](https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/任务恢复函数(任务中使用)-1740897585357.png)
+![任务恢复函数(任务中使用)](https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/任务恢复函数(任务中使用).png)
 
 使用该函数时需要将FreeRTOSConfig.h文件中宏INCLUDE_vTaskSuspend配置为1。
 
@@ -496,7 +495,7 @@ FreeRTOS中为了方便管理，采用第4号(NVIC_PriorityGroup_4)分配方式�
 - SHPR2寄存器地址：0xE000ED1C~0xE000ED1F
 - SHPR3寄存器地址：0xE000ED20~0xE000ED23
 
-![系统中断配置寄存器](https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/系统中断配置寄存器-1740899257858.png)
+![系统中断配置寄存器](https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/系统中断配置寄存器.png)
 
 FreeRTOS主要是使用SHPR3寄存器对**PendSV**和**Systick**中断优先级进行设置(设置为最低优先级)
 
@@ -563,7 +562,7 @@ BASEPRI：屏蔽优先级低于某一个阈值的中断，当设置为0时，则
 
 #### 4.临界段代码保护函数
 
-![临界段保护函数](https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/临界段保护函数-1740899808489.png)
+![临界段保护函数](https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/临界段保护函数.png)
 
 任务级临界区调用格式示例：
 
@@ -989,7 +988,7 @@ taskSELECT_HIGHEST_PRIORITY_TASK( )    /* 通过这个函数完成 */
 
 答：
 
-![前导置零指令](https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/前导置零指令.png)
+![前导置零指令](https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/前导置0指令.png)
 
 所谓的前导置零指令，大家可以简单理解为计算一个 32位数，出现第一个1前头部 0 的个数。
 
@@ -1001,7 +1000,7 @@ taskSELECT_HIGHEST_PRIORITY_TASK( )    /* 通过这个函数完成 */
 
 答：同等优先级任务轮流享有相同的CPU时间(可设置)，叫**时间片**，在FreeRTOS中，一个时间片就等于SysTick中断周期。
 
-![时间片调度](https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/时间片调度-1740904235640.png)
+![时间片调度](https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/时间片调度.png)
 
 运行过程如下：
 
