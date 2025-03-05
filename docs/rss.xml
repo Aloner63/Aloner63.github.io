@@ -1,5 +1,28 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Aloner63 的个人博客</title><link>https://Aloner63.github.io</link><description>分享技术，记录生活，探索未知</description><copyright>Aloner63 的个人博客</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/1340761045.jpeg</url><title>avatar</title><link>https://Aloner63.github.io</link></image><lastBuildDate>Sun, 02 Mar 2025 10:20:57 +0000</lastBuildDate><managingEditor>Aloner63 的个人博客</managingEditor><ttl>60</ttl><webMaster>Aloner63 的个人博客</webMaster><item><title>FreeRTOS_1</title><link>https://Aloner63.github.io/post/FreeRTOS_1.html</link><description>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Aloner63 的个人博客</title><link>https://Aloner63.github.io</link><description>分享技术，记录生活，探索未知</description><copyright>Aloner63 的个人博客</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/1340761045.jpeg</url><title>avatar</title><link>https://Aloner63.github.io</link></image><lastBuildDate>Wed, 05 Mar 2025 06:05:00 +0000</lastBuildDate><managingEditor>Aloner63 的个人博客</managingEditor><ttl>60</ttl><webMaster>Aloner63 的个人博客</webMaster><item><title>FreeRTOS_2</title><link>https://Aloner63.github.io/post/FreeRTOS_2.html</link><description>
+[TOC]
+
+## 11.FreeRTOS任务相关的其他API函数
+
+### 一、FreeRTOS任务相关的其他API函数介绍
+
+#### 1、FreeRTOS任务相关API函数介绍(部分常用的)
+
+答：
+
+![](https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E7%9B%B8%E5%85%B3%E7%9A%84%E5%85%B6%E4%BB%96API%E5%87%BD%E6%95%B0.png)
+
+### 二、任务状态查询API函数
+
+#### 1、获取任务优先级函数
+
+答：
+
+```C
+UBaseType_t  uxTaskPriorityGet(  const TaskHandle_t xTask  )
+```
+
+此函数用于获取指定任务的任务优先级，使用该函数需要将宏 INCLUDE_uxTaskPriorityGet 置1。</description><guid isPermaLink="true">https://Aloner63.github.io/post/FreeRTOS_2.html</guid><pubDate>Wed, 05 Mar 2025 06:04:39 +0000</pubDate></item><item><title>FreeRTOS_1</title><link>https://Aloner63.github.io/post/FreeRTOS_1.html</link><description>
 ## 目录
 
 &lt;details&gt;
