@@ -172,9 +172,9 @@ void loop() {
 <pre class="notranslate"><code class="notranslate">sudo ufw allow 5000
 </code></pre>
 <p>服务器端代码esp_server.py</p>
-<div class="highlight highlight-source-c++"><pre class="notranslate">from http.server import HTTPServer, BaseHTTPRequestHandler
-import json
-from datetime import datetime
+<div class="highlight highlight-source-c++"><pre class="notranslate">from http.server <span class="pl-k">import</span> HTTPServer, BaseHTTPRequestHandler
+<span class="pl-k">import</span> json
+from datetime <span class="pl-k">import</span> datetime
 
 <span class="pl-k">class</span> <span class="pl-en">SimpleHTTPRequestHandler</span>(BaseHTTPRequestHandler):
     def <span class="pl-en">do_POST</span>(self):
