@@ -710,7 +710,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <li><strong>协程式调度</strong> ：其实就是轮询，当前执行任务将会一直运行，同时高优先级的任务不会抢占低优先级任务。FreeRTOS现在虽然还在支持，但官方已经明确表示不再更新协程式调度。</li>
 </ul>
 <h4><a id="user-content-preemptive-scheduling-process"></a>3.抢占式调度过程</h4>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E6%8A%A2%E5%8D%A0%E5%BC%8F%E8%B0%83%E5%BA%A6.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E6%8A%A2%E5%8D%A0%E5%BC%8F%E8%B0%83%E5%BA%A6.png" alt="抢占式调度" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E6%8A%A2%E5%8D%A0%E5%BC%8F%E8%B0%83%E5%BA%A6.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E6%8A%A2%E5%8D%A0%E5%BC%8F%E8%B0%83%E5%BA%A6.png" alt="抢占式调度" style="max-width: 100%; height: auto;"></a></p>
 <p>运行过程如下：</p>
 <ol>
 <li>首先Task1在运行中，在这个过程中Task2就绪了，在抢占式调度器的作用下，Task2会抢占Task1的运行。</li>
@@ -727,7 +727,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <h4><a id="user-content-what-is-time-slice"></a>4.时间片是什么？</h4>
 <p>同等优先级任务轮流享有相同的CPU时间(可设置)，叫做时间片，在FreeRTOS中，一个时间片等于SysTick中断周期。</p>
 <h4><a id="user-content-time-slice-scheduling-process"></a>5.时间片调度过程</h4>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E6%97%B6%E9%97%B4%E7%89%87%E8%B0%83%E5%BA%A6.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E6%97%B6%E9%97%B4%E7%89%87%E8%B0%83%E5%BA%A6.png" alt="时间片调度" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E6%97%B6%E9%97%B4%E7%89%87%E8%B0%83%E5%BA%A6.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E6%97%B6%E9%97%B4%E7%89%87%E8%B0%83%E5%BA%A6.png" alt="时间片调度" style="max-width: 100%; height: auto;"></a></p>
 <p>运行过程如下：</p>
 <ol>
 <li>首先Task1运行完一个时间片后，切换至Task2运行。</li>
@@ -751,7 +751,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <li><strong>挂起态</strong> ：类似于暂停，调用函数vTaskSuspend()进入挂起态，需要调用解挂函数vTaskResume()才可以进入就绪态。</li>
 </ul>
 <h4><a id="user-content-task-state-transitions"></a>2.四种状态之间的转换关系</h4>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2%E5%85%B3%E7%B3%BB.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2%E5%85%B3%E7%B3%BB.png" alt="任务状态转换关系" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2%E5%85%B3%E7%B3%BB.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2%E5%85%B3%E7%B3%BB.png" alt="任务状态转换关系" style="max-width: 100%; height: auto;"></a></p>
 <ol>
 <li>仅就绪态可以转换成运行态。</li>
 <li>其他状态的任务想要运行，必须先转换成就绪态。</li>
@@ -782,14 +782,14 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <h3><a id="user-content-task-creation-deletion-api"></a>一.任务创建和删除API函数</h3>
 <h4><a id="user-content-task-creation-deletion-essence"></a>1.任务创建和删除的本质</h4>
 <p>任务创建和删除的本质就是调用FreeRTOS的API函数。</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E5%88%9B%E5%BB%BA%E5%92%8C%E5%88%A0%E9%99%A4API%E5%87%BD%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E5%88%9B%E5%BB%BA%E5%92%8C%E5%88%A0%E9%99%A4API%E5%87%BD%E6%95%B0.png" alt="任务创建和删除API函数" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E5%88%9B%E5%BB%BA%E5%92%8C%E5%88%A0%E9%99%A4API%E5%87%BD%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E5%88%9B%E5%BB%BA%E5%92%8C%E5%88%A0%E9%99%A4API%E5%87%BD%E6%95%B0.png" alt="任务创建和删除API函数" style="max-width: 100%; height: auto;"></a></p>
 <h4><a id="user-content-dynamic-vs-static-task-creation"></a>2.任务动态创建和静态创建的区别</h4>
 <ul>
 <li><strong>动态创建任务</strong> ：任务的任务控制块以及任务的栈空间所需的内存，均由FreeRTOS从FreeRTOS管理的堆中分配。</li>
 <li><strong>静态创建任务</strong> ：任务的任务控制块以及任务的栈空间所需的内存，需要用户分配提供。</li>
 </ul>
 <h4><a id="user-content-task-control-block-members"></a>3.任务控制块结构体成员介绍</h4>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E6%8E%A7%E5%88%B6%E5%9D%97%E7%BB%93%E6%9E%84%E4%BD%93%E6%88%90%E5%91%98.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E6%8E%A7%E5%88%B6%E5%9D%97%E7%BB%93%E6%9E%84%E4%BD%93%E6%88%90%E5%91%98.png" alt="任务控制块结构体成员" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E6%8E%A7%E5%88%B6%E5%9D%97%E7%BB%93%E6%9E%84%E4%BD%93%E6%88%90%E5%91%98.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E6%8E%A7%E5%88%B6%E5%9D%97%E7%BB%93%E6%9E%84%E4%BD%93%E6%88%90%E5%91%98.png" alt="任务控制块结构体成员" style="max-width: 100%; height: auto;"></a></p>
 <ol>
 <li>任务栈栈顶，在任务切换时的任务上下文保存、任务恢复息息相关。</li>
 <li>每个任务都有属于自己的任务控制块，类似身份证。</li>
@@ -801,7 +801,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <h4><a id="user-content-static-creation-advantages"></a>6.静态创建的优点</h4>
 <p>静态创建可将任务堆栈放置在特定的内存位置，并且无需关心对内存分配失败的处理 。</p>
 <p>创建任务时，任务堆栈所存的内容</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E5%88%9B%E5%BB%BA%E6%97%B6%E4%BB%BB%E5%8A%A1%E5%A0%86%E6%A0%88%E6%89%80%E5%AD%98%E5%86%85%E5%AE%B9.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E5%88%9B%E5%BB%BA%E6%97%B6%E4%BB%BB%E5%8A%A1%E5%A0%86%E6%A0%88%E6%89%80%E5%AD%98%E5%86%85%E5%AE%B9.png" alt="任务创建时任务堆栈所存内容" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E5%88%9B%E5%BB%BA%E6%97%B6%E4%BB%BB%E5%8A%A1%E5%A0%86%E6%A0%88%E6%89%80%E5%AD%98%E5%86%85%E5%AE%B9.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E5%88%9B%E5%BB%BA%E6%97%B6%E4%BB%BB%E5%8A%A1%E5%A0%86%E6%A0%88%E6%89%80%E5%AD%98%E5%86%85%E5%AE%B9.png" alt="任务创建时任务堆栈所存内容" style="max-width: 100%; height: auto;"></a></p>
 <ol>
 <li>寄存器下PSR被初始为0x01000000，其中bit24被置1，表示使用Thumb指令。</li>
 <li>寄存器PC被初始化为任务函数指针(任务A，即我们写的任务函数的地址)，这样当某次任务切换后，任务A获得CPU控制权，任务函数(任务A)被出栈到PC寄存器，之后会执行任务A的代码。</li>
@@ -810,9 +810,9 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 </ol>
 <h3><a id="user-content-dynamic-task-creation"></a>二.任务的创建（动态）</h3>
 <h4><a id="user-content-dynamic-function-creation"></a>1.动态函数的创建</h4>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%8A%A8%E6%80%81%E4%BB%BB%E5%8A%A1%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%8A%A8%E6%80%81%E4%BB%BB%E5%8A%A1%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png" alt="动态任务创建函数参数" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%8A%A8%E6%80%81%E4%BB%BB%E5%8A%A1%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%8A%A8%E6%80%81%E4%BB%BB%E5%8A%A1%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png" alt="动态任务创建函数参数" style="max-width: 100%; height: auto;"></a></p>
 <p>函数返回值</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%8A%A8%E6%80%81%E4%BB%BB%E5%8A%A1%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%8A%A8%E6%80%81%E4%BB%BB%E5%8A%A1%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png" alt="动态任务创建函数返回值" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%8A%A8%E6%80%81%E4%BB%BB%E5%8A%A1%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%8A%A8%E6%80%81%E4%BB%BB%E5%8A%A1%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png" alt="动态任务创建函数返回值" style="max-width: 100%; height: auto;"></a></p>
 <h4><a id="user-content-what-is-handle"></a>2.什么是句柄</h4>
 <p>你创建了一个任务，它就像是一个员工。</p>
 <p>任务句柄（<code class="notranslate">TaskHandle_t</code>）就是这个任务的 <strong>“身份证”</strong>，让你以后可以随时找到这个任务、控制它，比如暂停、删除、调整优先级等。</p>
@@ -875,9 +875,9 @@ xTaskCreate(taskFunc, "Worker", 1000, NULL, 1, &amp;worker2Handle);
 </ol>
 <h3><a id="user-content-static-task-creation"></a>三.任务的创建（静态）</h3>
 <h4><a id="user-content-static-function-creation"></a>1.静态函数的创建</h4>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E9%9D%99%E6%80%81%E4%BB%BB%E5%8A%A1%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E9%9D%99%E6%80%81%E4%BB%BB%E5%8A%A1%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png" alt="静态任务创建函数参数" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E9%9D%99%E6%80%81%E4%BB%BB%E5%8A%A1%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E9%9D%99%E6%80%81%E4%BB%BB%E5%8A%A1%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png" alt="静态任务创建函数参数" style="max-width: 100%; height: auto;"></a></p>
 <p>函数返回值</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E9%9D%99%E6%80%81%E4%BB%BB%E5%8A%A1%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E9%9D%99%E6%80%81%E4%BB%BB%E5%8A%A1%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png" alt="静态任务创建函数返回值" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E9%9D%99%E6%80%81%E4%BB%BB%E5%8A%A1%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E9%9D%99%E6%80%81%E4%BB%BB%E5%8A%A1%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png" alt="静态任务创建函数返回值" style="max-width: 100%; height: auto;"></a></p>
 <h4><a id="user-content-static-task-creation-process"></a>2.实现静态创建任务流程</h4>
 <ol>
 <li>将FreeRTOSConfig.h文件中宏configSUPPORT_STATIC_ALLOCATION配置为1。</li>
@@ -894,7 +894,7 @@ xTaskCreate(taskFunc, "Worker", 1000, NULL, 1, &amp;worker2Handle);
 </ol>
 <h3><a id="user-content-task-deletion"></a>四.任务的删除</h3>
 <h4><a id="user-content-task-deletion-function"></a>1.任务删除函数</h4>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E5%88%A0%E9%99%A4%E5%87%BD%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E5%88%A0%E9%99%A4%E5%87%BD%E6%95%B0.png" alt="任务删除函数" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E5%88%A0%E9%99%A4%E5%87%BD%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E5%88%A0%E9%99%A4%E5%87%BD%E6%95%B0.png" alt="任务删除函数" style="max-width: 100%; height: auto;"></a></p>
 <p>任务删除函数用于删除已经被创建的任务，被删除的任务将从就绪任务列表、阻塞任务列表、挂起任务列表和事件列表中移除。</p>
 <ol>
 <li>当传入的参数为NULL，则代表删除任务自身(当前正在运行的任务)。</li>
@@ -920,7 +920,7 @@ xTaskCreate(taskFunc, "Worker", 1000, NULL, 1, &amp;worker2Handle);
 <h2><a id="user-content-task-suspension-and-resumption"></a>4.任务的挂起和恢复</h2>
 <h3><a id="user-content-task-suspension-resumption-intro"></a>一.任务的挂起和恢复介绍</h3>
 <p>任务挂起与恢复的API函数</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E6%8C%82%E8%B5%B7%E5%92%8C%E6%81%A2%E5%A4%8D%E5%87%BD%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E6%8C%82%E8%B5%B7%E5%92%8C%E6%81%A2%E5%A4%8D%E5%87%BD%E6%95%B0.png" alt="任务挂起和恢复函数" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E6%8C%82%E8%B5%B7%E5%92%8C%E6%81%A2%E5%A4%8D%E5%87%BD%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E6%8C%82%E8%B5%B7%E5%92%8C%E6%81%A2%E5%A4%8D%E5%87%BD%E6%95%B0.png" alt="任务挂起和恢复函数" style="max-width: 100%; height: auto;"></a></p>
 <ul>
 <li><strong>挂起</strong>：挂起任务类似暂停，可恢复；删除任务，无法恢复，类似“人死两清”。</li>
 <li><strong>恢复</strong>：恢复被挂起的任务。</li>
@@ -928,7 +928,7 @@ xTaskCreate(taskFunc, "Worker", 1000, NULL, 1, &amp;worker2Handle);
 </ul>
 <h3><a id="user-content-task-suspension"></a>二.任务的挂起</h3>
 <h4><a id="user-content-suspension-function-intro"></a>1.挂起函数介绍</h4>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E6%8C%82%E8%B5%B7%E5%87%BD%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E6%8C%82%E8%B5%B7%E5%87%BD%E6%95%B0.png" alt="任务挂起函数" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E6%8C%82%E8%B5%B7%E5%87%BD%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E6%8C%82%E8%B5%B7%E5%87%BD%E6%95%B0.png" alt="任务挂起函数" style="max-width: 100%; height: auto;"></a></p>
 <p>任务挂起函数用于挂起任务，使用时需要将FreeRTOSConfig.h文件中宏INCLUDE_vTaskSuspend配置为1。</p>
 <p>无论优先级如何，被挂起的任务都将不再被执行，直到任务被恢复。</p>
 <p>注意：当传入的参数是NULL，则代表挂起任务自身(当前正在运行的任务)。</p>
@@ -942,7 +942,7 @@ xTaskCreate(taskFunc, "Worker", 1000, NULL, 1, &amp;worker2Handle);
 </ol>
 <h3><a id="user-content-task-resumption"></a>三.任务的恢复</h3>
 <h4><a id="user-content-resumption-function-task-intro"></a>1.任务恢复函数介绍（任务中）</h4>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E6%81%A2%E5%A4%8D%E5%87%BD%E6%95%B0(%E4%BB%BB%E5%8A%A1%E4%B8%AD%E4%BD%BF%E7%94%A8).png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E6%81%A2%E5%A4%8D%E5%87%BD%E6%95%B0(%E4%BB%BB%E5%8A%A1%E4%B8%AD%E4%BD%BF%E7%94%A8).png" alt="任务恢复函数(任务中使用)" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E6%81%A2%E5%A4%8D%E5%87%BD%E6%95%B0(%E4%BB%BB%E5%8A%A1%E4%B8%AD%E4%BD%BF%E7%94%A8).png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E6%81%A2%E5%A4%8D%E5%87%BD%E6%95%B0(%E4%BB%BB%E5%8A%A1%E4%B8%AD%E4%BD%BF%E7%94%A8).png" alt="任务恢复函数(任务中使用)" style="max-width: 100%; height: auto;"></a></p>
 <p>使用该函数时需要将FreeRTOSConfig.h文件中宏INCLUDE_vTaskSuspend配置为1。</p>
 <p>注意：任务无论被vTaskSuspend()挂起多少次，只需在任务中调用vTaskResume()恢复一次就能继续运行，且被恢复的任务会进入就绪态。</p>
 <h4><a id="user-content-resumption-function-task-internal"></a>2.任务回复函数的实现（任务中）</h4>
@@ -952,7 +952,7 @@ xTaskCreate(taskFunc, "Worker", 1000, NULL, 1, &amp;worker2Handle);
 <li>判断恢复任务优先级。（判断恢复的任务优先级是否大于当前正在运行的任务，是的话，执行任务切换。）</li>
 </ol>
 <h4><a id="user-content-resumption-function-isr-intro"></a>3.任务恢复函数介绍（中断中）</h4>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E6%81%A2%E5%A4%8D%E5%87%BD%E6%95%B0(%E4%B8%AD%E6%96%AD%E4%B8%AD%E4%BD%BF%E7%94%A8).png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E6%81%A2%E5%A4%8D%E5%87%BD%E6%95%B0(%E4%B8%AD%E6%96%AD%E4%B8%AD%E4%BD%BF%E7%94%A8).png" alt="任务恢复函数(中断中使用)" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E6%81%A2%E5%A4%8D%E5%87%BD%E6%95%B0(%E4%B8%AD%E6%96%AD%E4%B8%AD%E4%BD%BF%E7%94%A8).png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E6%81%A2%E5%A4%8D%E5%87%BD%E6%95%B0(%E4%B8%AD%E6%96%AD%E4%B8%AD%E4%BD%BF%E7%94%A8).png" alt="任务恢复函数(中断中使用)" style="max-width: 100%; height: auto;"></a></p>
 <p>使用该函数注意要将FreeRTOSConfig.h文件中宏INCLUDE_vTaskSuspend和INCLUDE_xTaskResumeFromISR配置为1。</p>
 <p>该函数专用于中断服务函数中，用于解挂被挂起任务。</p>
 <p>注意：中断服务程序中要调用freeRTOS的API函数则中断优先级不能高于FreeRTOS所管理的最高优先级。</p>
@@ -967,7 +967,7 @@ xTaskCreate(taskFunc, "Worker", 1000, NULL, 1, &amp;worker2Handle);
 <h3><a id="user-content-interrupt-intro"></a>一.中断介绍</h3>
 <h4><a id="user-content-what-is-interrupt"></a>1.什么是中断</h4>
 <p>让CPU打断正常运行的程序，转而去处理紧急的事件(程序)，就叫中断。</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%B8%AD%E6%96%AD%E4%B8%BE%E4%BE%8B.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%B8%AD%E6%96%AD%E4%B8%BE%E4%BE%8B.png" alt="中断举例" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%B8%AD%E6%96%AD%E4%B8%BE%E4%BE%8B.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%B8%AD%E6%96%AD%E4%B8%BE%E4%BE%8B.png" alt="中断举例" style="max-width: 100%; height: auto;"></a></p>
 <h4><a id="user-content-interrupt-execution-mechanism"></a>2.中断执行机制</h4>
 <ol>
 <li><strong>中断请求</strong> ：外设产生中断请求(如：GPIO外部中断、定时器中断...)。</li>
@@ -977,7 +977,7 @@ xTaskCreate(taskFunc, "Worker", 1000, NULL, 1, &amp;worker2Handle);
 <h3><a id="user-content-interrupt-priority-grouping"></a>二.中断优先级分组设置</h3>
 <h4><a id="user-content-priority-grouping-intro"></a>1.中断优先级分组介绍</h4>
 <p>ARM Cortex-M 使用了8位宽的寄存器来配置中断的优先等级，这个寄存器就是中断优先级配置寄存器。但STM32只用了中断优先级配置寄存器的高4位[7:4]，所以STM32提供了最大16级(0~15)的中断优先等级。</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BC%98%E5%85%88%E7%BA%A7%E9%85%8D%E7%BD%AE%E5%AF%84%E5%AD%98%E5%99%A8.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BC%98%E5%85%88%E7%BA%A7%E9%85%8D%E7%BD%AE%E5%AF%84%E5%AD%98%E5%99%A8.png" alt="优先级配置寄存器" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BC%98%E5%85%88%E7%BA%A7%E9%85%8D%E7%BD%AE%E5%AF%84%E5%AD%98%E5%99%A8.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BC%98%E5%85%88%E7%BA%A7%E9%85%8D%E7%BD%AE%E5%AF%84%E5%AD%98%E5%99%A8.png" alt="优先级配置寄存器" style="max-width: 100%; height: auto;"></a></p>
 <h4><a id="user-content-preemption-vs-subpriority"></a>2.什么是去抢占优先级，什么是子优先级</h4>
 <ul>
 <li><strong>抢占优先级</strong> ：抢占优先级的中断可以打断正在执行但抢占优先级低的中断。</li>
@@ -986,7 +986,7 @@ xTaskCreate(taskFunc, "Worker", 1000, NULL, 1, &amp;worker2Handle);
 <p>注意 ：中断优先级(抢占优先级和子优先级)数值越小，优先级越高。</p>
 <h4><a id="user-content-priority-configuration-methods"></a>3.中断优先级配置方式</h4>
 <p>一共有5种配置方式，对应着中断优先级分组的5个组。</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%B8%AD%E6%96%AD%E4%BC%98%E5%85%88%E7%BA%A7%E5%88%86%E9%85%8D%E6%96%B9%E5%BC%8F.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%B8%AD%E6%96%AD%E4%BC%98%E5%85%88%E7%BA%A7%E5%88%86%E9%85%8D%E6%96%B9%E5%BC%8F.png" alt="中断优先级分配方式" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%B8%AD%E6%96%AD%E4%BC%98%E5%85%88%E7%BA%A7%E5%88%86%E9%85%8D%E6%96%B9%E5%BC%8F.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%B8%AD%E6%96%AD%E4%BC%98%E5%85%88%E7%BA%A7%E5%88%86%E9%85%8D%E6%96%B9%E5%BC%8F.png" alt="中断优先级分配方式" style="max-width: 100%; height: auto;"></a></p>
 <p>FreeRTOS中为了方便管理，采用第4号(NVIC_PriorityGroup_4)分配方式。</p>
 <h4><a id="user-content-freertos-interrupt-priority-management"></a>4.freertos中对中断优先级的管理</h4>
 <ol>
@@ -994,7 +994,7 @@ xTaskCreate(taskFunc, "Worker", 1000, NULL, 1, &amp;worker2Handle);
 <li>建议将所有优先级位指定为抢占优先级位，方便FreeRTOS管理。</li>
 <li>中断优先级数值越小越优先，任务优先级数值越大越优先。</li>
 </ol>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%B8%AD%E6%96%AD%E5%92%8C%E4%BB%BB%E5%8A%A1%E4%BC%98%E5%85%88%E7%BA%A7%E7%9A%84%E4%B8%8D%E5%90%8C.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%B8%AD%E6%96%AD%E5%92%8C%E4%BB%BB%E5%8A%A1%E4%BC%98%E5%85%88%E7%BA%A7%E7%9A%84%E4%B8%8D%E5%90%8C.png" alt="中断和任务优先级的不同" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%B8%AD%E6%96%AD%E5%92%8C%E4%BB%BB%E5%8A%A1%E4%BC%98%E5%85%88%E7%BA%A7%E7%9A%84%E4%B8%8D%E5%90%8C.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%B8%AD%E6%96%AD%E5%92%8C%E4%BB%BB%E5%8A%A1%E4%BC%98%E5%85%88%E7%BA%A7%E7%9A%84%E4%B8%8D%E5%90%8C.png" alt="中断和任务优先级的不同" style="max-width: 100%; height: auto;"></a></p>
 <h3><a id="user-content-interrupt-related-registers"></a>三.中断相关寄存器</h3>
 <h4><a id="user-content-system-interrupt-priority-registers"></a>1.系统中断优先级配置寄存器</h4>
 <p>三个系统中断优先级配置寄存器，分别为 SHPR1、 SHPR2、 SHPR3 。</p>
@@ -1003,28 +1003,28 @@ xTaskCreate(taskFunc, "Worker", 1000, NULL, 1, &amp;worker2Handle);
 <li>SHPR2寄存器地址：0xE000ED1C~0xE000ED1F</li>
 <li>SHPR3寄存器地址：0xE000ED20~0xE000ED23</li>
 </ul>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E7%B3%BB%E7%BB%9F%E4%B8%AD%E6%96%AD%E9%85%8D%E7%BD%AE%E5%AF%84%E5%AD%98%E5%99%A8.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E7%B3%BB%E7%BB%9F%E4%B8%AD%E6%96%AD%E9%85%8D%E7%BD%AE%E5%AF%84%E5%AD%98%E5%99%A8.png" alt="系统中断配置寄存器" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E7%B3%BB%E7%BB%9F%E4%B8%AD%E6%96%AD%E9%85%8D%E7%BD%AE%E5%AF%84%E5%AD%98%E5%99%A8.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E7%B3%BB%E7%BB%9F%E4%B8%AD%E6%96%AD%E9%85%8D%E7%BD%AE%E5%AF%84%E5%AD%98%E5%99%A8.png" alt="系统中断配置寄存器" style="max-width: 100%; height: auto;"></a></p>
 <p>FreeRTOS主要是使用SHPR3寄存器对<strong>PendSV</strong>和<strong>Systick</strong>中断优先级进行设置(设置为最低优先级)</p>
 <h4><a id="user-content-freertos-pendsv-systick-config"></a>2.FreeRTOS如何配置PendSV和Systick中断优先级</h4>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/PendSV%E5%92%8CSystick%E4%B8%AD%E6%96%AD%E4%BC%98%E5%85%88%E7%BA%A71.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/PendSV%E5%92%8CSystick%E4%B8%AD%E6%96%AD%E4%BC%98%E5%85%88%E7%BA%A71.png" alt="PendSV和Systick中断优先级1" style="max-width: 100%;"></a></p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/PendSV%E5%92%8CSystick%E4%B8%AD%E6%96%AD%E4%BC%98%E5%85%88%E7%BA%A72.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/PendSV%E5%92%8CSystick%E4%B8%AD%E6%96%AD%E4%BC%98%E5%85%88%E7%BA%A72.png" alt="PendSV和Systick中断优先级2" style="max-width: 100%;"></a></p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/PendSV%E5%92%8CSystick%E4%B8%AD%E6%96%AD%E4%BC%98%E5%85%88%E7%BA%A73.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/PendSV%E5%92%8CSystick%E4%B8%AD%E6%96%AD%E4%BC%98%E5%85%88%E7%BA%A73.png" alt="PendSV和Systick中断优先级3" style="max-width: 100%;"></a></p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/PendSV%E5%92%8CSystick%E4%B8%AD%E6%96%AD%E4%BC%98%E5%85%88%E7%BA%A74.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/PendSV%E5%92%8CSystick%E4%B8%AD%E6%96%AD%E4%BC%98%E5%85%88%E7%BA%A74.png" alt="PendSV和Systick中断优先级4" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/PendSV%E5%92%8CSystick%E4%B8%AD%E6%96%AD%E4%BC%98%E5%85%88%E7%BA%A71.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/PendSV%E5%92%8CSystick%E4%B8%AD%E6%96%AD%E4%BC%98%E5%85%88%E7%BA%A71.png" alt="PendSV和Systick中断优先级1" style="max-width: 100%; height: auto;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/PendSV%E5%92%8CSystick%E4%B8%AD%E6%96%AD%E4%BC%98%E5%85%88%E7%BA%A72.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/PendSV%E5%92%8CSystick%E4%B8%AD%E6%96%AD%E4%BC%98%E5%85%88%E7%BA%A72.png" alt="PendSV和Systick中断优先级2" style="max-width: 100%; height: auto;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/PendSV%E5%92%8CSystick%E4%B8%AD%E6%96%AD%E4%BC%98%E5%85%88%E7%BA%A73.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/PendSV%E5%92%8CSystick%E4%B8%AD%E6%96%AD%E4%BC%98%E5%85%88%E7%BA%A73.png" alt="PendSV和Systick中断优先级3" style="max-width: 100%; height: auto;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/PendSV%E5%92%8CSystick%E4%B8%AD%E6%96%AD%E4%BC%98%E5%85%88%E7%BA%A74.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/PendSV%E5%92%8CSystick%E4%B8%AD%E6%96%AD%E4%BC%98%E5%85%88%E7%BA%A74.png" alt="PendSV和Systick中断优先级4" style="max-width: 100%; height: auto;"></a></p>
 <p>在FreeRTOS系统中PendSV和SysTick设置最低优先级。</p>
 <h4><a id="user-content-why-lowest-pendsv-systick"></a>3.为什么将PendSV和SysTick设置最低优先级</h4>
 <p>保证系统任务切换不会阻塞系统其他中断的响应。</p>
 <h4><a id="user-content-interrupt-mask-registers"></a>4.中断屏蔽寄存器</h4>
 <p>三个中断屏蔽寄存器，分别为PRIMASK、FAULTMASK和BASEPRI 。</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%B8%AD%E6%96%AD%E5%B1%8F%E8%94%BD%E5%AF%84%E5%AD%98%E5%99%A8.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%B8%AD%E6%96%AD%E5%B1%8F%E8%94%BD%E5%AF%84%E5%AD%98%E5%99%A8.png" alt="中断屏蔽寄存器" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%B8%AD%E6%96%AD%E5%B1%8F%E8%94%BD%E5%AF%84%E5%AD%98%E5%99%A8.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%B8%AD%E6%96%AD%E5%B1%8F%E8%94%BD%E5%AF%84%E5%AD%98%E5%99%A8.png" alt="中断屏蔽寄存器" style="max-width: 100%; height: auto;"></a></p>
 <p>FreeRTOS所使用的中断管理就是利用的<strong>BASEPRI</strong>这个寄存器。</p>
 <h4><a id="user-content-basepri-interrupt-mask"></a>5.BASEPRI中断屏蔽寄存器</h4>
 <p>BASEPRI：屏蔽优先级低于某一个阈值的中断，当设置为0时，则不关闭任何中断。</p>
 <p>比如： BASEPRI设置为0x50，代表中断优先级在5<del>15内的均被屏蔽，0</del>4的中断优先级正常执行</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/BASEPRI%E4%B8%AD%E6%96%AD%E5%B1%8F%E8%94%BD%E5%AF%84%E5%AD%98%E5%99%A8%E4%BA%8B%E4%BE%8B.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/BASEPRI%E4%B8%AD%E6%96%AD%E5%B1%8F%E8%94%BD%E5%AF%84%E5%AD%98%E5%99%A8%E4%BA%8B%E4%BE%8B.png" alt="BASEPRI中断屏蔽寄存器事例" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/BASEPRI%E4%B8%AD%E6%96%AD%E5%B1%8F%E8%94%BD%E5%AF%84%E5%AD%98%E5%99%A8%E4%BA%8B%E4%BE%8B.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/BASEPRI%E4%B8%AD%E6%96%AD%E5%B1%8F%E8%94%BD%E5%AF%84%E5%AD%98%E5%99%A8%E4%BA%8B%E4%BE%8B.png" alt="BASEPRI中断屏蔽寄存器事例" style="max-width: 100%; height: auto;"></a></p>
 <h4><a id="user-content-freertos-disable-interrupts"></a>6.freertos的关闭中断程序</h4>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%85%B3%E4%B8%AD%E6%96%AD%E7%A8%8B%E5%BA%8F.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%85%B3%E4%B8%AD%E6%96%AD%E7%A8%8B%E5%BA%8F.png" alt="关中断程序" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%85%B3%E4%B8%AD%E6%96%AD%E7%A8%8B%E5%BA%8F.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%85%B3%E4%B8%AD%E6%96%AD%E7%A8%8B%E5%BA%8F.png" alt="关中断程序" style="max-width: 100%; height: auto;"></a></p>
 <h4><a id="user-content-freertos-enable-interrupts"></a>7.freertos的开中断程序</h4>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%BC%80%E4%B8%AD%E6%96%AD%E7%A8%8B%E5%BA%8F.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%BC%80%E4%B8%AD%E6%96%AD%E7%A8%8B%E5%BA%8F.png" alt="开中断程序" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%BC%80%E4%B8%AD%E6%96%AD%E7%A8%8B%E5%BA%8F.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%BC%80%E4%B8%AD%E6%96%AD%E7%A8%8B%E5%BA%8F.png" alt="开中断程序" style="max-width: 100%; height: auto;"></a></p>
 <h4><a id="user-content-freertos-isr-api-notes"></a>8.中断服务函数调用FreeRTOS的API函数需注意</h4>
 <ol>
 <li>中断服务函数的优先级需在FreeRTOS所管理的范围内。</li>
@@ -1042,7 +1042,7 @@ xTaskCreate(taskFunc, "Worker", 1000, NULL, 1, &amp;worker2Handle);
 <h4><a id="user-content-what-interrupts-program"></a>3.什么可以打断当前程序的运行</h4>
 <p>中断、任务调度。</p>
 <h4><a id="user-content-critical-section-protection-functions"></a>4.临界段代码保护函数</h4>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%B8%B4%E7%95%8C%E6%AE%B5%E4%BF%9D%E6%8A%A4%E5%87%BD%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%B8%B4%E7%95%8C%E6%AE%B5%E4%BF%9D%E6%8A%A4%E5%87%BD%E6%95%B0.png" alt="临界段保护函数" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%B8%B4%E7%95%8C%E6%AE%B5%E4%BF%9D%E6%8A%A4%E5%87%BD%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%B8%B4%E7%95%8C%E6%AE%B5%E4%BF%9D%E6%8A%A4%E5%87%BD%E6%95%B0.png" alt="临界段保护函数" style="max-width: 100%; height: auto;"></a></p>
 <p>任务级临界区调用格式示例：</p>
 <div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-en">taskENTER_CRITICAL</span>();
 {
@@ -1064,7 +1064,7 @@ xTaskCreate(taskFunc, "Worker", 1000, NULL, 1, &amp;worker2Handle);
 </ol>
 <h2><a id="user-content-scheduler-suspend-resume-functions"></a>7.任务调度器挂起和恢复函数</h2>
 <h4><a id="user-content-scheduler-suspend-resume-functions-1"></a>1.任务调度器挂起和恢复函数</h4>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6%E5%99%A8%E6%8C%82%E8%B5%B7%E5%92%8C%E6%81%A2%E5%A4%8D%E5%87%BD%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6%E5%99%A8%E6%8C%82%E8%B5%B7%E5%92%8C%E6%81%A2%E5%A4%8D%E5%87%BD%E6%95%B0.png" alt="任务调度器挂起和恢复函数" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6%E5%99%A8%E6%8C%82%E8%B5%B7%E5%92%8C%E6%81%A2%E5%A4%8D%E5%87%BD%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6%E5%99%A8%E6%8C%82%E8%B5%B7%E5%92%8C%E6%81%A2%E5%A4%8D%E5%87%BD%E6%95%B0.png" alt="任务调度器挂起和恢复函数" style="max-width: 100%; height: auto;"></a></p>
 <p>使用格式示范：</p>
 <div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-en">vTaskSuspendAll</span>();
 {
@@ -1097,7 +1097,7 @@ xTaskCreate(taskFunc, "Worker", 1000, NULL, 1, &amp;worker2Handle);
 <p>列表项就是存放在列表中的项目。</p>
 <h4><a id="user-content-list-and-item-relationship"></a>3.列表和列表项的关系</h4>
 <p>列表相当于链表，列表项相当于节点，FreeRTOS中的列表是一个双向环形链表。</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E5%92%8C%E5%88%97%E8%A1%A8%E9%A1%B9%E5%85%B3%E7%B3%BB.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E5%92%8C%E5%88%97%E8%A1%A8%E9%A1%B9%E5%85%B3%E7%B3%BB.png" alt="列表和列表项关系" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E5%92%8C%E5%88%97%E8%A1%A8%E9%A1%B9%E5%85%B3%E7%B3%BB.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E5%92%8C%E5%88%97%E8%A1%A8%E9%A1%B9%E5%85%B3%E7%B3%BB.png" alt="列表和列表项关系" style="max-width: 100%; height: auto;"></a></p>
 <h4><a id="user-content-list-vs-array"></a>4.列表链表和数组的区别</h4>
 <ul>
 <li><strong>列表的特点</strong>：列表项间的地址非连续的，是人为的连接到一起的。列表项的数目是由后期添加或删除的个数决定的，随时可以改变。</li>
@@ -1107,7 +1107,7 @@ xTaskCreate(taskFunc, "Worker", 1000, NULL, 1, &amp;worker2Handle);
 <p>在OS中任务的数量是不确定的，并且任务状态是会发生改变的，所以非常适用列表(链表)这种数据结构。</p>
 <h4><a id="user-content-list-structure-intro"></a>6.列表结构体介绍</h4>
 <p>有关列表的东西均在文件list.c和list.h中，以下是列表结构体：</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E7%BB%93%E6%9E%84%E4%BD%93.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E7%BB%93%E6%9E%84%E4%BD%93.png" alt="列表结构体" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E7%BB%93%E6%9E%84%E4%BD%93.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E7%BB%93%E6%9E%84%E4%BD%93.png" alt="列表结构体" style="max-width: 100%; height: auto;"></a></p>
 <ol>
 <li>在结构体中，包含两个宏(listFIRST_LIST_INTEGRITY_CHECK_VALUE 和 listSECOND_LIST_INTEGRITY_CHECK_VALUE)，这两个宏是确定的已知常量，FreeRTOS通过检查这两个常量的值，来判断列表的数据在程序运行过程中，是否遭到破坏，该功能一般用于测试，默认是不开启的(我们一般不用去理会)。</li>
 <li>成员uxNumberOfltems，用于记录列表中的列表项的个数(不包括xListEnd)。</li>
@@ -1115,10 +1115,10 @@ xTaskCreate(taskFunc, "Worker", 1000, NULL, 1, &amp;worker2Handle);
 <li>成员变量xListEnd是一个迷你列表项，排在最末尾。</li>
 </ol>
 <p>列表结构示意图：</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E7%BB%93%E6%9E%84%E7%A4%BA%E6%84%8F%E5%9B%BE.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E7%BB%93%E6%9E%84%E7%A4%BA%E6%84%8F%E5%9B%BE.png" alt="列表结构示意图" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E7%BB%93%E6%9E%84%E7%A4%BA%E6%84%8F%E5%9B%BE.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E7%BB%93%E6%9E%84%E7%A4%BA%E6%84%8F%E5%9B%BE.png" alt="列表结构示意图" style="max-width: 100%; height: auto;"></a></p>
 <h4><a id="user-content-list-item-structure-intro"></a>7.列表项结构体介绍</h4>
 <p>列表项是列表中用于存放数据的地方，在list.h文件中，列表项的相关结构体定义：</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E9%A1%B9%E7%BB%93%E6%9E%84%E4%BD%93.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E9%A1%B9%E7%BB%93%E6%9E%84%E4%BD%93.png" alt="列表项结构体" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E9%A1%B9%E7%BB%93%E6%9E%84%E4%BD%93.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E9%A1%B9%E7%BB%93%E6%9E%84%E4%BD%93.png" alt="列表项结构体" style="max-width: 100%; height: auto;"></a></p>
 <ol>
 <li>成员变量xItemValue为列表项的值，这个值多用于按升序对列表中的列表项进行排序。</li>
 <li>成员变量pxNext和pxPrevious分别用于指向列表中列表项的下一个列表项和上一个列表项。</li>
@@ -1126,57 +1126,57 @@ xTaskCreate(taskFunc, "Worker", 1000, NULL, 1, &amp;worker2Handle);
 <li>成员变量pxContainer用于执行列表项所在列表。</li>
 </ol>
 <p>列表项结构体示意图：</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E9%A1%B9%E7%BB%93%E6%9E%84%E4%BD%93%E7%A4%BA%E6%84%8F%E5%9B%BE.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E9%A1%B9%E7%BB%93%E6%9E%84%E4%BD%93%E7%A4%BA%E6%84%8F%E5%9B%BE.png" alt="列表项结构体示意图" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E9%A1%B9%E7%BB%93%E6%9E%84%E4%BD%93%E7%A4%BA%E6%84%8F%E5%9B%BE.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E9%A1%B9%E7%BB%93%E6%9E%84%E4%BD%93%E7%A4%BA%E6%84%8F%E5%9B%BE.png" alt="列表项结构体示意图" style="max-width: 100%; height: auto;"></a></p>
 <h4><a id="user-content-mini-list-item"></a>8.迷你列表项</h4>
 <p>迷你列表项也是列表项，但迷你列表项仅用于标记列表的末尾和挂载其他插入列表中的列表项。</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E8%BF%B7%E4%BD%A0%E5%88%97%E8%A1%A8%E9%A1%B9.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E8%BF%B7%E4%BD%A0%E5%88%97%E8%A1%A8%E9%A1%B9.png" alt="迷你列表项" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E8%BF%B7%E4%BD%A0%E5%88%97%E8%A1%A8%E9%A1%B9.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E8%BF%B7%E4%BD%A0%E5%88%97%E8%A1%A8%E9%A1%B9.png" alt="迷你列表项" style="max-width: 100%; height: auto;"></a></p>
 <ol>
 <li>成员变量xItemValue为列表项的值，这个值多用于按升序对列表中的列表项进行排序。</li>
 <li>成员变量pxNext和pxPrevious分别用于指向列表中列表项的下一个列表项和上一个列表项。</li>
 <li>迷你列表项只用于标记列表的末尾和挂载其他插入列表中的列表项，因此不需要成员变量pxOwner和pxContainer，以节省内存开销。</li>
 </ol>
 <p>迷你列表项示意图：</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E8%BF%B7%E4%BD%A0%E5%88%97%E8%A1%A8%E9%A1%B9%E7%A4%BA%E6%84%8F%E5%9B%BE.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E8%BF%B7%E4%BD%A0%E5%88%97%E8%A1%A8%E9%A1%B9%E7%A4%BA%E6%84%8F%E5%9B%BE.png" alt="迷你列表项示意图" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E8%BF%B7%E4%BD%A0%E5%88%97%E8%A1%A8%E9%A1%B9%E7%A4%BA%E6%84%8F%E5%9B%BE.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E8%BF%B7%E4%BD%A0%E5%88%97%E8%A1%A8%E9%A1%B9%E7%A4%BA%E6%84%8F%E5%9B%BE.png" alt="迷你列表项示意图" style="max-width: 100%; height: auto;"></a></p>
 <h4><a id="user-content-list-and-item-example"></a>9.列表和列表项关系事例</h4>
 <p>列表初始状态：</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E5%88%9D%E5%A7%8B%E5%8C%96%E7%8A%B6%E6%80%81.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E5%88%9D%E5%A7%8B%E5%8C%96%E7%8A%B6%E6%80%81.png" alt="列表初始化状态" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E5%88%9D%E5%A7%8B%E5%8C%96%E7%8A%B6%E6%80%81.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E5%88%9D%E5%A7%8B%E5%8C%96%E7%8A%B6%E6%80%81.png" alt="列表初始化状态" style="max-width: 100%; height: auto;"></a></p>
 <p>列表插入两个列表项：</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E6%8F%92%E5%85%A5%E5%88%97%E8%A1%A8%E9%A1%B9.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E6%8F%92%E5%85%A5%E5%88%97%E8%A1%A8%E9%A1%B9.png" alt="列表插入列表项" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E6%8F%92%E5%85%A5%E5%88%97%E8%A1%A8%E9%A1%B9.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E6%8F%92%E5%85%A5%E5%88%97%E8%A1%A8%E9%A1%B9.png" alt="列表插入列表项" style="max-width: 100%; height: auto;"></a></p>
 <p>列表当前状态：</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%BD%93%E5%89%8D%E5%88%97%E8%A1%A8%E7%AE%80%E5%9B%BE.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%BD%93%E5%89%8D%E5%88%97%E8%A1%A8%E7%AE%80%E5%9B%BE.png" alt="当前列表简图" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%BD%93%E5%89%8D%E5%88%97%E8%A1%A8%E7%AE%80%E5%9B%BE.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%BD%93%E5%89%8D%E5%88%97%E8%A1%A8%E7%AE%80%E5%9B%BE.png" alt="当前列表简图" style="max-width: 100%; height: auto;"></a></p>
 <h3><a id="user-content-list-related-api-intro"></a>二.列表相关的API函数介绍</h3>
 <h4><a id="user-content-list-api-functions"></a>1.列表API函数</h4>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E5%87%BD%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E5%87%BD%E6%95%B0.png" alt="列表函数" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E5%87%BD%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E5%87%BD%E6%95%B0.png" alt="列表函数" style="max-width: 100%; height: auto;"></a></p>
 <h4><a id="user-content-init-list-vlistinitialise"></a>2.初始化列表函数vListInitialise</h4>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8%E5%87%BD%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8%E5%87%BD%E6%95%B0.png" alt="初始化列表函数" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8%E5%87%BD%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8%E5%87%BD%E6%95%B0.png" alt="初始化列表函数" style="max-width: 100%; height: auto;"></a></p>
 <p>函数参数：</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png" alt="初始化列表函数参数" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png" alt="初始化列表函数参数" style="max-width: 100%; height: auto;"></a></p>
 <p>列表初始化后示意图：</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8%E5%90%8E.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8%E5%90%8E.png" alt="初始化列表函数使用后" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8%E5%90%8E.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8%E5%90%8E.png" alt="初始化列表函数使用后" style="max-width: 100%; height: auto;"></a></p>
 <h4><a id="user-content-init-list-item-vlistinitialiseitem"></a>3.初始化列表项函数vListInitialiseItem</h4>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8%E9%A1%B9%E5%87%BD%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8%E9%A1%B9%E5%87%BD%E6%95%B0.png" alt="初始化列表项函数" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8%E9%A1%B9%E5%87%BD%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8%E9%A1%B9%E5%87%BD%E6%95%B0.png" alt="初始化列表项函数" style="max-width: 100%; height: auto;"></a></p>
 <p>函数参数：</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8%E9%A1%B9%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8%E9%A1%B9%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png" alt="初始化列表项函数参数" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8%E9%A1%B9%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8%E9%A1%B9%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png" alt="初始化列表项函数参数" style="max-width: 100%; height: auto;"></a></p>
 <p>列表初始化后示意图：</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8%E9%A1%B9%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8%E5%90%8E.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8%E9%A1%B9%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8%E5%90%8E.png" alt="初始化列表项函数使用后" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8%E9%A1%B9%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8%E5%90%8E.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%9D%E5%A7%8B%E5%8C%96%E5%88%97%E8%A1%A8%E9%A1%B9%E5%87%BD%E6%95%B0%E4%BD%BF%E7%94%A8%E5%90%8E.png" alt="初始化列表项函数使用后" style="max-width: 100%; height: auto;"></a></p>
 <h4><a id="user-content-insert-list-vlistinsert"></a>4.列表插入列表项函数vListInsert</h4>
 <p>此函数用于将待插入列表的列表项按照列表项值升序进行排序，有序地插入到列表中 。</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E6%8F%92%E5%85%A5%E5%88%97%E8%A1%A8%E9%A1%B9%E5%87%BD%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E6%8F%92%E5%85%A5%E5%88%97%E8%A1%A8%E9%A1%B9%E5%87%BD%E6%95%B0.png" alt="列表插入列表项函数" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E6%8F%92%E5%85%A5%E5%88%97%E8%A1%A8%E9%A1%B9%E5%87%BD%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E6%8F%92%E5%85%A5%E5%88%97%E8%A1%A8%E9%A1%B9%E5%87%BD%E6%95%B0.png" alt="列表插入列表项函数" style="max-width: 100%; height: auto;"></a></p>
 <p>函数参数：</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E6%8F%92%E5%85%A5%E5%88%97%E8%A1%A8%E9%A1%B9%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E6%8F%92%E5%85%A5%E5%88%97%E8%A1%A8%E9%A1%B9%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png" alt="列表插入列表项函数参数" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E6%8F%92%E5%85%A5%E5%88%97%E8%A1%A8%E9%A1%B9%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E6%8F%92%E5%85%A5%E5%88%97%E8%A1%A8%E9%A1%B9%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png" alt="列表插入列表项函数参数" style="max-width: 100%; height: auto;"></a></p>
 <p>函数vListInsert()，是将插入列表的列表项按照列表项值升序进行排列，有序地插入到列表中。</p>
 <h4><a id="user-content-insert-end-vlistinsertend"></a>5.列表末尾插入列表项vListInsertEnd</h4>
 <p>此函数用于将待插入列表的列表项插入到列表 pxIndex 指针指向的列表项前面，是一种无序的插入方法。</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E6%9C%AB%E5%B0%BE%E6%8F%92%E5%85%A5%E5%88%97%E8%A1%A8%E9%A1%B9%E5%87%BD%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E6%9C%AB%E5%B0%BE%E6%8F%92%E5%85%A5%E5%88%97%E8%A1%A8%E9%A1%B9%E5%87%BD%E6%95%B0.png" alt="列表末尾插入列表项函数" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E6%9C%AB%E5%B0%BE%E6%8F%92%E5%85%A5%E5%88%97%E8%A1%A8%E9%A1%B9%E5%87%BD%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E6%9C%AB%E5%B0%BE%E6%8F%92%E5%85%A5%E5%88%97%E8%A1%A8%E9%A1%B9%E5%87%BD%E6%95%B0.png" alt="列表末尾插入列表项函数" style="max-width: 100%; height: auto;"></a></p>
 <p>函数参数：</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E6%9C%AB%E5%B0%BE%E6%8F%92%E5%85%A5%E5%88%97%E8%A1%A8%E9%A1%B9%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E6%9C%AB%E5%B0%BE%E6%8F%92%E5%85%A5%E5%88%97%E8%A1%A8%E9%A1%B9%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png" alt="列表末尾插入列表项函数参数" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E6%9C%AB%E5%B0%BE%E6%8F%92%E5%85%A5%E5%88%97%E8%A1%A8%E9%A1%B9%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E6%9C%AB%E5%B0%BE%E6%8F%92%E5%85%A5%E5%88%97%E8%A1%A8%E9%A1%B9%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png" alt="列表末尾插入列表项函数参数" style="max-width: 100%; height: auto;"></a></p>
 <h4><a id="user-content-remove-list-uxlistremove"></a>6.列表项移除函数uxListRemove</h4>
 <p>此函数用于将列表项从列表项所在列表中移除。</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E9%A1%B9%E7%A7%BB%E9%99%A4%E5%87%BD%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E9%A1%B9%E7%A7%BB%E9%99%A4%E5%87%BD%E6%95%B0.png" alt="列表项移除函数" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E9%A1%B9%E7%A7%BB%E9%99%A4%E5%87%BD%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E9%A1%B9%E7%A7%BB%E9%99%A4%E5%87%BD%E6%95%B0.png" alt="列表项移除函数" style="max-width: 100%; height: auto;"></a></p>
 <p>函数参数：</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E9%A1%B9%E7%A7%BB%E9%99%A4%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E9%A1%B9%E7%A7%BB%E9%99%A4%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png" alt="列表项移除函数参数" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E9%A1%B9%E7%A7%BB%E9%99%A4%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E9%A1%B9%E7%A7%BB%E9%99%A4%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png" alt="列表项移除函数参数" style="max-width: 100%; height: auto;"></a></p>
 <p>函数返回值：</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E9%A1%B9%E7%A7%BB%E9%99%A4%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E9%A1%B9%E7%A7%BB%E9%99%A4%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png" alt="列表项移除函数返回值" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E9%A1%B9%E7%A7%BB%E9%99%A4%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%97%E8%A1%A8%E9%A1%B9%E7%A7%BB%E9%99%A4%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png" alt="列表项移除函数返回值" style="max-width: 100%; height: auto;"></a></p>
 <h2><a id="user-content-freertos-task-scheduling"></a>9.freertos任务调度</h2>
 <h3><a id="user-content-start-scheduler-overview"></a>一.开启任务调度器熟悉</h3>
 <h4><a id="user-content-start-scheduler-vtaskstartscheduler"></a>1.开启任务调度器函数vTaskStartScheduler</h4>
@@ -1203,7 +1203,7 @@ xTaskCreate(taskFunc, "Worker", 1000, NULL, 1, &amp;worker2Handle);
 </ol>
 <h4><a id="user-content-systick-timer"></a>3.SysTick滴答定时器</h4>
 <p>答：</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E6%BB%B4%E7%AD%94%E5%AE%9A%E6%97%B6%E5%99%A8.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E6%BB%B4%E7%AD%94%E5%AE%9A%E6%97%B6%E5%99%A8.png" alt="滴答定时器" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E6%BB%B4%E7%AD%94%E5%AE%9A%E6%97%B6%E5%99%A8.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E6%BB%B4%E7%AD%94%E5%AE%9A%E6%97%B6%E5%99%A8.png" alt="滴答定时器" style="max-width: 100%; height: auto;"></a></p>
 <h4><a id="user-content-heap-stack-growth"></a>4.堆和栈的地址生长方向</h4>
 <p>答：</p>
 <p><strong>堆</strong>  的生长方向向上，内存地址由低到高；</p>
@@ -1264,7 +1264,7 @@ xTaskCreate(taskFunc, "Worker", 1000, NULL, 1, &amp;worker2Handle);
 <li>通过pxCurrentTCB获取优先级最高的就绪态任务的任务栈地址，优先级最高的就绪态任务是系统将要运行的任务。</li>
 <li>通过任务的栈顶指针，将任务栈中的内容出栈到CPU寄存器中，任务栈中的内容在调用任务创建函数的时候，已初始化，然后设置PSP指针。</li>
 <li>通过往BASEPRI寄存器中写0，允许中断。</li>
-<li>R14是链接寄存器LR，在ISR中(此刻我们在SVC的ISR中)，它记录了异常返回值EXC_RETURN，而EXC_RETURN只有6个合法的值(M4、M7)，如下表所示：<a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/R14(LR%E9%93%BE%E6%8E%A5%E5%AF%84%E5%AD%98%E5%99%A8).png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/R14(LR%E9%93%BE%E6%8E%A5%E5%AF%84%E5%AD%98%E5%99%A8).png" alt="R14(LR链接寄存器)" style="max-width: 100%;"></a></li>
+<li>R14是链接寄存器LR，在ISR中(此刻我们在SVC的ISR中)，它记录了异常返回值EXC_RETURN，而EXC_RETURN只有6个合法的值(M4、M7)，如下表所示：<a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/R14(LR%E9%93%BE%E6%8E%A5%E5%AF%84%E5%AD%98%E5%99%A8).png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/R14(LR%E9%93%BE%E6%8E%A5%E5%AF%84%E5%AD%98%E5%99%A8).png" alt="R14(LR链接寄存器)" style="max-width: 100%; height: auto;"></a></li>
 </ol>
 <p>注意：</p>
 <ol>
@@ -1297,7 +1297,7 @@ xTaskCreate(taskFunc, "Worker", 1000, NULL, 1, &amp;worker2Handle);
 <p><strong>第二步</strong>：将任务B的各个寄存器值(被存于任务堆栈中)恢复到CPU寄存器中，这个过程叫做恢复现场。</p>
 <p>对任务A保存现场，对任务B恢复现场，这个过程称为：<strong>上下文切换</strong>。</p>
 <h4><a id="user-content-task-switching-process"></a>2.任务切换过程</h4>
-<p>答：<a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E5%88%87%E6%8D%A2.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E5%88%87%E6%8D%A2.png" alt="任务切换" style="max-width: 100%;"></a></p>
+<p>答：<a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E5%88%87%E6%8D%A2.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E5%88%87%E6%8D%A2.png" alt="任务切换" style="max-width: 100%; height: auto;"></a></p>
 <p>注意：任务切换的过程在PendSV中断服务函数里边完成。</p>
 <h4><a id="user-content-pendsv-trigger"></a>3.PendSV中断是如何触发的</h4>
 <p>答：</p>
@@ -1306,11 +1306,11 @@ xTaskCreate(taskFunc, "Worker", 1000, NULL, 1, &amp;worker2Handle);
 <li>执行FreeRTOS提供的相关API函数：portYIELD()。</li>
 </ol>
 <p>本质是通过中断控制和状态寄存器ICSR的bit28写入1挂起PendSV来启动PendSV中的。</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/PendSV%E7%9B%B8%E5%85%B3%E5%AF%84%E5%AD%98%E5%99%A8.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/PendSV%E7%9B%B8%E5%85%B3%E5%AF%84%E5%AD%98%E5%99%A8.png" alt="PendSV相关寄存器" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/PendSV%E7%9B%B8%E5%85%B3%E5%AF%84%E5%AD%98%E5%99%A8.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/PendSV%E7%9B%B8%E5%85%B3%E5%AF%84%E5%AD%98%E5%99%A8.png" alt="PendSV相关寄存器" style="max-width: 100%; height: auto;"></a></p>
 <p>上表摘取于《Cortex M3权威指南(中文)》第131页。</p>
 <h4><a id="user-content-pendsv-psp-msp"></a>4.在PendSV中断中PSP和MSP</h4>
 <p>答：在进入PendSV异常前的自动压栈使用的是进程堆栈(PSP)，正式进入到PendSV异常Handle后才自动改为主堆栈(MSP)，退出异常时切回PSP，并且从进程堆栈(PSP)上弹出数据(出栈)。</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E8%BF%9B%E5%85%A5PendSV%E6%97%B6%E7%9A%84PSP%E5%92%8CMSP.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E8%BF%9B%E5%85%A5PendSV%E6%97%B6%E7%9A%84PSP%E5%92%8CMSP.png" alt="进入PendSV时的PSP和MSP" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E8%BF%9B%E5%85%A5PendSV%E6%97%B6%E7%9A%84PSP%E5%92%8CMSP.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E8%BF%9B%E5%85%A5PendSV%E6%97%B6%E7%9A%84PSP%E5%92%8CMSP.png" alt="进入PendSV时的PSP和MSP" style="max-width: 100%; height: auto;"></a></p>
 <p>注意：在PendSV中断中时，CPU使用的是MSP，但我们要处理的是PSP的数据存取。</p>
 <h4><a id="user-content-find-highest-priority-task"></a>5.查找最高优先级任务</h4>
 <p>答：</p>
@@ -1318,13 +1318,13 @@ xTaskCreate(taskFunc, "Worker", 1000, NULL, 1, &amp;worker2Handle);
 <p>taskSELECT_HIGHEST_PRIORITY_TASK( )    /* 通过这个函数完成 */</p>
 <h4><a id="user-content-leading-zero-instruction"></a>6.前导置零指令</h4>
 <p>答：</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%89%8D%E5%AF%BC%E7%BD%AE0%E6%8C%87%E4%BB%A4.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%89%8D%E5%AF%BC%E7%BD%AE0%E6%8C%87%E4%BB%A4.png" alt="前导置零指令" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%89%8D%E5%AF%BC%E7%BD%AE0%E6%8C%87%E4%BB%A4.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%89%8D%E5%AF%BC%E7%BD%AE0%E6%8C%87%E4%BB%A4.png" alt="前导置零指令" style="max-width: 100%; height: auto;"></a></p>
 <p>所谓的前导置零指令，大家可以简单理解为计算一个 32位数，出现第一个1前头部 0 的个数。</p>
 <hr>
 <h2><a id="user-content-freertos-timeslice-polling"></a>10.FreeRTOS时间片轮询</h2>
 <h3><a id="user-content-timeslice-polling-intro"></a>一.时间片轮询简介</h3>
 <p>答：同等优先级任务轮流享有相同的CPU时间(可设置)，叫<strong>时间片</strong>，在FreeRTOS中，一个时间片就等于SysTick中断周期。</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E6%97%B6%E9%97%B4%E7%89%87%E8%B0%83%E5%BA%A6.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E6%97%B6%E9%97%B4%E7%89%87%E8%B0%83%E5%BA%A6.png" alt="时间片调度" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E6%97%B6%E9%97%B4%E7%89%87%E8%B0%83%E5%BA%A6.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E6%97%B6%E9%97%B4%E7%89%87%E8%B0%83%E5%BA%A6.png" alt="时间片调度" style="max-width: 100%; height: auto;"></a></p>
 <p>运行过程如下：</p>
 <ol>
 <li>首先Task1运行完一个时间片后，切换至Task2运行。</li>

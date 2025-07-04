@@ -90,14 +90,14 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <div class="markdown-body" id="postBody"><h5>原理：</h5>
 <p>VSCode 的 Remote - SSH 功能本质上是利用 SSH 协议，在本地机器（客户端）和远程云服务器之间建立安全连接，然后在远程服务器上运行一个 VSCode Server 实例。本地 VSCode（前端界面）通过 SSH 通道与远程的 VSCode Server（后端）通信，从而实现远程开发体验。</p>
 <p>用户在本地 VSCode 中操作时，感觉像在本地开发，但实际的计算和文件操作发生在远程服务器上。</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/%E5%8E%9F%E7%90%86.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/%E5%8E%9F%E7%90%86.png" alt="" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/%E5%8E%9F%E7%90%86.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/%E5%8E%9F%E7%90%86.png" alt="" style="max-width: 100%; height: auto;"></a></p>
 <p>本例配置：本地电脑为win11，云服务器为Ubuntu</p>
 <p>准备条件：本地安装好vscode</p>
 <p>第一步：安装远程开发插件（remote-SSH）</p>
 <p>第二步：配置相关文件</p>
 <p>进入配置文件</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/image-20250311180136763.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/image-20250311180136763.png" alt="" style="max-width: 100%;"></a></p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/image-20250311181110102.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/image-20250311181110102.png" alt="" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/image-20250311180136763.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/image-20250311180136763.png" alt="" style="max-width: 100%; height: auto;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/image-20250311181110102.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/image-20250311181110102.png" alt="" style="max-width: 100%; height: auto;"></a></p>
 <p>文件内容</p>
 <pre lang="config" class="notranslate"><code class="notranslate">Host debian			# 别名
   HostName yourip	# 实际服务器ip
@@ -120,7 +120,7 @@ Host ubuntu
 <pre class="notranslate"><code class="notranslate"> ssh-keygen -t rsa 
 </code></pre>
 <p>生成秘钥对<br>
-<a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/image-20250311180242242.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/image-20250311180242242.png" alt="" style="max-width: 100%;"></a></p>
+<a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/image-20250311180242242.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/image-20250311180242242.png" alt="" style="max-width: 100%; height: auto;"></a></p>
 <ul>
 <li>打开生成的秘钥保存路径，拷贝 <code class="notranslate">id_rsa.pub</code> 内容，添加到到云服务器的 <code class="notranslate">~/.ssh/authorized_keys</code> 文件后面。</li>
 </ul>

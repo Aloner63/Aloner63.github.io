@@ -132,7 +132,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <p>上述打包方式，只会在exe上显示图标。并不会在程序运行时，在状态栏和程序头部显示图标。以下是实现上述缺陷的办法。</p>
 <p>1，首先在 ThymomaSegmentationApp 类中添加图标设置:</p>
 <p>（程序运行时，显示在头部）</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/image-20250118204903403.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/image-20250118204903403.png" alt="" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/image-20250118204903403.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/image-20250118204903403.png" alt="" style="max-width: 100%; height: auto;"></a></p>
 <div class="highlight highlight-source-python"><pre class="notranslate"><span class="pl-c"># thymoma_segmentation_app.py</span>
 <span class="pl-k">from</span> <span class="pl-v">PyQt5</span>.<span class="pl-v">QtGui</span> <span class="pl-k">import</span> <span class="pl-v">QIcon</span>
 <span class="pl-k">from</span> <span class="pl-v">PyQt5</span>.<span class="pl-v">QtWidgets</span> <span class="pl-k">import</span> <span class="pl-v">QMainWindow</span>, <span class="pl-v">QPushButton</span>, <span class="pl-v">QVBoxLayout</span>, <span class="pl-v">QHBoxLayout</span>, <span class="pl-v">QWidget</span>, <span class="pl-v">QFileDialog</span>, <span class="pl-v">QLabel</span>, <span class="pl-v">QProgressBar</span>
