@@ -98,8 +98,8 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 </div>
     <div id="content">
 <div class="markdown-body" id="postBody"><p>ESP-01S 基本参数<br>
-<a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/222a8a308874efa976dbd68125140a57.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/222a8a308874efa976dbd68125140a57.png" alt="img" style="max-width: 100%; height: auto;"></a></p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/ab7b3ba25b06f9e259135eb4b087300d.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/ab7b3ba25b06f9e259135eb4b087300d.png" alt="img" style="max-width: 100%; height: auto;"></a></p>
+<a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/222a8a308874efa976dbd68125140a57.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/222a8a308874efa976dbd68125140a57.png" alt="img" style="max-width: 100%;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/ab7b3ba25b06f9e259135eb4b087300d.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/ab7b3ba25b06f9e259135eb4b087300d.png" alt="img" style="max-width: 100%;"></a></p>
 <p>环境：win11 ，Arduous版本2.3.4   ， ESP01S ，USB to TTL</p>
 <p>1，安装好Arduous IDE（这个没什么好说的，修改一下安装路径。无脑下一步。使用2.3.4  注：版本不同，页面可能不同，操作大同小异。 ）</p>
 <p>2，添加开发包地址，老版的Anderson自带，新版不带。进入 【文件 &gt; 首选项】 下的其他开发板管理器地址添加8266的官方地址 。使用其他的开发板是同样的方式。添加之后，重启Arduous</p>
@@ -108,9 +108,9 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <p>3，重启以后，【工具 &gt; 管理库】，搜索esp8266，添加 ESP8266 Community。安装以后，【工具】一栏会出现相关的参数。一般默认的都是可以正常使用的，也可以根据自己的需求调整。</p>
 <p>4，硬件连接方式</p>
 <p>这里有两个接口需要连VCC，而且为esp供电需要一个稳定的电源。TTL的电源不太稳定。建议用st-link中的3.3V和面包板结合。</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/image-20250102221811554.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/image-20250102221811554.png" alt="image-20250102221811554" style="max-width: 100%; height: auto;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/image-20250102221811554.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/image-20250102221811554.png" alt="image-20250102221811554" style="max-width: 100%;"></a></p>
 <p>网上教程还有这样连接的（TX 连 TX，RX 连 RX。给出的解释是：搭建的环境是用来编译和烧录ESP8266 01S程序的。写好的程序只会借道arduino的串口线写进ESP8266中去运行，并不会写进arduino。）本人使用上面的连线成功烧录，如果不成功，可以试试下面的连线方式。</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/image-20250102221923000.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/image-20250102221923000.png" alt="image-20250102221923000" style="max-width: 100%; height: auto;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/image-20250102221923000.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/image-20250102221923000.png" alt="image-20250102221923000" style="max-width: 100%;"></a></p>
 <p>5，烧录（本方式适用第一种接线方式，第二种没试）</p>
 <p>（1）当出现  Connecting........___ 的时候。这时候说明Arduous在连接串口，将VCC拔掉再插上（重启esp）</p>
 <p>（2）重启之后出现  百分比  ，等待烧录成功即可。</p>

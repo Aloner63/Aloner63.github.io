@@ -114,7 +114,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <li>vscode的安装</li>
 <li>安装MinGW-W64及配置环境变量</li>
 </ol>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/145416d97b141096571d8073ada18314.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/145416d97b141096571d8073ada18314.png" alt="" style="max-width: 100%; height: auto;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/145416d97b141096571d8073ada18314.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/145416d97b141096571d8073ada18314.png" alt="" style="max-width: 100%;"></a></p>
 <h5>单个文件的编译和运行</h5>
 <p>单个文件直接根据vscode编译运行即可。（会自动生成一个task.json文件）</p>
 <p>写好测试代码后，点击右上角的调试按钮，这时会弹出调试程序的选项，选择第一个，也就是 gcc 编译工具。</p>
@@ -130,21 +130,21 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <h5>多个.c文件的运行和调试</h5>
 <p>当需要多个.c文件需要编译和运行的时候。就需要task.json文件。</p>
 <p>这个文件是用于定义任务配置，这些任务可以在 VS Code 中运行，例如编译代码、运行测试、启动调试器等。tasks.json文件是一个 JSON 格式的文件，其中包含了任务的配置信息，包括任务名称、命令、参数等。通过编辑tasks.json文件，我们可以自定义项目中的各种任务，并在 VS Code 中方便地执行这些任务。</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/70c6c0e46257925345a57c76e5230b6a.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/70c6c0e46257925345a57c76e5230b6a.png" alt="" style="max-width: 100%; height: auto;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/70c6c0e46257925345a57c76e5230b6a.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/70c6c0e46257925345a57c76e5230b6a.png" alt="" style="max-width: 100%;"></a></p>
 <p>具体修改如下图所示，我注释掉了原来的"${file}"，并新增一行"*.c"，表示并非指定某一个 .c 文件，而是当前文件夹下所有的 .c 文件。同时也把"${fileDirname}\${fileBasenameNoExtension}.exe"注释掉，改成"${fileDirname}\program.exe"，那么多个 .c 文件编译之后的可执行文件就是program.exe。</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/d87b4f522dc14d9a6cbd15370fbd16a0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/d87b4f522dc14d9a6cbd15370fbd16a0.png" alt="" style="max-width: 100%; height: auto;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/d87b4f522dc14d9a6cbd15370fbd16a0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/d87b4f522dc14d9a6cbd15370fbd16a0.png" alt="" style="max-width: 100%;"></a></p>
 <p>修改好后，按组合键<code class="notranslate">Ctrl + s</code>保存即可。</p>
 <p>还需要一个launch.json文件。点击左侧的运行和调试，再点击创建lanuch.json文件。</p>
 <p>搜索框会弹出选项，选择c++（GDB/LLDB）</p>
 <p>然后 VS Code 会新建一个 JSON 文件，点击右下角的<code class="notranslate">添加配置</code>，在弹出的下拉菜单中选择<code class="notranslate">C/C++：（gdb）启动</code>。</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/d80525fca1e08143dc63379be33dd9a9.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/d80525fca1e08143dc63379be33dd9a9.png" alt="" style="max-width: 100%; height: auto;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/d80525fca1e08143dc63379be33dd9a9.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/d80525fca1e08143dc63379be33dd9a9.png" alt="" style="max-width: 100%;"></a></p>
 <p>此时，JSON 文件会多出一些配置信息，需要我们修改的内容如下图所示的红框标志内容。</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/2a4329d95fdf853dc91c85a605c10f28.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/2a4329d95fdf853dc91c85a605c10f28.png" alt="" style="max-width: 100%; height: auto;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/2a4329d95fdf853dc91c85a605c10f28.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/2a4329d95fdf853dc91c85a605c10f28.png" alt="" style="max-width: 100%;"></a></p>
 <p>修改为下图红框所示内容，<code class="notranslate">“program”</code>后的内容就是前面提到的<code class="notranslate">tasks.json</code>文件中的编译后产生的可执行文件。<code class="notranslate">"miDebuggerPath"</code>后面的则是前面安装的 MinGW-W64 的 gdb 工具的路径。修改后保持关闭。</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/47664b98a346762eb2f10e45513cecba.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/47664b98a346762eb2f10e45513cecba.png" alt="" style="max-width: 100%; height: auto;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/47664b98a346762eb2f10e45513cecba.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/47664b98a346762eb2f10e45513cecba.png" alt="" style="max-width: 100%;"></a></p>
 <p>代码测试</p>
 <p>之后，我们进行多文件的编译调试，先在<code class="notranslate">C</code>文件夹下新建一个新的文件夹，我这里命名为<code class="notranslate">test2</code>，并在这个文件夹里面新建三个文件，分别是<code class="notranslate">test.c</code>、<code class="notranslate">max.h</code>和<code class="notranslate">max.c</code>。</p>
-<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/a711137d2a24a25241d9ea639e337434.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/a711137d2a24a25241d9ea639e337434.png" alt="" style="max-width: 100%; height: auto;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/a711137d2a24a25241d9ea639e337434.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/a711137d2a24a25241d9ea639e337434.png" alt="" style="max-width: 100%;"></a></p>
 <p>代码如下：</p>
 <p>max.h</p>
 <div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-k">#ifndef</span> <span class="pl-s1">__MAX_H__</span>

@@ -126,7 +126,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <p>工作区：就是电脑上能看到的本地目录</p>
 <p>版本库：工作区的一个.git文件夹</p>
 <p>版本库中有很多东西，其中最重要的就是被称为stage（或index）的暂存区，还有git为我们自动创建的第一个分支master，以及指向master的一个指针叫HEAD。</p>
-<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/780c970d-2502-466f-9ab9-c4ae5a1693a1"><img src="https://github.com/user-attachments/assets/780c970d-2502-466f-9ab9-c4ae5a1693a1" alt="repo" style="max-width: 100%; height: auto;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/780c970d-2502-466f-9ab9-c4ae5a1693a1"><img src="https://github.com/user-attachments/assets/780c970d-2502-466f-9ab9-c4ae5a1693a1" alt="repo" style="max-width: 100%;"></a></p>
 <p>当我们使用git	add将文件添加进来的时候，实际上就是把文件修改添加到暂存区。</p>
 <p>当我们进行git	commit提交修改的时候，实际上就是把暂存区中的所有内容提交到当前分支。</p>
 <p>可以简单的理解为，需要提交的文件修改都放到暂存区（git add），然后一次性提交暂存区的所有修改（git commit）。</p>
@@ -187,15 +187,15 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <h6>创建和合并分支</h6>
 <p>根本原理是什么样呢？</p>
 <p>在版本回退里，我们已经知道，在每次进行提交之后，git都会把它们串成一条时间线，这条时间线就是一个分支。这条分支就是我们所说的主分支，也就是master分支。严格来说，HEAD并不是指向提交的，而是指向master的，master才指向提交。</p>
-<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/f2c86e4c-caa5-4440-ac36-3488c17db60c"><img src="https://github.com/user-attachments/assets/f2c86e4c-caa5-4440-ac36-3488c17db60c" alt="HEAD指向master1 drawio" style="max-width: 100%; height: auto;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/f2c86e4c-caa5-4440-ac36-3488c17db60c"><img src="https://github.com/user-attachments/assets/f2c86e4c-caa5-4440-ac36-3488c17db60c" alt="HEAD指向master1 drawio" style="max-width: 100%;"></a></p>
 <p>当我们每进行一次提交，master就会向前移动一步，随着不断地提交，master分支的线越来越长。</p>
 <p>当我们创建了一个新的分支dev后，git会新建一个指针，这个指针会指向master当前的提交，然后再把HEAD指向dev。</p>
-<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/ac6a669a-285f-4672-81e0-509200425ce9"><img src="https://github.com/user-attachments/assets/ac6a669a-285f-4672-81e0-509200425ce9" alt="dev指向master当前 drawio" style="max-width: 100%; height: auto;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/ac6a669a-285f-4672-81e0-509200425ce9"><img src="https://github.com/user-attachments/assets/ac6a669a-285f-4672-81e0-509200425ce9" alt="dev指向master当前 drawio" style="max-width: 100%;"></a></p>
 <p>注意：在进行上述操作时，工作区没有任何变化</p>
 <p>从现在开始，工作区的修改和提交就是针对dev分支的了。如果进行了新的提交。那么会出现HEAD指向的dev往后移动一步，而master不变。</p>
-<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/7088d676-6246-4cc2-be97-b8ae2e386107"><img src="https://github.com/user-attachments/assets/7088d676-6246-4cc2-be97-b8ae2e386107" alt="HEAD指向dev向后移动一步 drawio" style="max-width: 100%; height: auto;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/7088d676-6246-4cc2-be97-b8ae2e386107"><img src="https://github.com/user-attachments/assets/7088d676-6246-4cc2-be97-b8ae2e386107" alt="HEAD指向dev向后移动一步 drawio" style="max-width: 100%;"></a></p>
 <p>当我们在dev上的工作完成以后，就可以把dev合并到master上去了。怎么合并呢？就是让master直接指向dev的当前提交。</p>
-<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/c19225b3-cf51-4fdd-8702-ca5b63c670d6"><img src="https://github.com/user-attachments/assets/c19225b3-cf51-4fdd-8702-ca5b63c670d6" alt="master指向dev当前提交 drawio" style="max-width: 100%; height: auto;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/c19225b3-cf51-4fdd-8702-ca5b63c670d6"><img src="https://github.com/user-attachments/assets/c19225b3-cf51-4fdd-8702-ca5b63c670d6" alt="master指向dev当前提交 drawio" style="max-width: 100%;"></a></p>
 <p>git合并是非常快的。本质上就是修改指针。</p>
 <p>合并完成后，dev分支的作用就没有了。可以删除dev分支。</p>
 <p>具体操作</p>
@@ -215,16 +215,16 @@ git merge dev		：将dev分支合并到当前的分支
 </code></pre>
 <h6>解决冲突</h6>
 <p>当分支冲突时，也就是说，当我们修改过dev分支后，没有在master分支上提交。然后在master上进行了修改之后，进行了合并。这时候，两个分支的文件内容会冲突。</p>
-<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/b4cc3d8e-edda-423e-8382-8da79bc03067"><img src="https://github.com/user-attachments/assets/b4cc3d8e-edda-423e-8382-8da79bc03067" alt="分支冲突 drawio" style="max-width: 100%; height: auto;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/b4cc3d8e-edda-423e-8382-8da79bc03067"><img src="https://github.com/user-attachments/assets/b4cc3d8e-edda-423e-8382-8da79bc03067" alt="分支冲突 drawio" style="max-width: 100%;"></a></p>
 <p>文件存在冲突，必须手动解决冲突后再提交。<code class="notranslate">git status</code>也可以告诉我们冲突的文件。</p>
 <p>Git用<code class="notranslate">&lt;&lt;&lt;&lt;&lt;&lt;&lt;</code>，<code class="notranslate">=======</code>，<code class="notranslate">&gt;&gt;&gt;&gt;&gt;&gt;&gt;</code>标记出不同分支的内容，我们修改如下后保存。</p>
 <p>再进行提交，就变成正常了。</p>
-<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/5e5596f6-3b55-46cf-98cc-ce5d1c58cb87"><img src="https://github.com/user-attachments/assets/5e5596f6-3b55-46cf-98cc-ce5d1c58cb87" alt="冲突解决 drawio" style="max-width: 100%; height: auto;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/5e5596f6-3b55-46cf-98cc-ce5d1c58cb87"><img src="https://github.com/user-attachments/assets/5e5596f6-3b55-46cf-98cc-ce5d1c58cb87" alt="冲突解决 drawio" style="max-width: 100%;"></a></p>
 <h6>分支管理策略（能看到分支合并历史）</h6>
 <p>当我们进行实际开发的时候，master一般作为发布版本的主分支。一般不在上面进行开发。在那干活呢？在副分支上干活，dev上。如果是多人共同合作的话，还会有很多很多分支。每个人都有自己的分支。</p>
 <pre class="notranslate"><code class="notranslate">git merge --no-ff -m "merge with no-ff" dev
 </code></pre>
-<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/b37ef7de-ad86-4bd0-ab35-9f65c8291d6c"><img src="https://github.com/user-attachments/assets/b37ef7de-ad86-4bd0-ab35-9f65c8291d6c" alt="branches" style="max-width: 100%; height: auto;"></a></p>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/b37ef7de-ad86-4bd0-ab35-9f65c8291d6c"><img src="https://github.com/user-attachments/assets/b37ef7de-ad86-4bd0-ab35-9f65c8291d6c" alt="branches" style="max-width: 100%;"></a></p>
 <p>合并分支时，加上<code class="notranslate">--no-ff</code>参数就可以用普通模式合并，合并后的历史有分支，能看出来曾经做过合并，而<code class="notranslate">fast forward</code>合并就看不出来曾经做过合并（git默认是<code class="notranslate">fast forward</code>合并分支）</p>
 <h6>bug分支</h6>
 <p>现在有一个bug任务比较紧急。目前来看，需要创建一个分支来修复它，但是dev分支上的工作还没有提交。dev上的工作至少还需要两天才能完成，但是bug比较急，需要5分钟之内解决。这时候该怎么办？</p>
