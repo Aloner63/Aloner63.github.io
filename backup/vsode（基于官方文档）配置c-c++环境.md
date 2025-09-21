@@ -1,5 +1,33 @@
 **从根本上来说，vscode就是一个文本编译器。**它之所以能狗对多种代码进行编写，本质上还是通过插件，各种包的下载和相关环境的配置实现的。
 
+简单方法（小工程）
+在软件界面按住Ctrl+Shift+P，在软件上方出现输入框中输入：C/C++:Edit Configurations。选择第一个配置JSON配置。
+完成之后，.vscode目录下面会自动添加了一个c_cpp_properties.json。在c_cpp_properties.json中加入自己需要的头文件路径。
+注意：不光只添加自己所需的头文件路径，还要添加include等等路径
+```
+{
+    "configurations": [
+        {
+            "name": "Linux",
+            "includePath": [
+                "${workspaceFolder}/**",
+                "${workspaceFolder}/lock",
+                "/usr/include",
+                "/usr/include/c++/11",
+                "/usr/include/x86_64-linux-gnu/c++/11"
+            ],
+            "defines": [],
+            "compilerPath": "/usr/bin/g++",
+            "cStandard": "c17",
+            "cppStandard": "gnu++17",
+            "intelliSenseMode": "linux-gcc-x64"
+        }
+    ],
+    "version": 4
+}
+```
+
+
 **第一步**
 卸载老的vscode（如果电脑上没有安装过，跳过）
 电脑上如果已经有了vscode的，想重新安装的。先将vscode完全卸载。去源文件夹中找到unins000.exe卸载。
