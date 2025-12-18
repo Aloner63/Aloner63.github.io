@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>Aloner63 的个人博客</title><link>https://Aloner63.github.io</link><description>分享技术，记录生活，探索未知</description><copyright>Aloner63 的个人博客</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/1340761045.jpeg</url><title>avatar</title><link>https://Aloner63.github.io</link></image><lastBuildDate>Thu, 18 Dec 2025 01:33:19 +0000</lastBuildDate><managingEditor>Aloner63 的个人博客</managingEditor><ttl>60</ttl><webMaster>Aloner63 的个人博客</webMaster><item><title>kc-unet++源码</title><link>https://Aloner63.github.io/post/kc-unet%2B%2B-yuan-ma.html</link><description>train.py
+train.py
 ```
 import argparse
 import os
@@ -250,14 +249,14 @@ def main():
     cudnn.benchmark = True
 
     # create model
-    print('=&gt; creating model %s' % config['arch'])
+    print("=> creating model %s" % config['arch'])
     model = archs.__dict__[config['arch']](config['num_classes'],
                                            config['input_channels'],
                                            config['deep_supervision'])
 
     # Enable multi-GPU support with DataParallel
-    if torch.cuda.device_count() &gt; 1:
-        print(f'=&gt; Using {torch.cuda.device_count()} GPUs!')
+    if torch.cuda.device_count() > 1:
+        print(f"=> Using {torch.cuda.device_count()} GPUs!")
         model = nn.DataParallel(model)
     model = model.cuda()
 
@@ -367,13 +366,13 @@ def main():
                                  'val_loss', 'val_iou', 'val_dice', 'val_precision', 'val_recall'])
         df.to_csv('models/%s/log.csv' % config['name'], mode='a', header=False, index=False)
 
-        if val_log['iou'] &gt; best_iou:
-            print('=&gt; saved best model')
+        if val_log['iou'] > best_iou:
+            print("=> saved best model")
             best_iou = val_log['iou']
             best_epoch = epoch
             torch.save(model.state_dict(), 'models/%s/model.pth' % config['name'])
 
-    print('=&gt; Best IoU: %.4f at epoch %d' % (best_iou, best_epoch))
+    print("=> Best IoU: %.4f at epoch %d" % (best_iou, best_epoch))
 
 
 if __name__ == '__main__':
@@ -393,10 +392,10 @@ from model.attention.CBAM import CBAMBlock  # 导入CBAM模块
 __all__ = ['UKAN_NestedUNet']
 
 class KANLayer(nn.Module):
-    '''
+    """
     KAN层实现，基于Kolmogorov-Arnold网络
     这是一个特殊的神经网络层，使用样条函数来增强网络的表达能力
-    '''
+    """
     def __init__(self, in_features, hidden_features=None, out_features=None, act_layer=nn.GELU, drop=0.):
         super().__init__()
         out_features = out_features or in_features
@@ -454,11 +453,11 @@ class KANLayer(nn.Module):
         self.drop = nn.Dropout(drop)
 
     def forward(self, x, H, W):
-        '''
+        """
         前向传播函数
         x: 输入特征 [B, N, C]
         H, W: 特征图的高和宽
-        '''
+        """
         B, N, C = x.shape
         # 应用第一个KAN线性层
         x = self.fc1(x.reshape(B * N, C)).reshape(B, N, -1)
@@ -474,28 +473,28 @@ class KANLayer(nn.Module):
         return self.drop(x)
 
 class KANBlock(nn.Module):
-    '''
+    """
     KAN块，包含一个LayerNorm和一个KANLayer，并使用残差连接
-    '''
+    """
     def __init__(self, dim, drop=0., drop_path=0., norm_layer=nn.LayerNorm):
         super().__init__()
         # DropPath用于随机丢弃残差连接，增强正则化
-        self.drop_path = DropPath(drop_path) if drop_path &gt; 0. else nn.Identity()
+        self.drop_path = DropPath(drop_path) if drop_path > 0. else nn.Identity()
         # 层归一化
         self.norm = norm_layer(dim)
         # KAN层
         self.layer = KANLayer(in_features=dim, hidden_features=dim, drop=drop)
 
     def forward(self, x, H, W):
-        '''
+        """
         前向传播函数，实现残差连接
-        '''
+        """
         return x + self.drop_path(self.layer(self.norm(x), H, W))
 
 class PatchEmbed(nn.Module):
-    '''
+    """
     图像块嵌入层，将图像转换为序列表示
-    '''
+    """
     def __init__(self, img_size=224, patch_size=7, stride=4, in_chans=3, embed_dim=768):
         super().__init__()
         img_size = to_2tuple(img_size)
@@ -511,10 +510,10 @@ class PatchEmbed(nn.Module):
         self.norm = nn.LayerNorm(embed_dim)
 
     def forward(self, x):
-        '''
+        """
         前向传播函数
         将图像转换为序列表示
-        '''
+        """
         # 应用卷积
         x = self.proj(x)
         # 获取输出特征图的尺寸
@@ -526,9 +525,9 @@ class PatchEmbed(nn.Module):
         return x, H, W
 
 class VGGBlock(nn.Module):
-    '''
+    """
     VGG块，包含两个卷积层，每个卷积层后跟批归一化和ReLU激活
-    '''
+    """
     def __init__(self, in_channels, middle_channels, out_channels):
         super().__init__()
         # ReLU激活函数
@@ -543,9 +542,9 @@ class VGGBlock(nn.Module):
         self.bn2 = nn.BatchNorm2d(out_channels)
 
     def forward(self, x):
-        '''
+        """
         前向传播函数
-        '''
+        """
         out = self.conv1(x)
         out = self.bn1(out)
         out = self.relu(out)
@@ -555,10 +554,10 @@ class VGGBlock(nn.Module):
         return out
 
 class UKAN_NestedUNet(nn.Module):
-    '''
+    """
     UKAN嵌套UNet模型，将KAN模块集成到UNet++架构中
     KAN模块主要在深层特征(x2_0, x2_2, x3_0, x4_0, x3_1)中发挥作用
-    '''
+    """
     def __init__(self, num_classes, input_channels=3, deep_supervision=False, img_size=224, **kwargs):
         super().__init__()
         # 定义每层的滤波器数量
@@ -633,10 +632,10 @@ class UKAN_NestedUNet(nn.Module):
             self.final = nn.Conv2d(self.nb_filter[0], num_classes, kernel_size=1)
 
     def forward(self, input):
-        '''
+        """
         前向传播函数
         实现UNet++的前向传播，并在深层特征中应用KAN模块
-        '''
+        """
         # 编码器路径
         # 第一层特征
         x0_0 = self.conv0_0(input)
@@ -767,7 +766,7 @@ class KANLinear(torch.nn.Module):
             .expand(in_features, -1)
             .contiguous()
         )
-        self.register_buffer('grid', grid)
+        self.register_buffer("grid", grid)
 
         self.base_weight = torch.nn.Parameter(torch.Tensor(out_features, in_features))
         self.spline_weight = torch.nn.Parameter(
@@ -810,7 +809,7 @@ class KANLinear(torch.nn.Module):
                 torch.nn.init.kaiming_uniform_(self.spline_scaler, a=math.sqrt(5) * self.scale_spline)
 
     def b_splines(self, x: torch.Tensor):
-        '''
+        """
         Compute the B-spline bases for the given input tensor.
 
         Args:
@@ -818,14 +817,14 @@ class KANLinear(torch.nn.Module):
 
         Returns:
             torch.Tensor: B-spline bases tensor of shape (batch_size, in_features, grid_size + spline_order).
-        '''
+        """
         assert x.dim() == 2 and x.size(1) == self.in_features
 
         grid: torch.Tensor = (
             self.grid
         )  # (in_features, grid_size + 2 * spline_order + 1)
         x = x.unsqueeze(-1)
-        bases = ((x &gt;= grid[:, :-1]) &amp; (x &lt; grid[:, 1:])).to(x.dtype)
+        bases = ((x >= grid[:, :-1]) & (x < grid[:, 1:])).to(x.dtype)
         for k in range(1, self.spline_order + 1):
             bases = (
                 (x - grid[:, : -(k + 1)])
@@ -845,7 +844,7 @@ class KANLinear(torch.nn.Module):
         return bases.contiguous()
 
     def curve2coeff(self, x: torch.Tensor, y: torch.Tensor):
-        '''
+        """
         Compute the coefficients of the curve that interpolates the given points.
 
         Args:
@@ -854,7 +853,7 @@ class KANLinear(torch.nn.Module):
 
         Returns:
             torch.Tensor: Coefficients tensor of shape (out_features, in_features, grid_size + spline_order).
-        '''
+        """
         assert x.dim() == 2 and x.size(1) == self.in_features
         assert y.size() == (x.size(0), self.in_features, self.out_features)
 
@@ -944,7 +943,7 @@ class KANLinear(torch.nn.Module):
         self.spline_weight.data.copy_(self.curve2coeff(x, unreduced_spline_output))
 
     def regularization_loss(self, regularize_activation=1.0, regularize_entropy=1.0):
-        '''
+        """
         Compute the regularization loss.
 
         This is a dumb simulation of the original L1 regularization as stated in the
@@ -955,7 +954,7 @@ class KANLinear(torch.nn.Module):
         The L1 regularization is now computed as mean absolute value of the spline
         weights. The authors implementation also includes this term in addition to the
         sample-based regularization.
-        '''
+        """
         l1_fake = self.spline_weight.abs().mean(-1)
         regularization_loss_activation = l1_fake.sum()
         p = l1_fake / regularization_loss_activation
@@ -1027,7 +1026,7 @@ import torch.utils.data
 
 class Dataset(torch.utils.data.Dataset):
     def __init__(self, img_ids, img_dir, mask_dir, img_ext, mask_ext, num_classes, transform=None):
-        '''
+        """
         Args:
             img_ids (list): Image ids.
             img_dir: Image file directory.
@@ -1039,7 +1038,7 @@ class Dataset(torch.utils.data.Dataset):
         
         Note:
             Make sure to put the files as the following structure:
-            &lt;dataset name&gt;
+            <dataset name>
             ├── images
             |   ├── 0a7e06.jpg
             │   ├── 0aab0a.jpg
@@ -1059,7 +1058,7 @@ class Dataset(torch.utils.data.Dataset):
                 |   ├── 0b1761.png
                 |   ├── ...
                 ...
-        '''
+        """
         self.img_ids = img_ids
         self.img_dir = img_dir
         self.mask_dir = mask_dir
@@ -1080,335 +1079,254 @@ class Dataset(torch.utils.data.Dataset):
         for i in range(self.num_classes):
             mask.append(cv2.imread(os.path.join(self.mask_dir, str(i),
                         img_id + self.mask_ext), cv2.IMREAD_GRAYSCALE)[..., None])
-        #数组沿深度方向进行拼接。</description><guid isPermaLink="true">https://Aloner63.github.io/post/kc-unet%2B%2B-yuan-ma.html</guid><pubDate>Thu, 18 Dec 2025 01:28:50 +0000</pubDate></item><item><title>vscode实现远程开发</title><link>https://Aloner63.github.io/post/vscode-shi-xian-yuan-cheng-kai-fa.html</link><description>##### 原理：
+        #数组沿深度方向进行拼接。
+        mask = np.dstack(mask)
 
-VSCode 的 Remote - SSH 功能本质上是利用 SSH 协议，在本地机器（客户端）和远程云服务器之间建立安全连接，然后在远程服务器上运行一个 VSCode Server 实例。</description><guid isPermaLink="true">https://Aloner63.github.io/post/vscode-shi-xian-yuan-cheng-kai-fa.html</guid><pubDate>Tue, 11 Mar 2025 10:33:52 +0000</pubDate></item><item><title>FreeRTOS_2</title><link>https://Aloner63.github.io/post/FreeRTOS_2.html</link><description>
-[TOC]
+        if self.transform is not None:
+            augmented = self.transform(image=img, mask=mask)#这个包比较方便，能把mask也一并做掉
+            img = augmented['image']#参考https://github.com/albumentations-team/albumentations
+            mask = augmented['mask']
+        
+        img = img.astype('float32') / 255
+        img = img.transpose(2, 0, 1)
+        mask = mask.astype('float32') / 255
+        mask = mask.transpose(2, 0, 1)
+        
+        return img, mask, {'img_id': img_id}
 
-## 11.FreeRTOS任务相关的其他API函数
 
-### 一、FreeRTOS任务相关的其他API函数介绍
+losses.py
+import torch
+import torch.nn as nn
+import torch.nn.functional as F
 
-#### 1、FreeRTOS任务相关API函数介绍(部分常用的)
+try:
+    from LovaszSoftmax.pytorch.lovasz_losses import lovasz_hinge
+except ImportError:
+    pass
 
-答：
+__all__ = ['BCEDiceLoss', 'LovaszHingeLoss']
 
-![](https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E7%9B%B8%E5%85%B3%E7%9A%84%E5%85%B6%E4%BB%96API%E5%87%BD%E6%95%B0.png)
 
-### 二、任务状态查询API函数
+class BCEDiceLoss(nn.Module):
+    def __init__(self):
+        super().__init__()
 
-#### 1、获取任务优先级函数
+    def forward(self, input, target):
+        bce = F.binary_cross_entropy_with_logits(input, target)
+        smooth = 1e-5
+        input = torch.sigmoid(input)
+        num = target.size(0)
+        input = input.view(num, -1)
+        target = target.view(num, -1)
+        intersection = (input * target)
+        dice = (2. * intersection.sum(1) + smooth) / (input.sum(1) + target.sum(1) + smooth)
+        dice = 1 - dice.sum() / num
+        return 0.5 * bce + dice
 
-答：
 
-```C
-UBaseType_t  uxTaskPriorityGet(  const TaskHandle_t xTask  )
+class LovaszHingeLoss(nn.Module):
+    def __init__(self):
+        super().__init__()
+
+    def forward(self, input, target):
+        input = input.squeeze(1)
+        target = target.squeeze(1)
+        loss = lovasz_hinge(input, target, per_image=True)
+
+        return loss
+
 ```
 
-此函数用于获取指定任务的任务优先级，使用该函数需要将宏 INCLUDE_uxTaskPriorityGet 置1。</description><guid isPermaLink="true">https://Aloner63.github.io/post/FreeRTOS_2.html</guid><pubDate>Wed, 05 Mar 2025 06:04:39 +0000</pubDate></item><item><title>FreeRTOS_1</title><link>https://Aloner63.github.io/post/FreeRTOS_1.html</link><description>
-## 目录
+metrics.py
+```
+import numpy as np
+import torch
+import torch.nn.functional as F
 
-&lt;details&gt;
-&lt;summary&gt;概述&lt;/summary&gt;
 
-- [概述](#overview)
-&lt;/details&gt;
+def iou_score(output, target):
+    smooth = 1e-5
 
-&lt;details&gt;
-&lt;summary&gt;1.基础知识&lt;/summary&gt;
+    if torch.is_tensor(output):
+        output = torch.sigmoid(output).data.cpu().numpy()
+    if torch.is_tensor(target):
+        target = target.data.cpu().numpy()
+    output_ = output > 0.5
+    target_ = target > 0.5
+    intersection = (output_ & target_).sum()
+    union = (output_ | target_).sum()
 
-- [1.基础知识](#basic-knowledge)
-  - [一.任务调度器简述](#task-scheduler-overview)
-    - [1.什么是任务调度器](#what-is-task-scheduler)
-    - [2.freertos的调度方式](#freertos-scheduling-methods)
-    - [3.抢占式调度过程](#preemptive-scheduling-process)
-    - [4.时间片是什么](#what-is-time-slice)
-    - [5.时间片调度过程](#time-slice-scheduling-process)
-  - [二.任务状态](#task-states)
-    - [1.freertos的任务状态](#freertos-task-states)
-    - [2.四种状态之间的转换关系](#task-state-transitions)
-    - [3.任务状态列表](#task-state-list)
-&lt;/details&gt;
+    return (intersection + smooth) / (union + smooth)
 
-&lt;details&gt;
-&lt;summary&gt;2.freertos系统配置文件详解&lt;/summary&gt;
 
-- [2.freertos系统配置文件详解](#freertos-config-details)
-&lt;/details&gt;
+def dice_coef(output, target):
+    smooth = 1e-5
 
-&lt;details&gt;
-&lt;summary&gt;3.任务的创建和删除&lt;/summary&gt;
+    if torch.is_tensor(output):
+        output = torch.sigmoid(output).data.cpu().numpy()
+    if torch.is_tensor(target):
+        target = target.data.cpu().numpy()
+    output = output > 0.5
+    target = target > 0.5
+    intersection = (output & target).sum()
 
-- [3.任务的创建和删除](#task-creation-and-deletion)
-  - [一.任务创建和删除API函数](#task-creation-deletion-api)
-    - [1.任务创建和删除的本质](#task-creation-deletion-essence)
-    - [2.任务动态创建和静态创建的区别](#dynamic-vs-static-task-creation)
-    - [3.任务控制块结构体成员介绍](#task-control-block-members)
-    - [4.什么是临界保护区](#what-is-critical-section)
-    - [5.动态创建的优点](#dynamic-creation-advantages)
-    - [6.静态创建的优点](#static-creation-advantages)
-  - [二.任务的创建（动态）](#dynamic-task-creation)
-    - [1.动态函数的创建](#dynamic-function-creation)
-    - [2.什么是句柄](#what-is-handle)
-    - [3.实现动态创建任务流程](#dynamic-task-creation-process)
-    - [4.动态任务创建函数内部实现简述](#dynamic-task-creation-internal)
-  - [三.任务的创建（静态）](#static-task-creation)
-    - [1.静态函数的创建](#static-function-creation)
-    - [2.实现静态创建任务流程](#static-task-creation-process)
-    - [3.静态任务创建函数内部实现简述](#static-task-creation-internal)
-  - [四.任务的删除](#task-deletion)
-    - [1.任务删除函数](#task-deletion-function)
-    - [2.删除任务流程](#task-deletion-process)
-    - [3.删除任务函数内部实现简述](#task-deletion-internal)
-&lt;/details&gt;
+    return (2. * intersection + smooth) / \
+        (output.sum() + target.sum() + smooth)
 
-&lt;details&gt;
-&lt;summary&gt;4.任务的挂起和恢复&lt;/summary&gt;
 
-- [4.任务的挂起和恢复](#task-suspension-and-resumption)
-  - [一.任务的挂起和恢复介绍](#task-suspension-resumption-intro)
-  - [二.任务的挂起](#task-suspension)
-    - [1.挂起函数介绍](#suspension-function-intro)
-    - [2.任务挂起函数内部实现](#suspension-function-internal)
-  - [三.任务的恢复](#task-resumption)
-    - [1.任务恢复函数介绍（任务中）](#resumption-function-task-intro)
-    - [2.任务回复函数的实现（任务中）](#resumption-function-task-internal)
-    - [3.任务恢复函数介绍（中断中）](#resumption-function-isr-intro)
-    - [4.任务恢复函数内部实现（中断中）](#resumption-function-isr-internal)
-&lt;/details&gt;
+def precision_score(output, target):
+    smooth = 1e-5
 
-&lt;details&gt;
-&lt;summary&gt;5.中断管理&lt;/summary&gt;
+    if torch.is_tensor(output):
+        output = torch.sigmoid(output).data.cpu().numpy()
+    if torch.is_tensor(target):
+        target = target.data.cpu().numpy()
+    output = output > 0.5
+    target = target > 0.5
+    
+    true_positives = (output & target).sum()
+    predicted_positives = output.sum()
 
-- [5.中断管理](#interrupt-management)
-  - [一.中断介绍](#interrupt-intro)
-    - [1.什么是中断](#what-is-interrupt)
-    - [2.中断执行机制](#interrupt-execution-mechanism)
-  - [二.中断优先级分组设置](#interrupt-priority-grouping)
-    - [1.中断优先级分组介绍](#priority-grouping-intro)
-    - [2.什么是去抢占优先级什么是子优先级](#preemption-vs-subpriority)
-    - [3.中断优先级配置方式](#priority-configuration-methods)
-    - [4.freertos中对中断优先级的管理](#freertos-interrupt-priority-management)
-  - [三.中断相关寄存器](#interrupt-related-registers)
-    - [1.系统中断优先级配置寄存器](#system-interrupt-priority-registers)
-    - [2.FreeRTOS如何配置PendSV和Systick中断优先级](#freertos-pendsv-systick-config)
-    - [3.为什么将PendSV和SysTick设置最低优先级](#why-lowest-pendsv-systick)
-    - [4.中断屏蔽寄存器](#interrupt-mask-registers)
-    - [5.BASEPRI中断屏蔽寄存器](#basepri-interrupt-mask)
-    - [6.freertos的关闭中断程序](#freertos-disable-interrupts)
-    - [7.freertos的开中断程序](#freertos-enable-interrupts)
-    - [8.中断服务函数调用FreeRTOS的API函数需注意](#freertos-isr-api-notes)
-&lt;/details&gt;
+    return (true_positives + smooth) / (predicted_positives + smooth)
 
-&lt;details&gt;
-&lt;summary&gt;6.freertos临界段代码保护&lt;/summary&gt;
 
-- [6.freertos临界段代码保护](#freertos-critical-section-protection)
-  - [1.什么是临界段](#what-is-critical-section-1)
-  - [2.适用什么场合](#critical-section-use-cases)
-  - [3.什么可以打断当前程序的运行](#what-interrupts-program)
-  - [4.临界段代码保护函数](#critical-section-protection-functions)
-  - [5.临界段代码保护函数使用特点](#critical-section-function-features)
-&lt;/details&gt;
+def recall_score(output, target):
+    smooth = 1e-5
 
-&lt;details&gt;
-&lt;summary&gt;7.任务调度器挂起和恢复函数&lt;/summary&gt;
+    if torch.is_tensor(output):
+        output = torch.sigmoid(output).data.cpu().numpy()
+    if torch.is_tensor(target):
+        target = target.data.cpu().numpy()
+    output = output > 0.5
+    target = target > 0.5
+    
+    true_positives = (output & target).sum()
+    actual_positives = target.sum()
 
-- [7.任务调度器挂起和恢复函数](#scheduler-suspend-resume-functions)
-  - [1.任务调度器挂起和恢复函数](#scheduler-suspend-resume-functions-1)
-  - [2.任务调度器挂起和恢复的特点](#scheduler-suspend-resume-features)
-  - [3.挂起任务调度器vTaskSuspendAll](#suspend-scheduler-vtasksuspendall)
-  - [4.恢复任务调度器xTaskResumeAll](#resume-scheduler-xtaskresumeall)
-&lt;/details&gt;
+    return (true_positives + smooth) / (actual_positives + smooth)
+```
 
-&lt;details&gt;
-&lt;summary&gt;8.freertos的列表和列表项&lt;/summary&gt;
 
-- [8.freertos的列表和列表项](#freertos-lists-and-items)
-  - [一.列表和列表项的简介](#list-and-item-intro)
-    - [1.什么是列表](#what-is-list)
-    - [2.什么是列表项](#what-is-list-item)
-    - [3.列表和列表项的关系](#list-and-item-relationship)
-    - [4.列表链表和数组的区别](#list-vs-array)
-    - [5.OS中为什么使用列表](#why-use-lists-in-os)
-    - [6.列表结构体介绍](#list-structure-intro)
-    - [7.列表项结构体介绍](#list-item-structure-intro)
-    - [8.迷你列表项](#mini-list-item)
-    - [9.列表和列表项关系事例](#list-and-item-example)
-  - [二.列表相关的API函数介绍](#list-related-api-intro)
-    - [1.列表API函数](#list-api-functions)
-    - [2.初始化列表函数vListInitialise](#init-list-vlistinitialise)
-    - [3.初始化列表项函数vListInitialiseItem](#init-list-item-vlistinitialiseitem)
-    - [4.列表插入列表项函数vListInsert](#insert-list-vlistinsert)
-    - [5.列表末尾插入列表项vListInsertEnd](#insert-end-vlistinsertend)
-    - [6.列表项移除函数uxListRemove](#remove-list-uxlistremove)
-&lt;/details&gt;
+utils.py
+```
+import argparse
 
-&lt;details&gt;
-&lt;summary&gt;9.freertos任务调度&lt;/summary&gt;
 
-- [9.freertos任务调度](#freertos-task-scheduling)
-  - [一.开启任务调度器熟悉](#start-scheduler-overview)
-    - [1.开启任务调度器函数vTaskStartScheduler](#start-scheduler-vtaskstartscheduler)
-    - [2.配置硬件架构及启动第一个任务函数xPortStartScheduler](#config-hardware-xportstartscheduler)
-    - [3.SysTick滴答定时器](#systick-timer)
-    - [4.堆和栈的地址生长方向](#heap-stack-growth)
-    - [5.压栈和出栈的地址增长方向](#stack-push-pop-direction)
-    - [6.知识补充](#knowledge-supplement)
-  - [二.启动第一个任务熟悉](#start-first-task-overview)
-    - [1.启动第一个任务涉及的关键函数](#start-first-task-key-functions)
-    - [2.想象一下应该如何启动第一个任务](#how-to-start-first-task)
-    - [3.prvStartFirstTask 介绍](#prvstartfirsttask-intro)
-    - [4.什么是MSP指针](#what-is-msp-pointer)
-    - [5.为什么汇编代码要PRESERVE8八字节对齐](#why-preserve8-alignment)
-    - [6.prvStartFirstTask为什么要操作0XE00ED08](#prvstartfirsttask-0xe00ed08)
-    - [7.vPortSVCHandle介绍](#vportsvchandle-intro)
-    - [8.出栈压栈汇编指令详解](#stack-instruction-details)
-  - [三.任务切换掌握](#task-switching-mastery)
-    - [1.任务切换的本质](#task-switching-essence)
-    - [2.任务切换过程](#task-switching-process)
-    - [3.PendSV中断是如何触发的](#pendsv-trigger)
-    - [4.在PendSV中断中PSP和MSP](#pendsv-psp-msp)
-    - [5.查找最高优先级任务](#find-highest-priority-task)
-    - [6.前导置零指令](#leading-zero-instruction)
-&lt;/details&gt;
+def str2bool(v):
+    if v.lower() in ['true', 1]:
+        return True
+    elif v.lower() in ['false', 0]:
+        return False
+    else:
+        raise argparse.ArgumentTypeError('Boolean value expected.')
 
-&lt;details&gt;
-&lt;summary&gt;10.FreeRTOS时间片轮询&lt;/summary&gt;
 
-- [10.FreeRTOS时间片轮询](#freertos-timeslice-polling)
-  - [一.时间片轮询简介](#timeslice-polling-intro)
-&lt;/details&gt;
+def count_params(model):
+    return sum(p.numel() for p in model.parameters() if p.requires_grad)
 
----
 
-## &lt;a id='freertos'&gt;&lt;/a&gt;FreeRTOS
+class AverageMeter(object):
+    """Computes and stores the average and current value"""
 
-## &lt;a id='overview'&gt;&lt;/a&gt;概述
+    def __init__(self):
+        self.reset()
 
-随着产品实现的功能越来越多，单纯的裸机系统已经不能完美的解决问题了，反而会使程序边的更加复杂，如果想降低编程的难度，我们可以考虑引入RTOS实现多任务管理。</description><guid isPermaLink="true">https://Aloner63.github.io/post/FreeRTOS_1.html</guid><pubDate>Sun, 02 Mar 2025 09:16:59 +0000</pubDate></item><item><title>vscode运行c++</title><link>https://Aloner63.github.io/post/vscode-yun-xing-c%2B%2B.html</link><description>#### vscode运行c++
+    def reset(self):
+        self.val = 0
+        self.avg = 0
+        self.sum = 0
+        self.count = 0
 
-###### 在c++的编译中，g++，gdb，gcc都是什么？
+    def update(self, val, n=1):
+        self.val = val
+        self.sum += val * n
+        self.count += n
+        self.avg = self.sum / self.count
+```
 
-**GCC (GNU Compiler Collection)**，这是GNU项目的编译器集合，最初是'GNU C Compiler'的缩写，现在支持多种编程语言，**主要用于编译C语言程序**，命令格式：gcc source.c -o output
 
-**G++ (GNU C++ Compiler)**是GCC的一部分，**专门用于编译C++程序**，会自动链接C++标准库，将.cpp文件视为C++源代码（而gcc默认将其视为C文件），命令格式：g++ source.cpp -o output
+CBAM.py
+```
+import numpy as np
+import torch
+from torch import nn
+from torch.nn import init
 
-**GDB (GNU Debugger)**是GNU项目的调试器，用于程序调试，可以：（设置断点，单步执行，查看变量值，查看调用栈，监控变量变化）命令格式：gdb ./program
 
-GNU项目（GNU Project）是一个非常重要的自由软件运动。</description><guid isPermaLink="true">https://Aloner63.github.io/post/vscode-yun-xing-c%2B%2B.html</guid><pubDate>Tue, 11 Feb 2025 10:42:18 +0000</pubDate></item><item><title>esp8266连接私有服务器</title><link>https://Aloner63.github.io/post/esp8266-lian-jie-si-you-fu-wu-qi.html</link><description>ESP-01S 基本参数&#13;
-![img](https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/222a8a308874efa976dbd68125140a57.png)&#13;
-&#13;
-![img](https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/ab7b3ba25b06f9e259135eb4b087300d.png)&#13;
-&#13;
-环境：win11 ，Arduous版本2.3.4   ， ESP01S ，USB to TTL&#13;
-&#13;
-1，安装好Arduous IDE（这个没什么好说的，修改一下安装路径。</description><guid isPermaLink="true">https://Aloner63.github.io/post/esp8266-lian-jie-si-you-fu-wu-qi.html</guid><pubDate>Thu, 02 Jan 2025 14:21:57 +0000</pubDate></item><item><title>I2C</title><link>https://Aloner63.github.io/post/I2C.html</link><description>I2C 是一种串行通信协议。</description><guid isPermaLink="true">https://Aloner63.github.io/post/I2C.html</guid><pubDate>Thu, 02 Jan 2025 13:09:09 +0000</pubDate></item><item><title>打包python</title><link>https://Aloner63.github.io/post/da-bao-python.html</link><description>##### 将python打包成可执行exe
 
-将python打包的方式大概分为2种，其中每一种都可以简单打包和压缩打包（压缩打包就是构件单独的环境，将项目不需要的包隔离出去）
+class ChannelAttention(nn.Module):
+    def __init__(self,channel,reduction=16):
+        super().__init__()
+        self.maxpool=nn.AdaptiveMaxPool2d(1)
+        self.avgpool=nn.AdaptiveAvgPool2d(1)
+        self.se=nn.Sequential(
+            nn.Conv2d(channel,channel//reduction,1,bias=False),
+            nn.ReLU(),
+            nn.Conv2d(channel//reduction,channel,1,bias=False)
+        )
+        self.sigmoid=nn.Sigmoid()
+    
+    def forward(self, x) :
+        max_result=self.maxpool(x)
+        avg_result=self.avgpool(x)
+        max_out=self.se(max_result)
+        avg_out=self.se(avg_result)
+        output=self.sigmoid(max_out+avg_out)
+        return output
 
-1. 单个文件的打包
-2. 多个文件的打包（当面对一个大项目的时候，为了方便维护，通常将代码分到不同的文件中。</description><guid isPermaLink="true">https://Aloner63.github.io/post/da-bao-python.html</guid><pubDate>Thu, 02 Jan 2025 07:59:57 +0000</pubDate></item><item><title>websocket</title><link>https://Aloner63.github.io/post/websocket.html</link><description>&lt;html&gt;&lt;body&gt;&#13;
-&lt;!--StartFragment--&gt;&lt;p&gt;WebSocket 是一种网络通信协议，旨在通过持久的、全双工（双向）通信连接实现实时数据交换。</description><guid isPermaLink="true">https://Aloner63.github.io/post/websocket.html</guid><pubDate>Mon, 11 Nov 2024 13:15:01 +0000</pubDate></item><item><title>关于github克隆仓库出错问题</title><link>https://Aloner63.github.io/post/guan-yu-github-ke-long-cang-ku-chu-cuo-wen-ti.html</link><description>使用 git clone 下载 Github 等网站的仓库时，可能会遇到类似 'Recv failure: Connection was reset' 或 'Failed to connect to http://github.com port 443 after 21114 ms: Couldn't connect to server' 的报错。</description><guid isPermaLink="true">https://Aloner63.github.io/post/guan-yu-github-ke-long-cang-ku-chu-cuo-wen-ti.html</guid><pubDate>Sun, 27 Oct 2024 12:33:21 +0000</pubDate></item><item><title>CDN和反向代理浅解</title><link>https://Aloner63.github.io/post/CDN-he-fan-xiang-dai-li-qian-jie.html</link><description>#### CDN&#13;
-&#13;
-CDN的全称为“Content Delivery Network”，及，内容分发网络。</description><guid isPermaLink="true">https://Aloner63.github.io/post/CDN-he-fan-xiang-dai-li-qian-jie.html</guid><pubDate>Wed, 23 Oct 2024 12:54:57 +0000</pubDate></item><item><title>apache反向代理（并启用https）</title><link>https://Aloner63.github.io/post/apache-fan-xiang-dai-li-%EF%BC%88-bing-qi-yong-https%EF%BC%89.html</link><description>&#13;
-&#13;
-```&#13;
-2024/11/15 更新&#13;
-&#13;
-可以使用cloudfare启用https(较为简单，更新后的DNS可能需要1天到两天更新。</description><guid isPermaLink="true">https://Aloner63.github.io/post/apache-fan-xiang-dai-li-%EF%BC%88-bing-qi-yong-https%EF%BC%89.html</guid><pubDate>Tue, 22 Oct 2024 03:26:05 +0000</pubDate></item><item><title>ubuntu笔记</title><link>https://Aloner63.github.io/post/ubuntu-bi-ji.html</link><description>ubuntu笔记&#13;
-&#13;
-**一切皆文件**&#13;
-&#13;
-不同颜色代表不同类型的文件&#13;
-&#13;
-- `蓝色`：目录&#13;
-- `绿色`：可执行文件&#13;
-- `白色`：一般性文件，如文本文件，配置文件等&#13;
-- `红色`：压缩文件或归档文件&#13;
-- `浅蓝色`：链接文件&#13;
-- 红色闪烁：链接文件存在问题&#13;
-- 黄色：设备文件&#13;
-- 青黄色：管道文件&#13;
-&#13;
-##### 终端命令格式&#13;
-&#13;
-```&#13;
-command 	[-options]	[parameter]&#13;
-```&#13;
-&#13;
-##### 查阅命令的使用手册&#13;
-&#13;
-```&#13;
-command	--help&#13;
-```&#13;
-&#13;
-##### 自动补全&#13;
-&#13;
-在敲出 文件/目录/命令 的前几个字母后，按下tab键&#13;
-&#13;
-- 如果输入没有歧义，则系统自动补全&#13;
-- 如果存在相似名称，再按一下`tab`键，系统会提示可能存在的命令&#13;
-&#13;
-##### 曾经使用过的命令&#13;
-&#13;
-- 按 上/下 光标键切换&#13;
-- 使用`ctrl+c`退出选择，另起一行&#13;
-&#13;
-&#13;
-&#13;
-&#13;
-&#13;
-##### 6个常用的终端命令&#13;
-&#13;
-```&#13;
-ls：（list）查看当前文件夹下的内容&#13;
-&#13;
-pwd：（print work directoy）查看当前所在文件夹&#13;
-&#13;
-cd：（change directoy）移动到摸一个指定文件夹&#13;
-&#13;
-touch：（touch）如果文件不存在，新建文件&#13;
-&#13;
-mkdir：（make dirctory）创建目录&#13;
-&#13;
-rm：（remove）删除指定文件名&#13;
-&#13;
-clear：（clear）清屏&#13;
-```&#13;
-&#13;
-&#13;
-&#13;
-```&#13;
-ctrl+shift+=：放大终端窗口的字体&#13;
-&#13;
-ctrl+-：缩小&#13;
-```&#13;
-&#13;
-&#13;
-&#13;
-##### ls命令&#13;
-&#13;
-```&#13;
-ls       # 仅列出当前目录可见文件&#13;
-ls -l    # 列出当前目录可见文件详细信息&#13;
-ls -hl   # 列出详细信息并以可读大小显示文件大小&#13;
-ls -al   # 列出所有文件（包括隐藏）的详细信息&#13;
-ls --human-readable --size -1 -S --classify # 按文件大小排序&#13;
-du -sh * | sort -h # 按文件大小排序(同上)&#13;
-```&#13;
-&#13;
-&#13;
-&#13;
-##### cd命令&#13;
-&#13;
-```&#13;
-cd    # 进入用户主目录；&#13;
-cd /  # 进入根目录&#13;
-cd ~  # 进入用户主目录；&#13;
-cd ..  # 返回上级目录（若当前目录为“/“，则执行完后还在“/'；'..'为上级目录的意思）；&#13;
-cd ../..  # 返回上两级目录；&#13;
-cd !$  # 把上个命令的参数作为cd参数使用。</description><guid isPermaLink="true">https://Aloner63.github.io/post/ubuntu-bi-ji.html</guid><pubDate>Thu, 10 Oct 2024 01:20:01 +0000</pubDate></item><item><title>vsode（基于官方文档）配置c/c++环境</title><link>https://Aloner63.github.io/post/vsode%EF%BC%88-ji-yu-guan-fang-wen-dang-%EF%BC%89-pei-zhi-c-c%2B%2B-huan-jing.html</link><description>**从根本上来说，vscode就是一个文本编译器。</description><guid isPermaLink="true">https://Aloner63.github.io/post/vsode%EF%BC%88-ji-yu-guan-fang-wen-dang-%EF%BC%89-pei-zhi-c-c%2B%2B-huan-jing.html</guid><pubDate>Wed, 09 Oct 2024 11:23:08 +0000</pubDate></item><item><title>git的使用</title><link>https://Aloner63.github.io/post/git-de-shi-yong.html</link><description>### git&#13;
-&#13;
-所有的版本控制系统，其实只能跟踪文本文件的改动，比如TXT文件，网页，所有的程序代码等等，Git也不例外。</description><guid isPermaLink="true">https://Aloner63.github.io/post/git-de-shi-yong.html</guid><pubDate>Thu, 26 Sep 2024 03:14:01 +0000</pubDate></item><item><title>OSI 7层网络模型</title><link>https://Aloner63.github.io/post/OSI%207-ceng-wang-luo-mo-xing.html</link><description>1，OSI 7层网络模型&#13;
-  OSI（Open System Interconnect）七层模型是一种将计算机网络通信协议划分为七个不同层次的标准化框架。</description><guid isPermaLink="true">https://Aloner63.github.io/post/OSI%207-ceng-wang-luo-mo-xing.html</guid><pubDate>Thu, 12 Sep 2024 05:16:24 +0000</pubDate></item><item><title>为什么要用Docker？</title><link>https://Aloner63.github.io/post/wei-shen-me-yao-yong-Docker%EF%BC%9F.html</link><description>一个软件，从诞生到正常使用，需要经过跟多步骤。</description><guid isPermaLink="true">https://Aloner63.github.io/post/wei-shen-me-yao-yong-Docker%EF%BC%9F.html</guid><pubDate>Tue, 03 Sep 2024 06:59:59 +0000</pubDate></item><item><title>自建vpn</title><link>https://Aloner63.github.io/post/zi-jian-vpn.html</link><description>第一步：获取vps服务器。</description><guid isPermaLink="true">https://Aloner63.github.io/post/zi-jian-vpn.html</guid><pubDate>Thu, 22 Aug 2024 04:32:39 +0000</pubDate></item><item><title>IP相关知识点，TCP/IP知识点</title><link>https://Aloner63.github.io/post/IP-xiang-guan-zhi-shi-dian-%EF%BC%8CTCP-IP-zhi-shi-dian.html</link><description>IP地址的分类系统（A类、B类、C类、D类和E类）用于简化互联网中的地址分配。</description><guid isPermaLink="true">https://Aloner63.github.io/post/IP-xiang-guan-zhi-shi-dian-%EF%BC%8CTCP-IP-zhi-shi-dian.html</guid><pubDate>Sat, 13 Jul 2024 07:51:30 +0000</pubDate></item><item><title>计算机网络基础知识</title><link>https://Aloner63.github.io/post/ji-suan-ji-wang-luo-ji-chu-zhi-shi.html</link><description>国际标准化组织（ISO）在1978年提出了'开放系统互联参考模型'，即著名的OSI/RM模型（Open System Interconnection/Reference Model）。</description><guid isPermaLink="true">https://Aloner63.github.io/post/ji-suan-ji-wang-luo-ji-chu-zhi-shi.html</guid><pubDate>Sat, 13 Jul 2024 05:10:18 +0000</pubDate></item></channel></rss>
+class SpatialAttention(nn.Module):
+    def __init__(self,kernel_size=7):
+        super().__init__()
+        self.conv=nn.Conv2d(2,1,kernel_size=kernel_size,padding=kernel_size//2)
+        self.sigmoid=nn.Sigmoid()
+    
+    def forward(self, x) :
+        max_result,_=torch.max(x,dim=1,keepdim=True)
+        avg_result=torch.mean(x,dim=1,keepdim=True)
+        result=torch.cat([max_result,avg_result],1)
+        output=self.conv(result)
+        output=self.sigmoid(output)
+        return output
+
+
+
+class CBAMBlock(nn.Module):
+
+    def __init__(self, channel=512,reduction=16,kernel_size=49):
+        super().__init__()
+        self.ca=ChannelAttention(channel=channel,reduction=reduction)
+        self.sa=SpatialAttention(kernel_size=kernel_size)
+
+
+    def init_weights(self):
+        for m in self.modules():
+            if isinstance(m, nn.Conv2d):
+                init.kaiming_normal_(m.weight, mode='fan_out')
+                if m.bias is not None:
+                    init.constant_(m.bias, 0)
+            elif isinstance(m, nn.BatchNorm2d):
+                init.constant_(m.weight, 1)
+                init.constant_(m.bias, 0)
+            elif isinstance(m, nn.Linear):
+                init.normal_(m.weight, std=0.001)
+                if m.bias is not None:
+                    init.constant_(m.bias, 0)
+
+    def forward(self, x):
+        b, c, _, _ = x.size()
+        residual=x
+        out=x*self.ca(x)
+        out=out*self.sa(out)
+        return out+residual
+
+
+if __name__ == '__main__':
+    input=torch.randn(50,512,7,7)
+    kernel_size=input.shape[2]
+    cbam = CBAMBlock(channel=512,reduction=16,kernel_size=kernel_size)
+    output=cbam(input)
+    print(output.shape)
+```
+
+    
