@@ -63,7 +63,7 @@ UBaseType_t  uxTaskPriorityGet(  const TaskHandle_t xTask  )
 <meta property="og:url" content="https://Aloner63.github.io/post/FreeRTOS_2.html">
 <meta property="og:image" content="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/1340761045.jpeg">
 <title>FreeRTOS_2</title>
-
+<link href="//unpkg.com/@wooorm/starry-night@2.1.1/style/both.css" rel="stylesheet" />
 
 
 </head>
@@ -87,7 +87,17 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
     body {padding: 8px;}
     .postTitle{font-size:24px;}
 }
-
+.copy-feedback {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 50px;
+    color: var(--color-fg-on-emphasis);
+    background-color: var(--color-fg-muted);
+    border-radius: 3px;
+    padding: 5px 8px;
+    font-size: 12px;
+}
 </style>
 
 
@@ -128,8 +138,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <h3>二、任务状态查询API函数</h3>
 <h4>1、获取任务优先级函数</h4>
 <p>答：</p>
-<pre lang="C" class="notranslate"><code class="notranslate">UBaseType_t  uxTaskPriorityGet(  const TaskHandle_t xTask  )
-</code></pre>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-smi">UBaseType_t</span>  <span class="pl-en">uxTaskPriorityGet</span>(  <span class="pl-k">const</span> <span class="pl-smi">TaskHandle_t</span> <span class="pl-s1">xTask</span>  )</pre></div>
 <p>此函数用于获取指定任务的任务优先级，使用该函数需要将宏 INCLUDE_uxTaskPriorityGet 置1。</p>
 <p>函数参数：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E8%8E%B7%E5%8F%96%E4%BB%BB%E5%8A%A1%E4%BC%98%E5%85%88%E7%BA%A7%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E8%8E%B7%E5%8F%96%E4%BB%BB%E5%8A%A1%E4%BC%98%E5%85%88%E7%BA%A7%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png" alt="" style="max-width: 100%;"></a></p>
@@ -137,83 +146,74 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E8%8E%B7%E5%8F%96%E4%BB%BB%E5%8A%A1%E4%BC%98%E5%85%88%E7%BA%A7%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E8%8E%B7%E5%8F%96%E4%BB%BB%E5%8A%A1%E4%BC%98%E5%85%88%E7%BA%A7%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png" alt="" style="max-width: 100%;"></a></p>
 <h4>2、修改任务优先级函数</h4>
 <p>答：</p>
-<pre lang="c" class="notranslate"><code class="notranslate">void vTaskPrioritySet( TaskHandle_t xTask , UBaseType_t uxNewPriority )
-</code></pre>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-smi">void</span> <span class="pl-en">vTaskPrioritySet</span>( <span class="pl-smi">TaskHandle_t</span> <span class="pl-s1">xTask</span> , <span class="pl-smi">UBaseType_t</span> <span class="pl-s1">uxNewPriority</span> )</pre></div>
 <p>此函数用于改变某个任务的任务优先级，使用该函数需将宏 INCLUDE_vTaskPrioritySet 为 1 。</p>
 <p>函数参数：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BF%AE%E6%94%B9%E4%BB%BB%E5%8A%A1%E4%BC%98%E5%85%88%E7%BA%A7%E5%87%BD%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BF%AE%E6%94%B9%E4%BB%BB%E5%8A%A1%E4%BC%98%E5%85%88%E7%BA%A7%E5%87%BD%E6%95%B0.png" alt="" style="max-width: 100%;"></a></p>
 <h4>3、获取系统任务数量函数</h4>
 <p>答：</p>
-<pre lang="c" class="notranslate"><code class="notranslate">UBaseType_t   uxTaskGetNumberOfTasks( void )
-</code></pre>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-smi">UBaseType_t</span>   <span class="pl-en">uxTaskGetNumberOfTasks</span>( <span class="pl-smi">void</span> )</pre></div>
 <p>此函数用于获取系统中任务的任务数量。</p>
 <p>函数返回值：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E8%8E%B7%E5%8F%96%E7%B3%BB%E7%BB%9F%E4%BB%BB%E5%8A%A1%E6%95%B0%E9%87%8F%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E8%8E%B7%E5%8F%96%E7%B3%BB%E7%BB%9F%E4%BB%BB%E5%8A%A1%E6%95%B0%E9%87%8F%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png" alt="" style="max-width: 100%;"></a></p>
 <h4>4、获取系统中所有任务状态信息函数</h4>
 <p>答：</p>
-<pre lang="C" class="notranslate"><code class="notranslate">UBaseType_t   uxTaskGetSystemState(   TaskStatus_t * const pxTaskStatusArray,
-                                      const UBaseType_t uxArraySize,
-                                      configRUN_TIME_COUNTER_TYPE * const pulTotalRunTime   )
-</code></pre>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-smi">UBaseType_t</span>   <span class="pl-en">uxTaskGetSystemState</span>(   <span class="pl-smi">TaskStatus_t</span> <span class="pl-c1">*</span> <span class="pl-k">const</span> <span class="pl-s1">pxTaskStatusArray</span>,
+                                      <span class="pl-k">const</span> <span class="pl-smi">UBaseType_t</span> <span class="pl-s1">uxArraySize</span>,
+                                      <span class="pl-smi">configRUN_TIME_COUNTER_TYPE</span> <span class="pl-c1">*</span> <span class="pl-k">const</span> <span class="pl-s1">pulTotalRunTime</span>   )</pre></div>
 <p>此函数用于获取系统中所有任务的任务状态信息，使用该函数需将宏 configUSE_TRACE_FACILITY 置 1。</p>
 <p>函数参数：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E8%8E%B7%E5%8F%96%E7%B3%BB%E7%BB%9F%E4%B8%AD%E6%89%80%E6%9C%89%E4%BB%BB%E5%8A%A1%E7%8A%B6%E6%80%81%E4%BF%A1%E6%81%AF%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E8%8E%B7%E5%8F%96%E7%B3%BB%E7%BB%9F%E4%B8%AD%E6%89%80%E6%9C%89%E4%BB%BB%E5%8A%A1%E7%8A%B6%E6%80%81%E4%BF%A1%E6%81%AF%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png" alt="" style="max-width: 100%;"></a></p>
 <p>函数返回值：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E8%8E%B7%E5%8F%96%E7%B3%BB%E7%BB%9F%E4%B8%AD%E6%89%80%E6%9C%89%E4%BB%BB%E5%8A%A1%E7%8A%B6%E6%80%81%E4%BF%A1%E6%81%AF%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E8%8E%B7%E5%8F%96%E7%B3%BB%E7%BB%9F%E4%B8%AD%E6%89%80%E6%9C%89%E4%BB%BB%E5%8A%A1%E7%8A%B6%E6%80%81%E4%BF%A1%E6%81%AF%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png" alt="" style="max-width: 100%;"></a></p>
 <p>参数成员pxTaskStatusArray的结构体：</p>
-<pre lang="C" class="notranslate"><code class="notranslate">typedef struct xTASK_STATUS
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-k">typedef</span> <span class="pl-k">struct</span> <span class="pl-smi">xTASK_STATUS</span>
 {
-    TaskHandle_t                   xHandle;                     /* 任务句柄 */ 
-    const char *                   pcTaskName;                  /* 任务名 */
-    UBaseType_t                    xTaskNumber;                 /* 任务编号 */
-    eTaskStatee                    CurrentState;                /* 任务状态 */
-    UBaseType_t                    uxCurrentPriority;           /* 任务优先级 */
-    UBaseType_t                    uxBasePriority;              /* 任务原始优先级*/
-    configRUN_TIME_COUNTER_TYPE    ulRunTimeCounter;            /* 任务运行时间*/
-    StackType_t *                  pxStackBase;                 /* 任务栈基地址 */
-    configSTACK_DEPTH_TYPE         usStackHighWaterMark;        /* 任务栈历史剩余最小值 */
-} TaskStatus_t;
-</code></pre>
+    <span class="pl-smi">TaskHandle_t</span>                   <span class="pl-c1">xHandle</span>;                     <span class="pl-c">/* 任务句柄 */</span> 
+    <span class="pl-k">const</span> <span class="pl-smi">char</span> <span class="pl-c1">*</span>                   <span class="pl-c1">pcTaskName</span>;                  <span class="pl-c">/* 任务名 */</span>
+    <span class="pl-smi">UBaseType_t</span>                    <span class="pl-c1">xTaskNumber</span>;                 <span class="pl-c">/* 任务编号 */</span>
+    <span class="pl-smi">eTaskStatee</span>                    <span class="pl-c1">CurrentState</span>;                <span class="pl-c">/* 任务状态 */</span>
+    <span class="pl-smi">UBaseType_t</span>                    <span class="pl-c1">uxCurrentPriority</span>;           <span class="pl-c">/* 任务优先级 */</span>
+    <span class="pl-smi">UBaseType_t</span>                    <span class="pl-c1">uxBasePriority</span>;              <span class="pl-c">/* 任务原始优先级*/</span>
+    <span class="pl-smi">configRUN_TIME_COUNTER_TYPE</span>    <span class="pl-c1">ulRunTimeCounter</span>;            <span class="pl-c">/* 任务运行时间*/</span>
+    <span class="pl-smi">StackType_t</span> <span class="pl-c1">*</span>                  <span class="pl-c1">pxStackBase</span>;                 <span class="pl-c">/* 任务栈基地址 */</span>
+    <span class="pl-smi">configSTACK_DEPTH_TYPE</span>         <span class="pl-c1">usStackHighWaterMark</span>;        <span class="pl-c">/* 任务栈历史剩余最小值 */</span>
+} <span class="pl-smi">TaskStatus_t</span>;</pre></div>
 <h4>5、获取系统中单个任务状态信息函数</h4>
 <p>答：</p>
-<pre lang="c" class="notranslate"><code class="notranslate">void vTaskGetInfo(  TaskHandle_t     xTask,
-                    TaskStatus_t *   pxTaskStatus,
-                    BaseType_t       xGetFreeStackSpace,
-                    eTaskState       eState  )  
-</code></pre>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-smi">void</span> <span class="pl-en">vTaskGetInfo</span>(  <span class="pl-smi">TaskHandle_t</span>     <span class="pl-s1">xTask</span>,
+                    <span class="pl-smi">TaskStatus_t</span> <span class="pl-c1">*</span>   <span class="pl-s1">pxTaskStatus</span>,
+                    <span class="pl-smi">BaseType_t</span>       <span class="pl-s1">xGetFreeStackSpace</span>,
+                    <span class="pl-smi">eTaskState</span>       <span class="pl-s1">eState</span>  )  </pre></div>
 <p>此函数用于获取指定的单个任务的状态信息，使用该函数需将宏 configUSE_TRACE_FACILITY 置 1</p>
 <p>函数参数：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E8%8E%B7%E5%8F%96%E7%B3%BB%E7%BB%9F%E4%B8%AD%E5%8D%95%E4%B8%AA%E4%BB%BB%E5%8A%A1%E7%8A%B6%E6%80%81%E4%BF%A1%E6%81%AF%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E8%8E%B7%E5%8F%96%E7%B3%BB%E7%BB%9F%E4%B8%AD%E5%8D%95%E4%B8%AA%E4%BB%BB%E5%8A%A1%E7%8A%B6%E6%80%81%E4%BF%A1%E6%81%AF%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png" alt="" style="max-width: 100%;"></a></p>
 <p>参数成员eState的结构体：</p>
-<pre lang="C" class="notranslate"><code class="notranslate">typedef enum
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-k">typedef</span> <span class="pl-k">enum</span>
 {
-    eRunning = 0,       /* 运行态 */
-    eReady,             /* 就绪态 */
-    eBlocked,           /* 阻塞态 */
-    eSuspended,         /* 挂起态 */
-    eDeleted,           /* 任务被删除 */
-    eInvalid            /* 无效 */ 
-} eTaskState;
-</code></pre>
+    <span class="pl-s1">eRunning</span> <span class="pl-c1">=</span> <span class="pl-c1">0</span>,       <span class="pl-c">/* 运行态 */</span>
+    <span class="pl-s1">eReady</span>,             <span class="pl-c">/* 就绪态 */</span>
+    <span class="pl-s1">eBlocked</span>,           <span class="pl-c">/* 阻塞态 */</span>
+    <span class="pl-s1">eSuspended</span>,         <span class="pl-c">/* 挂起态 */</span>
+    <span class="pl-s1">eDeleted</span>,           <span class="pl-c">/* 任务被删除 */</span>
+    <span class="pl-s1">eInvalid</span>            <span class="pl-c">/* 无效 */</span> 
+} <span class="pl-smi">eTaskState</span>;</pre></div>
 <h4>6、获取当前任务的任务句柄函数</h4>
 <p>答：</p>
-<pre lang="c" class="notranslate"><code class="notranslate">TaskHandle_t    xTaskGetCurrentTaskHandle( void )
-</code></pre>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-smi">TaskHandle_t</span>    <span class="pl-en">xTaskGetCurrentTaskHandle</span>( <span class="pl-smi">void</span> )</pre></div>
 <p>此函数用于获取当前任务的任务句柄， 使用该函数需将宏 INCLUDE_xTaskGetCurrentTaskHandle 置 1。</p>
 <p>函数返回值：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8D%E4%BB%BB%E5%8A%A1%E7%9A%84%E4%BB%BB%E5%8A%A1%E5%8F%A5%E6%9F%84%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E8%8E%B7%E5%8F%96%E5%BD%93%E5%89%8D%E4%BB%BB%E5%8A%A1%E7%9A%84%E4%BB%BB%E5%8A%A1%E5%8F%A5%E6%9F%84%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png" alt="" style="max-width: 100%;"></a></p>
 <h4>7、通过任务名获取任务句柄函数</h4>
 <p>答：</p>
-<pre lang="c" class="notranslate"><code class="notranslate">TaskHandle_t xTaskGetHandle(const char * pcNameToQuery); 
-</code></pre>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-smi">TaskHandle_t</span> <span class="pl-en">xTaskGetHandle</span>(<span class="pl-k">const</span> <span class="pl-smi">char</span> <span class="pl-c1">*</span> <span class="pl-s1">pcNameToQuery</span>); </pre></div>
 <p>此函数用于通过任务名获取任务句柄 ， 使用该函数需将宏 INCLUDE_xTaskGetHandle 置 1。</p>
 <p>函数参数：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E9%80%9A%E8%BF%87%E4%BB%BB%E5%8A%A1%E5%90%8D%E8%8E%B7%E5%8F%96%E4%BB%BB%E5%8A%A1%E5%8F%A5%E6%9F%84%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E9%80%9A%E8%BF%87%E4%BB%BB%E5%8A%A1%E5%90%8D%E8%8E%B7%E5%8F%96%E4%BB%BB%E5%8A%A1%E5%8F%A5%E6%9F%84%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png" alt="" style="max-width: 100%;"></a></p>
 <p>函数返回值：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E9%80%9A%E8%BF%87%E4%BB%BB%E5%8A%A1%E5%90%8D%E8%8E%B7%E5%8F%96%E4%BB%BB%E5%8A%A1%E5%8F%A5%E6%9F%84%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E9%80%9A%E8%BF%87%E4%BB%BB%E5%8A%A1%E5%90%8D%E8%8E%B7%E5%8F%96%E4%BB%BB%E5%8A%A1%E5%8F%A5%E6%9F%84%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png" alt="" style="max-width: 100%;"></a></p>
 <h4>8、获取指定任务的任务堆栈历史最小剩余函数</h4>
-<pre lang="c" class="notranslate"><code class="notranslate">UBaseType_t    uxTaskGetStackHighWaterMark( TaskHandle_t  xTask )
-</code></pre>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-smi">UBaseType_t</span>    <span class="pl-en">uxTaskGetStackHighWaterMark</span>( <span class="pl-smi">TaskHandle_t</span>  <span class="pl-s1">xTask</span> )</pre></div>
 <p>此函数用于获取指定任务的任务栈历史最小剩余堆栈；使用该函数需将宏 INCLUDE_uxTaskGetStackHighWaterMark 置 1。</p>
 <p>函数参数：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E8%8E%B7%E5%8F%96%E6%8C%87%E5%AE%9A%E4%BB%BB%E5%8A%A1%E7%9A%84%E4%BB%BB%E5%8A%A1%E5%A0%86%E6%A0%88%E5%8E%86%E5%8F%B2%E6%9C%80%E5%B0%8F%E5%89%A9%E4%BD%99%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E8%8E%B7%E5%8F%96%E6%8C%87%E5%AE%9A%E4%BB%BB%E5%8A%A1%E7%9A%84%E4%BB%BB%E5%8A%A1%E5%A0%86%E6%A0%88%E5%8E%86%E5%8F%B2%E6%9C%80%E5%B0%8F%E5%89%A9%E4%BD%99%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png" alt="" style="max-width: 100%;"></a></p>
@@ -221,28 +221,25 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E8%8E%B7%E5%8F%96%E6%8C%87%E5%AE%9A%E4%BB%BB%E5%8A%A1%E7%9A%84%E4%BB%BB%E5%8A%A1%E5%A0%86%E6%A0%88%E5%8E%86%E5%8F%B2%E6%9C%80%E5%B0%8F%E5%89%A9%E4%BD%99%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E8%8E%B7%E5%8F%96%E6%8C%87%E5%AE%9A%E4%BB%BB%E5%8A%A1%E7%9A%84%E4%BB%BB%E5%8A%A1%E5%A0%86%E6%A0%88%E5%8E%86%E5%8F%B2%E6%9C%80%E5%B0%8F%E5%89%A9%E4%BD%99%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png" alt="" style="max-width: 100%;"></a></p>
 <h4>9、查询指定任务运行状态函数</h4>
 <p>答：</p>
-<pre lang="c" class="notranslate"><code class="notranslate">eTaskState    eTaskGetState(TaskHandle_t xTask)
-</code></pre>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-smi">eTaskState</span>    <span class="pl-en">eTaskGetState</span>(<span class="pl-smi">TaskHandle_t</span> <span class="pl-s1">xTask</span>)</pre></div>
 <p>此函数用于查询某个任务的运行状态，使用此函数需将宏 INCLUDE_eTaskGetState 置1</p>
 <p>函数参数：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E6%9F%A5%E8%AF%A2%E6%8C%87%E5%AE%9A%E4%BB%BB%E5%8A%A1%E8%BF%90%E8%A1%8C%E7%8A%B6%E6%80%81%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E6%9F%A5%E8%AF%A2%E6%8C%87%E5%AE%9A%E4%BB%BB%E5%8A%A1%E8%BF%90%E8%A1%8C%E7%8A%B6%E6%80%81%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png" alt="" style="max-width: 100%;"></a></p>
 <p>函数返回值：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E6%9F%A5%E8%AF%A2%E6%8C%87%E5%AE%9A%E4%BB%BB%E5%8A%A1%E8%BF%90%E8%A1%8C%E7%8A%B6%E6%80%81%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E6%9F%A5%E8%AF%A2%E6%8C%87%E5%AE%9A%E4%BB%BB%E5%8A%A1%E8%BF%90%E8%A1%8C%E7%8A%B6%E6%80%81%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png" alt="" style="max-width: 100%;"></a></p>
 <p>参数成员xTask的结构体：</p>
-<pre lang="c" class="notranslate"><code class="notranslate">typedef enum
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-k">typedef</span> <span class="pl-k">enum</span>
 {
-    eRunning = 0,	/* 运行态 */
-    eReady,         /* 就绪态 */
-    eBlocked,       /* 阻塞态 */
-    eSuspended,     /* 挂起态 */
-    eDeleted,       /* 任务被删除 */
-    eInvalid        /* 无效 */ 
-} eTaskState;
-</code></pre>
+    <span class="pl-s1">eRunning</span> <span class="pl-c1">=</span> <span class="pl-c1">0</span>,	<span class="pl-c">/* 运行态 */</span>
+    <span class="pl-s1">eReady</span>,         <span class="pl-c">/* 就绪态 */</span>
+    <span class="pl-s1">eBlocked</span>,       <span class="pl-c">/* 阻塞态 */</span>
+    <span class="pl-s1">eSuspended</span>,     <span class="pl-c">/* 挂起态 */</span>
+    <span class="pl-s1">eDeleted</span>,       <span class="pl-c">/* 任务被删除 */</span>
+    <span class="pl-s1">eInvalid</span>        <span class="pl-c">/* 无效 */</span> 
+} <span class="pl-smi">eTaskState</span>;</pre></div>
 <h4>10、以“表格”的形式获取系统中任务信息函数</h4>
 <p>答：</p>
-<pre lang="c" class="notranslate"><code class="notranslate">void   vTaskList(char * pcWriteBuffer)
-</code></pre>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-smi">void</span>   <span class="pl-en">vTaskList</span>(<span class="pl-smi">char</span> <span class="pl-c1">*</span> <span class="pl-s1">pcWriteBuffer</span>)</pre></div>
 <p>此函数用于以“表格”的形式获取系统中任务的信息 ；</p>
 <p>使用此函数需将宏 configUSE_TRACE_FACILITY 和configUSE_STATS_FORMATTING_FUNCTIONS 置1 。</p>
 <p>函数参数：</p>
@@ -259,8 +256,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <h3>三、任务时间统计API函数</h3>
 <h4>1、任务时间统计函数</h4>
 <p>答：</p>
-<pre lang="c" class="notranslate"><code class="notranslate">void    vTaskGetRunTimeStats( char * pcWriteBuffer ) 
-</code></pre>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-smi">void</span>    <span class="pl-en">vTaskGetRunTimeStats</span>( <span class="pl-smi">char</span> <span class="pl-c1">*</span> <span class="pl-s1">pcWriteBuffer</span> ) </pre></div>
 <p>此函数用于统计任务的运行时间信息，使用此函数需将宏 configGENERATE_RUN_TIME_STAT 、configUSE_STATS_FORMATTING_FUNCTIONS 置1。</p>
 <p>函数参数：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E6%97%B6%E9%97%B4%E7%BB%9F%E8%AE%A1API%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E6%97%B6%E9%97%B4%E7%BB%9F%E8%AE%A1API%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png" alt="" style="max-width: 100%;"></a></p>
@@ -393,39 +389,36 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <h3>二、队列结构体介绍</h3>
 <h4>1、队列结构体</h4>
 <p>答：</p>
-<pre lang="C" class="notranslate"><code class="notranslate">typedef struct QueueDefinition 
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-k">typedef</span> <span class="pl-k">struct</span> <span class="pl-smi">QueueDefinition</span> 
 {
-    int8_t * pcHead;                       /* 存储区域的起始地址 */
-    int8_t * pcWriteTo;                    /* 下一个写入的位置 */
-    union
+    <span class="pl-smi">int8_t</span> <span class="pl-c1">*</span> <span class="pl-c1">pcHead</span>;                       <span class="pl-c">/* 存储区域的起始地址 */</span>
+    <span class="pl-smi">int8_t</span> <span class="pl-c1">*</span> <span class="pl-c1">pcWriteTo</span>;                    <span class="pl-c">/* 下一个写入的位置 */</span>
+    <span class="pl-k">union</span>
     {
-        QueuePointers_t     xQueue;
-        SemaphoreData_t  xSemaphore; 
-    } u ;
-    List_t xTasksWaitingToSend;             /* 等待发送列表 */
-    List_t xTasksWaitingToReceive;          /* 等待接收列表 */
-    volatile UBaseType_t uxMessagesWaiting; /* 非空闲队列项目的数量 */
-    UBaseType_t uxLength；                  /* 队列长度 */
-    UBaseType_t uxItemSize;                 /* 队列项目的大小 */
-    volatile int8_t cRxLock;                /* 读取上锁计数器 */
-    volatile int8_t cTxLock;                /* 写入上锁计数器 */
-   /* 其他的一些条件编译 */
-} xQUEUE;
-</code></pre>
+        <span class="pl-smi">QueuePointers_t</span>     <span class="pl-c1">xQueue</span>;
+        <span class="pl-smi">SemaphoreData_t</span>  <span class="pl-c1">xSemaphore</span>; 
+    } <span class="pl-c1">u</span> ;
+    <span class="pl-smi">List_t</span> <span class="pl-c1">xTasksWaitingToSend</span>;             <span class="pl-c">/* 等待发送列表 */</span>
+    <span class="pl-smi">List_t</span> <span class="pl-c1">xTasksWaitingToReceive</span>;          <span class="pl-c">/* 等待接收列表 */</span>
+    <span class="pl-k">volatile</span> <span class="pl-smi">UBaseType_t</span> <span class="pl-c1">uxMessagesWaiting</span>; <span class="pl-c">/* 非空闲队列项目的数量 */</span>
+    <span class="pl-smi">UBaseType_t</span> <span class="pl-c1">uxLength</span>；                  <span class="pl-c">/* 队列长度 */</span>
+    <span class="pl-c1">UBaseType_t</span> <span class="pl-smi">uxItemSize</span>;                 <span class="pl-c">/* 队列项目的大小 */</span>
+    <span class="pl-k">volatile</span> <span class="pl-smi">int8_t</span> <span class="pl-c1">cRxLock</span>;                <span class="pl-c">/* 读取上锁计数器 */</span>
+    <span class="pl-k">volatile</span> <span class="pl-smi">int8_t</span> <span class="pl-c1">cTxLock</span>;                <span class="pl-c">/* 写入上锁计数器 */</span>
+   <span class="pl-c">/* 其他的一些条件编译 */</span>
+} <span class="pl-smi">xQUEUE</span>;</pre></div>
 <p>当用于队列使用时：</p>
-<pre lang="C" class="notranslate"><code class="notranslate">typedef struct QueuePointers
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-k">typedef</span> <span class="pl-k">struct</span> <span class="pl-smi">QueuePointers</span>
 {
-    int8_t * pcTail;                 /* 存储区的结束地址 */
-    int8_t * pcReadFrom;             /* 最后一个读取队列的地址 */
-} QueuePointers_t;
-</code></pre>
+    <span class="pl-smi">int8_t</span> <span class="pl-c1">*</span> <span class="pl-c1">pcTail</span>;                 <span class="pl-c">/* 存储区的结束地址 */</span>
+    <span class="pl-smi">int8_t</span> <span class="pl-c1">*</span> <span class="pl-c1">pcReadFrom</span>;             <span class="pl-c">/* 最后一个读取队列的地址 */</span>
+} <span class="pl-smi">QueuePointers_t</span>;</pre></div>
 <p>当用于互斥信号量和递归互斥信号量时：</p>
-<pre lang="c" class="notranslate"><code class="notranslate">typedef struct SemaphoreData
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-k">typedef</span> <span class="pl-k">struct</span> <span class="pl-smi">SemaphoreData</span>
 {
-    TaskHandle_t xMutexHolder;		    /* 互斥信号量持有者 */
-    UBaseType_t uxRecursiveCallCount;	/* 递归互斥信号量的获取计数器 */
-} SemaphoreData_t;
-</code></pre>
+    <span class="pl-smi">TaskHandle_t</span> <span class="pl-c1">xMutexHolder</span>;		    <span class="pl-c">/* 互斥信号量持有者 */</span>
+    <span class="pl-smi">UBaseType_t</span> <span class="pl-c1">uxRecursiveCallCount</span>;	<span class="pl-c">/* 递归互斥信号量的获取计数器 */</span>
+} <span class="pl-smi">SemaphoreData_t</span>;</pre></div>
 <p>队列结构体示意图：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E9%98%9F%E5%88%97%E7%BB%93%E6%9E%84%E4%BD%93%E7%A4%BA%E6%84%8F%E5%9B%BE.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E9%98%9F%E5%88%97%E7%BB%93%E6%9E%84%E4%BD%93%E7%A4%BA%E6%84%8F%E5%9B%BE.png" alt="" style="max-width: 100%;"></a></p>
 <h3>三、队列相关API函数介绍</h3>
@@ -435,9 +428,8 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <p>答：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%9B%E5%BB%BA%E9%98%9F%E5%88%97%E5%87%BD%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%9B%E5%BB%BA%E9%98%9F%E5%88%97%E5%87%BD%E6%95%B0.png" alt="" style="max-width: 100%;"></a></p>
 <p>动态和静态创建队列之间的区别：队列所需的内存空间由 FreeRTOS 从 FreeRTOS 管理的堆中分配，而静态创建需要用户自行分配内存。</p>
-<pre lang="C" class="notranslate"><code class="notranslate">#define xQueueCreate (  uxQueueLength,   uxItemSize  )
-        xQueueGenericCreate( ( uxQueueLength ), ( uxItemSize ), (queueQUEUE_TYPE_BASE )) 
-</code></pre>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-k">#define</span> <span class="pl-s1">xQueueCreate</span> (  uxQueueLength,   uxItemSize  )
+        <span class="pl-en">xQueueGenericCreate</span>( ( <span class="pl-s1">uxQueueLength</span> ), ( <span class="pl-s1">uxItemSize</span> ), (<span class="pl-s1">queueQUEUE_TYPE_BASE</span> )) </pre></div>
 <p>此函数用于使用动态方式创建队列，队列所需的内存空间由 FreeRTOS 从 FreeRTOS 管理的堆中分配。</p>
 <p>函数参数：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%8A%A8%E6%80%81%E5%88%9B%E5%BB%BA%E9%98%9F%E5%88%97%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%8A%A8%E6%80%81%E5%88%9B%E5%BB%BA%E9%98%9F%E5%88%97%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png" alt="" style="max-width: 100%;"></a></p>
@@ -445,41 +437,34 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%8A%A8%E6%80%81%E5%88%9B%E5%BB%BA%E9%98%9F%E5%88%97%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%8A%A8%E6%80%81%E5%88%9B%E5%BB%BA%E9%98%9F%E5%88%97%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png" alt="" style="max-width: 100%;"></a></p>
 <h4>3、各种功能所对应的队列</h4>
 <p>答：</p>
-<pre lang="c" class="notranslate"><code class="notranslate">#define queueQUEUE_TYPE_BASE                    ( ( uint8_t ) 0U )  /* 队列 */
-#define queueQUEUE_TYPE_SET                     ( ( uint8_t ) 0U )  /* 队列集 */
-#define queueQUEUE_TYPE_MUTEX                   ( ( uint8_t ) 1U )  /* 互斥信号量 */
-#define queueQUEUE_TYPE_COUNTING_SEMAPHORE      ( ( uint8_t ) 2U )  /* 计数型信号量 */
-#define queueQUEUE_TYPE_BINARY_SEMAPHORE        ( ( uint8_t ) 3U )  /* 二值信号量 */
-#define queueQUEUE_TYPE_RECURSIVE_MUTEX         ( ( uint8_t ) 4U )  /* 递归互斥信号量 */
-</code></pre>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-k">#define</span> <span class="pl-s1">queueQUEUE_TYPE_BASE</span>                    ( ( uint8_t ) 0U )  <span class="pl-c">/* 队列 */</span>
+<span class="pl-k">#define</span> <span class="pl-s1">queueQUEUE_TYPE_SET</span>                     ( ( uint8_t ) 0U )  <span class="pl-c">/* 队列集 */</span>
+<span class="pl-k">#define</span> <span class="pl-s1">queueQUEUE_TYPE_MUTEX</span>                   ( ( uint8_t ) 1U )  <span class="pl-c">/* 互斥信号量 */</span>
+<span class="pl-k">#define</span> <span class="pl-s1">queueQUEUE_TYPE_COUNTING_SEMAPHORE</span>      ( ( uint8_t ) 2U )  <span class="pl-c">/* 计数型信号量 */</span>
+<span class="pl-k">#define</span> <span class="pl-s1">queueQUEUE_TYPE_BINARY_SEMAPHORE</span>        ( ( uint8_t ) 3U )  <span class="pl-c">/* 二值信号量 */</span>
+<span class="pl-k">#define</span> <span class="pl-s1">queueQUEUE_TYPE_RECURSIVE_MUTEX</span>         ( ( uint8_t ) 4U )  <span class="pl-c">/* 递归互斥信号量 */</span></pre></div>
 <h4>4、队列写入消息函数</h4>
 <p>答：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E9%98%9F%E5%88%97%E5%86%99%E5%85%A5%E6%B6%88%E6%81%AF%E5%87%BD%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E9%98%9F%E5%88%97%E5%86%99%E5%85%A5%E6%B6%88%E6%81%AF%E5%87%BD%E6%95%B0.png" alt="" style="max-width: 100%;"></a></p>
-<pre lang="c" class="notranslate"><code class="notranslate">#define  xQueueSend( xQueue, pvItemToQueue, xTicksToWait  )
-         xQueueGenericSend( ( xQueue ), ( pvItemToQueue ), ( xTicksToWait ), queueSEND_TO_BACK )
-</code></pre>
-<pre lang="c" class="notranslate"><code class="notranslate">#define  xQueueSendToBack( xQueue, pvItemToQueue, xTicksToWait  )
-         xQueueGenericSend( ( xQueue ), ( pvItemToQueue ), ( xTicksToWait ), queueSEND_TO_BACK )
-</code></pre>
-<pre lang="C" class="notranslate"><code class="notranslate">#define  xQueueSendToFront( xQueue, pvItemToQueue, xTicksToWait  )
-         xQueueGenericSend( ( xQueue ), ( pvItemToQueue ), ( xTicksToWait ), queueSEND_TO_FRONT )
-</code></pre>
-<pre lang="C" class="notranslate"><code class="notranslate">#define  xQueueOverwrite(  xQueue,   pvItemToQueue  )
-         xQueueGenericSend( ( xQueue ), ( pvItemToQueue ), 0, queueOVERWRITE )
-</code></pre>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-k">#define</span>  <span class="pl-en">xQueueSend</span>( <span class="pl-s1">xQueue</span>, <span class="pl-s1">pvItemToQueue</span>, <span class="pl-s1">xTicksToWait</span>  )
+         <span class="pl-en">xQueueGenericSend</span>( ( <span class="pl-s1">xQueue</span> ), ( <span class="pl-s1">pvItemToQueue</span> ), ( <span class="pl-s1">xTicksToWait</span> ), <span class="pl-s1">queueSEND_TO_BACK</span> )</pre></div>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-k">#define</span>  <span class="pl-en">xQueueSendToBack</span>( <span class="pl-s1">xQueue</span>, <span class="pl-s1">pvItemToQueue</span>, <span class="pl-s1">xTicksToWait</span>  )
+         <span class="pl-en">xQueueGenericSend</span>( ( <span class="pl-s1">xQueue</span> ), ( <span class="pl-s1">pvItemToQueue</span> ), ( <span class="pl-s1">xTicksToWait</span> ), <span class="pl-s1">queueSEND_TO_BACK</span> )</pre></div>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-k">#define</span>  <span class="pl-en">xQueueSendToFront</span>( <span class="pl-s1">xQueue</span>, <span class="pl-s1">pvItemToQueue</span>, <span class="pl-s1">xTicksToWait</span>  )
+         <span class="pl-en">xQueueGenericSend</span>( ( <span class="pl-s1">xQueue</span> ), ( <span class="pl-s1">pvItemToQueue</span> ), ( <span class="pl-s1">xTicksToWait</span> ), <span class="pl-s1">queueSEND_TO_FRONT</span> )</pre></div>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-k">#define</span>  <span class="pl-en">xQueueOverwrite</span>(  <span class="pl-s1">xQueue</span>,   <span class="pl-s1">pvItemToQueue</span>  )
+         <span class="pl-en">xQueueGenericSend</span>( ( <span class="pl-s1">xQueue</span> ), ( <span class="pl-s1">pvItemToQueue</span> ), <span class="pl-c1">0</span>, <span class="pl-s1">queueOVERWRITE</span> )</pre></div>
 <p>可以看到这几个写入函数调用的是同一个函数xQueueGenericSend( )，只是指定了不同的写入位置！</p>
 <p>队列一共有3种写入位置：</p>
-<pre lang="c" class="notranslate"><code class="notranslate">#define queueSEND_TO_BACK                ( ( BaseType_t ) 0 )       /* 写入队列尾部 */
-#define queueSEND_TO_FRONT              ( ( BaseType_t ) 1 )        /* 写入队列头部 */
-#define queueOVERWRITE                  ( ( BaseType_t ) 2 )        /* 覆写队列*/
-</code></pre>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-k">#define</span> <span class="pl-s1">queueSEND_TO_BACK</span>                ( ( BaseType_t ) 0 )       <span class="pl-c">/* 写入队列尾部 */</span>
+<span class="pl-k">#define</span> <span class="pl-s1">queueSEND_TO_FRONT</span>              ( ( BaseType_t ) 1 )        <span class="pl-c">/* 写入队列头部 */</span>
+<span class="pl-k">#define</span> <span class="pl-s1">queueOVERWRITE</span>                  ( ( BaseType_t ) 2 )        <span class="pl-c">/* 覆写队列*/</span></pre></div>
 <p>注意：覆写方式写入队列，只有在队列的队列长度为 1 时，才能够使用 。</p>
 <p>往队列写入消息函数入口参数解析：</p>
-<pre lang="C" class="notranslate"><code class="notranslate">BaseType_t      xQueueGenericSend(  QueueHandle_t       xQueue,
-                                    const void * const  pvItemToQueue,
-                                    TickType_t          xTicksToWait,
-                                    const BaseType_t    xCopyPosition   );
-</code></pre>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-smi">BaseType_t</span>      <span class="pl-en">xQueueGenericSend</span>(  <span class="pl-smi">QueueHandle_t</span>       <span class="pl-s1">xQueue</span>,
+                                    <span class="pl-k">const</span> <span class="pl-smi">void</span> <span class="pl-c1">*</span> <span class="pl-k">const</span>  <span class="pl-s1">pvItemToQueue</span>,
+                                    <span class="pl-smi">TickType_t</span>          <span class="pl-s1">xTicksToWait</span>,
+                                    <span class="pl-k">const</span> <span class="pl-smi">BaseType_t</span>    <span class="pl-s1">xCopyPosition</span>   );</pre></div>
 <p>函数参数：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%BE%80%E9%98%9F%E5%88%97%E5%86%99%E5%85%A5%E6%B6%88%E6%81%AF%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%BE%80%E9%98%9F%E5%88%97%E5%86%99%E5%85%A5%E6%B6%88%E6%81%AF%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png" alt="" style="max-width: 100%;"></a></p>
 <p>函数返回值：</p>
@@ -487,19 +472,17 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <h4>5、队列读出消息函数</h4>
 <p>答：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E9%98%9F%E5%88%97%E8%AF%BB%E5%87%BA%E6%B6%88%E6%81%AF%E5%87%BD%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E9%98%9F%E5%88%97%E8%AF%BB%E5%87%BA%E6%B6%88%E6%81%AF%E5%87%BD%E6%95%B0.png" alt="" style="max-width: 100%;"></a></p>
-<pre lang="c" class="notranslate"><code class="notranslate">BaseType_t    xQueueReceive( QueueHandle_t  xQueue, 
-                             void *   const pvBuffer,  
-                             TickType_t     xTicksToWait )
-</code></pre>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-smi">BaseType_t</span>    <span class="pl-en">xQueueReceive</span>( <span class="pl-smi">QueueHandle_t</span>  <span class="pl-s1">xQueue</span>, 
+                             <span class="pl-smi">void</span> <span class="pl-c1">*</span>   <span class="pl-k">const</span> <span class="pl-s1">pvBuffer</span>,  
+                             <span class="pl-smi">TickType_t</span>     <span class="pl-s1">xTicksToWait</span> )</pre></div>
 <p>此函数用于在任务中，从队列中读取消息，并且消息读取成功后，会将消息从队列中移除。</p>
 <p>函数参数：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E9%98%9F%E5%88%97%E8%AF%BB%E5%87%BA%E6%B6%88%E6%81%AF%E5%87%BD%E6%95%B01%E5%8F%82%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E9%98%9F%E5%88%97%E8%AF%BB%E5%87%BA%E6%B6%88%E6%81%AF%E5%87%BD%E6%95%B01%E5%8F%82%E6%95%B0.png" alt="" style="max-width: 100%;"></a></p>
 <p>函数返回值：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E9%98%9F%E5%88%97%E8%AF%BB%E5%87%BA%E6%B6%88%E6%81%AF%E5%87%BD%E6%95%B01%E8%BF%94%E5%9B%9E%E5%80%BC.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E9%98%9F%E5%88%97%E8%AF%BB%E5%87%BA%E6%B6%88%E6%81%AF%E5%87%BD%E6%95%B01%E8%BF%94%E5%9B%9E%E5%80%BC.png" alt="" style="max-width: 100%;"></a></p>
-<pre lang="C" class="notranslate"><code class="notranslate">BaseType_t   xQueuePeek( QueueHandle_t   xQueue,
-                         void * const   pvBuffer,
-                         TickType_t   xTicksToWait )
-</code></pre>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-smi">BaseType_t</span>   <span class="pl-en">xQueuePeek</span>( <span class="pl-smi">QueueHandle_t</span>   <span class="pl-s1">xQueue</span>,
+                         <span class="pl-smi">void</span> <span class="pl-c1">*</span> <span class="pl-k">const</span>   <span class="pl-s1">pvBuffer</span>,
+                         <span class="pl-smi">TickType_t</span>   <span class="pl-s1">xTicksToWait</span> )</pre></div>
 <p>此函数用于在任务中，从队列中读取消息， 但与函数 xQueueReceive()不同，此函数在成功读取消息后，并不会移除已读取的消息！</p>
 <p>函数参数：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E9%98%9F%E5%88%97%E8%AF%BB%E5%87%BA%E6%B6%88%E6%81%AF%E5%87%BD%E6%95%B02%E5%8F%82%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E9%98%9F%E5%88%97%E8%AF%BB%E5%87%BA%E6%B6%88%E6%81%AF%E5%87%BD%E6%95%B02%E5%8F%82%E6%95%B0.png" alt="" style="max-width: 100%;"></a></p>
@@ -547,37 +530,31 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BA%8C%E5%80%BC%E4%BF%A1%E5%8F%B7%E9%87%8FAPI%E5%87%BD%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BA%8C%E5%80%BC%E4%BF%A1%E5%8F%B7%E9%87%8FAPI%E5%87%BD%E6%95%B0.png" alt="" style="max-width: 100%;"></a></p>
 <h4>3、创建二值信号量函数</h4>
 <p>答：创建二值信号量函数：</p>
-<pre lang="c" class="notranslate"><code class="notranslate">SemaphoreHandle_t  xSemaphoreCreateBinary( void );
-</code></pre>
-<pre lang="c" class="notranslate"><code class="notranslate">#define   xSemaphoreCreateBinary()
-xQueueGenericCreate(1 , semSEMAPHORE_QUEUE_ITEM_LENGTH, queueQUEUE_TYPE_BINARY_SEMAPHORE)
-#define   semSEMAPHORE_QUEUE_ITEM_LENGTH   (( uint8_t ) 0U)
-</code></pre>
-<pre lang="c" class="notranslate"><code class="notranslate">#define   queueQUEUE_TYPE_BASE                           ( ( uint8_t ) 0U ) /* 队列 */
-#define   queueQUEUE_TYPE_SET                            ( ( uint8_t ) 0U ) /* 队列集 */
-#define   queueQUEUE_TYPE_MUTEX                          ( ( uint8_t ) 1U ) /* 互斥信号量 */
-#define   queueQUEUE_TYPE_COUNTING_SEMAPHORE             ( ( uint8_t ) 2U ) /* 计数型信号量 */
-#define   queueQUEUE_TYPE_BINARY_SEMAPHORE               ( ( uint8_t ) 3U ) /* 二值信号量 */
-#define   queueQUEUE_TYPE_RECURSIVE_MUTEX                ( ( uint8_t ) 4U ) /* 递归互斥信号量 */
-</code></pre>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-smi">SemaphoreHandle_t</span>  <span class="pl-en">xSemaphoreCreateBinary</span>( <span class="pl-smi">void</span> );</pre></div>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-k">#define</span>   <span class="pl-en">xSemaphoreCreateBinary</span>()
+<span class="pl-en">xQueueGenericCreate</span>(<span class="pl-c1">1</span> , <span class="pl-s1">semSEMAPHORE_QUEUE_ITEM_LENGTH</span>, <span class="pl-s1">queueQUEUE_TYPE_BINARY_SEMAPHORE</span>)
+<span class="pl-k">#define</span>   <span class="pl-s1">semSEMAPHORE_QUEUE_ITEM_LENGTH</span>   (( uint8_t ) 0U)</pre></div>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-k">#define</span>   <span class="pl-s1">queueQUEUE_TYPE_BASE</span>                           ( ( uint8_t ) 0U ) <span class="pl-c">/* 队列 */</span>
+<span class="pl-k">#define</span>   <span class="pl-s1">queueQUEUE_TYPE_SET</span>                            ( ( uint8_t ) 0U ) <span class="pl-c">/* 队列集 */</span>
+<span class="pl-k">#define</span>   <span class="pl-s1">queueQUEUE_TYPE_MUTEX</span>                          ( ( uint8_t ) 1U ) <span class="pl-c">/* 互斥信号量 */</span>
+<span class="pl-k">#define</span>   <span class="pl-s1">queueQUEUE_TYPE_COUNTING_SEMAPHORE</span>             ( ( uint8_t ) 2U ) <span class="pl-c">/* 计数型信号量 */</span>
+<span class="pl-k">#define</span>   <span class="pl-s1">queueQUEUE_TYPE_BINARY_SEMAPHORE</span>               ( ( uint8_t ) 3U ) <span class="pl-c">/* 二值信号量 */</span>
+<span class="pl-k">#define</span>   <span class="pl-s1">queueQUEUE_TYPE_RECURSIVE_MUTEX</span>                ( ( uint8_t ) 4U ) <span class="pl-c">/* 递归互斥信号量 */</span></pre></div>
 <p>返回值：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%9B%E5%BB%BA%E4%BA%8C%E5%80%BC%E4%BF%A1%E5%8F%B7%E9%87%8F%E8%BF%94%E5%9B%9E%E5%80%BC.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%9B%E5%BB%BA%E4%BA%8C%E5%80%BC%E4%BF%A1%E5%8F%B7%E9%87%8F%E8%BF%94%E5%9B%9E%E5%80%BC.png" alt="" style="max-width: 100%;"></a></p>
 <h4>4、释放二值信号量函数</h4>
 <p>答：释放二值信号量函数：</p>
-<pre lang="c" class="notranslate"><code class="notranslate">BaseType_t   xSemaphoreGive( xSemaphore ) 
-</code></pre>
-<pre lang="c" class="notranslate"><code class="notranslate">#define   xSemaphoreGive ( xSemaphore )
-xQueueGenericSend((QueueHandle_t)( xSemaphore ), NULL, semGIVE_BLOCK_TIME, queueSEND_TO_BACK)
-#define   semGIVE_BLOCK_TIME       ( ( TickType_t ) 0U )
-</code></pre>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-smi">BaseType_t</span>   <span class="pl-en">xSemaphoreGive</span>( <span class="pl-s1">xSemaphore</span> ) </pre></div>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-k">#define</span>   <span class="pl-s1">xSemaphoreGive</span> ( xSemaphore )
+<span class="pl-en">xQueueGenericSend</span>((<span class="pl-s1">QueueHandle_t</span>)( <span class="pl-s1">xSemaphore</span> ), <span class="pl-c1">NULL</span>, <span class="pl-s1">semGIVE_BLOCK_TIME</span>, <span class="pl-s1">queueSEND_TO_BACK</span>)
+<span class="pl-k">#define</span>   <span class="pl-s1">semGIVE_BLOCK_TIME</span>       ( ( TickType_t ) 0U )</pre></div>
 <p>函数参数：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E9%87%8A%E6%94%BE%E4%BA%8C%E5%80%BC%E4%BF%A1%E5%8F%B7%E9%87%8F%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E9%87%8A%E6%94%BE%E4%BA%8C%E5%80%BC%E4%BF%A1%E5%8F%B7%E9%87%8F%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png" alt="" style="max-width: 100%;"></a></p>
 <p>函数返回值：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E9%87%8A%E6%94%BE%E4%BA%8C%E5%80%BC%E4%BF%A1%E5%8F%B7%E9%87%8F%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E9%87%8A%E6%94%BE%E4%BA%8C%E5%80%BC%E4%BF%A1%E5%8F%B7%E9%87%8F%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png" alt="" style="max-width: 100%;"></a></p>
 <h4>5、获取二值信号量函数</h4>
 <p>答：获取二值信号量函数：</p>
-<pre lang="c" class="notranslate"><code class="notranslate">BaseType_t   xSemaphoreTake( xSemaphore, xBlockTime ) 
-</code></pre>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-smi">BaseType_t</span>   <span class="pl-en">xSemaphoreTake</span>( <span class="pl-s1">xSemaphore</span>, <span class="pl-s1">xBlockTime</span> ) </pre></div>
 <p>函数参数：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E8%8E%B7%E5%8F%96%E4%BA%8C%E5%80%BC%E4%BF%A1%E5%8F%B7%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E8%8E%B7%E5%8F%96%E4%BA%8C%E5%80%BC%E4%BF%A1%E5%8F%B7%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png" alt="" style="max-width: 100%;"></a></p>
 <p>函数返回值：</p>
@@ -596,18 +573,16 @@ xQueueGenericSend((QueueHandle_t)( xSemaphore ), NULL, semGIVE_BLOCK_TIME, queue
 <p>注意：计数型信号量的释放与获取的函数和二值信号量一样。</p>
 <h4>3、计数型信号量创建函数</h4>
 <p>答：</p>
-<pre lang="c" class="notranslate"><code class="notranslate">#define 	xSemaphoreCreateCounting( uxMaxCount , uxInitialCount )
-            xQueueCreateCountingSemaphore( ( uxMaxCount ) , ( uxInitialCount ) ) 
-</code></pre>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-k">#define</span> 	<span class="pl-en">xSemaphoreCreateCounting</span>( <span class="pl-s1">uxMaxCount</span> , <span class="pl-s1">uxInitialCount</span> )
+            <span class="pl-en">xQueueCreateCountingSemaphore</span>( ( <span class="pl-s1">uxMaxCount</span> ) , ( <span class="pl-s1">uxInitialCount</span> ) ) </pre></div>
 <p>函数参数：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E8%AE%A1%E6%95%B0%E5%9E%8B%E4%BF%A1%E5%8F%B7%E9%87%8F%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E8%AE%A1%E6%95%B0%E5%9E%8B%E4%BF%A1%E5%8F%B7%E9%87%8F%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png" alt="" style="max-width: 100%;"></a></p>
 <p>函数返回值：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E8%AE%A1%E6%95%B0%E5%9E%8B%E4%BF%A1%E5%8F%B7%E9%87%8F%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E8%AE%A1%E6%95%B0%E5%9E%8B%E4%BF%A1%E5%8F%B7%E9%87%8F%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png" alt="" style="max-width: 100%;"></a></p>
 <h4>4、获取计数型信号量计数值函数</h4>
 <p>答：</p>
-<pre lang="C" class="notranslate"><code class="notranslate">#define 	uxSemaphoreGetCount( xSemaphore ) 
-            uxQueueMessagesWaiting(( QueueHandle_t )( xSemaphore ))
-</code></pre>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-k">#define</span> 	<span class="pl-en">uxSemaphoreGetCount</span>( <span class="pl-s1">xSemaphore</span> ) 
+            uxQueueMessagesWaiting(( QueueHandle_t )( xSemaphore ))</pre></div>
 <p>函数参数：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E8%8E%B7%E5%8F%96%E8%AE%A1%E6%95%B0%E5%80%BC%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E8%8E%B7%E5%8F%96%E8%AE%A1%E6%95%B0%E5%80%BC%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png" alt="" style="max-width: 100%;"></a></p>
 <p>函数返回值：</p>
@@ -650,8 +625,7 @@ xQueueGenericSend((QueueHandle_t)( xSemaphore ), NULL, semGIVE_BLOCK_TIME, queue
 <p>注意：创建互斥信号量时，会主动释放一次信号量。</p>
 <h4>6、创建互斥信号量函数</h4>
 <p>答：</p>
-<pre lang="c" class="notranslate"><code class="notranslate">#define   xSemaphoreCreateMutex()      xQueueCreateMutex( queueQUEUE_TYPE_MUTEX )
-</code></pre>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-k">#define</span>   <span class="pl-en">xSemaphoreCreateMutex</span>()      xQueueCreateMutex( queueQUEUE_TYPE_MUTEX )</pre></div>
 <p>函数返回值：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%9B%E5%BB%BA%E4%BA%92%E6%96%A5%E4%BF%A1%E5%8F%B7%E9%87%8F%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%9B%E5%BB%BA%E4%BA%92%E6%96%A5%E4%BF%A1%E5%8F%B7%E9%87%8F%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png" alt="" style="max-width: 100%;"></a></p>
 <h2>15.FreeRTOS队列集</h2>
@@ -673,17 +647,15 @@ xQueueGenericSend((QueueHandle_t)( xSemaphore ), NULL, semGIVE_BLOCK_TIME, queue
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E9%98%9F%E5%88%97%E9%9B%86%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E9%98%9F%E5%88%97%E9%9B%86%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0.png" alt="" style="max-width: 100%;"></a></p>
 <h4>2、队列集创建函数</h4>
 <p>答：</p>
-<pre lang="C" class="notranslate"><code class="notranslate">QueueSetHandle_t     xQueueCreateSet( const  UBaseType_t  uxEventQueueLength ); 
-</code></pre>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-smi">QueueSetHandle_t</span>     <span class="pl-en">xQueueCreateSet</span>( <span class="pl-k">const</span>  <span class="pl-smi">UBaseType_t</span>  <span class="pl-s1">uxEventQueueLength</span> ); </pre></div>
 <p>函数参数：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E9%98%9F%E5%88%97%E9%9B%86%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E9%98%9F%E5%88%97%E9%9B%86%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png" alt="" style="max-width: 100%;"></a></p>
 <p>函数返回值：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E9%98%9F%E5%88%97%E9%9B%86%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E9%98%9F%E5%88%97%E9%9B%86%E5%88%9B%E5%BB%BA%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png" alt="" style="max-width: 100%;"></a></p>
 <h4>3、队列集添加函数</h4>
 <p>答：</p>
-<pre lang="C" class="notranslate"><code class="notranslate">BaseType_t xQueueAddToSet( QueueSetMemberHandle_t   xQueueOrSemaphore,
-                           QueueSetHandle_t         xQueueSet); 
-</code></pre>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-smi">BaseType_t</span> <span class="pl-en">xQueueAddToSet</span>( <span class="pl-smi">QueueSetMemberHandle_t</span>   <span class="pl-s1">xQueueOrSemaphore</span>,
+                           <span class="pl-smi">QueueSetHandle_t</span>         <span class="pl-s1">xQueueSet</span>); </pre></div>
 <p>此函数用于往队列集中添加队列，要注意的时，队列在被添加到队列集之前队列中不能有有效的消息。</p>
 <p>函数参数：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E9%98%9F%E5%88%97%E9%9B%86%E6%B7%BB%E5%8A%A0%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E9%98%9F%E5%88%97%E9%9B%86%E6%B7%BB%E5%8A%A0%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png" alt="" style="max-width: 100%;"></a></p>
@@ -691,9 +663,8 @@ xQueueGenericSend((QueueHandle_t)( xSemaphore ), NULL, semGIVE_BLOCK_TIME, queue
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E9%98%9F%E5%88%97%E9%9B%86%E6%B7%BB%E5%8A%A0%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E9%98%9F%E5%88%97%E9%9B%86%E6%B7%BB%E5%8A%A0%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png" alt="" style="max-width: 100%;"></a></p>
 <h4>4、队列集移除函数</h4>
 <p>答：</p>
-<pre lang="C" class="notranslate"><code class="notranslate">BaseType_t   xQueueRemoveFromSet( QueueSetMemberHandle_t    xQueueOrSemaphore,
-                                  QueueSetHandle_t          xQueueSet ); 
-</code></pre>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-smi">BaseType_t</span>   <span class="pl-en">xQueueRemoveFromSet</span>( <span class="pl-smi">QueueSetMemberHandle_t</span>    <span class="pl-s1">xQueueOrSemaphore</span>,
+                                  <span class="pl-smi">QueueSetHandle_t</span>          <span class="pl-s1">xQueueSet</span> ); </pre></div>
 <p>此函数用于从队列集中移除队列，要注意的是，队列在从队列集中移除之前，必须没有有效的消息。</p>
 <p>函数参数：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E9%98%9F%E5%88%97%E9%9B%86%E7%A7%BB%E9%99%A4%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E9%98%9F%E5%88%97%E9%9B%86%E7%A7%BB%E9%99%A4%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png" alt="" style="max-width: 100%;"></a></p>
@@ -701,9 +672,8 @@ xQueueGenericSend((QueueHandle_t)( xSemaphore ), NULL, semGIVE_BLOCK_TIME, queue
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E9%98%9F%E5%88%97%E9%9B%86%E7%A7%BB%E9%99%A4%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E9%98%9F%E5%88%97%E9%9B%86%E7%A7%BB%E9%99%A4%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png" alt="" style="max-width: 100%;"></a></p>
 <h4>5、队列集获取函数</h4>
 <p>答：</p>
-<pre lang="C" class="notranslate"><code class="notranslate">QueueSetMemberHandle_t   xQueueSelectFromSet( QueueSetHandle_t    xQueueSet,
-                                              TickType_t const    xTicksToWait)
-</code></pre>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-smi">QueueSetMemberHandle_t</span>   <span class="pl-en">xQueueSelectFromSet</span>( <span class="pl-smi">QueueSetHandle_t</span>    <span class="pl-s1">xQueueSet</span>,
+                                              <span class="pl-smi">TickType_t</span> <span class="pl-k">const</span>    <span class="pl-s1">xTicksToWait</span>)</pre></div>
 <p>此函数用于在任务中获取队列集中有有效消息的队列。</p>
 <p>函数参数：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E9%98%9F%E5%88%97%E9%9B%86%E8%8E%B7%E5%8F%96%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E9%98%9F%E5%88%97%E9%9B%86%E8%8E%B7%E5%8F%96%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png" alt="" style="max-width: 100%;"></a></p>
@@ -726,15 +696,14 @@ xQueueGenericSend((QueueHandle_t)( xSemaphore ), NULL, semGIVE_BLOCK_TIME, queue
 </ul>
 <h4>3、事件标志组的标志变量</h4>
 <p>答：一个事件组就包含了一个EventBits_t数据类型的变量，变量类型EventBits_t数据类型的定义如下所示：</p>
-<pre lang="C" class="notranslate"><code class="notranslate">typedef TickType_t EventBits_t;
-#if ( configUSE_16_BIT_TICKS  ==  1 )
-	typedef   uint16_t   TickType_t;
-#else
-	typedef   uint32_t   TickType_t;
-#endif
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-k">typedef</span> <span class="pl-smi">TickType_t</span> <span class="pl-smi">EventBits_t</span>;
+<span class="pl-k">#if</span> ( <span class="pl-s1">configUSE_16_BIT_TICKS</span>  <span class="pl-c1">==</span>  <span class="pl-c1">1</span> )
+	<span class="pl-k">typedef</span>   <span class="pl-smi">uint16_t</span>   <span class="pl-smi">TickType_t</span>;
+<span class="pl-k">#else</span>
+	<span class="pl-k">typedef</span>   <span class="pl-smi">uint32_t</span>   <span class="pl-smi">TickType_t</span>;
+<span class="pl-k">#endif</span>
 
-#define  configUSE_16_BIT_TICKS    0 
-</code></pre>
+<span class="pl-k">#define</span>  <span class="pl-s1">configUSE_16_BIT_TICKS</span>    0 </pre></div>
 <p>EventBits_t 实际上是一个 16 位或 32 位无符号的数据类型。</p>
 <p>注意：虽然使用了32为/16位无符号的数据类型变量来存储事件标志，但其中的高8为作用是存储事件标志组的控制信息，低24位/8位的作用才是存储事件标志，所以说一个事件标志组最多可以存储24个事件标志！！！</p>
 <p>24位事件标志组示例图：</p>
@@ -748,36 +717,32 @@ xQueueGenericSend((QueueHandle_t)( xSemaphore ), NULL, semGIVE_BLOCK_TIME, queue
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BA%8B%E4%BB%B6%E6%A0%87%E5%BF%97%E7%BB%84%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BA%8B%E4%BB%B6%E6%A0%87%E5%BF%97%E7%BB%84%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0.png" alt="" style="max-width: 100%;"></a></p>
 <h4>2、动态创建事件标志组函数</h4>
 <p>答：</p>
-<pre lang="C" class="notranslate"><code class="notranslate">EventGroupHandle_t    xEventGroupCreate ( void ); 
-</code></pre>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-smi">EventGroupHandle_t</span>    <span class="pl-en">xEventGroupCreate</span> ( <span class="pl-smi">void</span> ); </pre></div>
 <p>函数返回值：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%8A%A8%E6%80%81%E5%88%9B%E5%BB%BA%E4%BA%8B%E4%BB%B6%E6%A0%87%E5%BF%97%E7%BB%84.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%8A%A8%E6%80%81%E5%88%9B%E5%BB%BA%E4%BA%8B%E4%BB%B6%E6%A0%87%E5%BF%97%E7%BB%84.png" alt="" style="max-width: 100%;"></a></p>
 <h4>3、消除事件标志位函数</h4>
 <p>答：</p>
-<pre lang="C" class="notranslate"><code class="notranslate">EventBits_t  xEventGroupClearBits( EventGroupHandle_t   xEventGroup,
-                                   const EventBits_t    uxBitsToClear) 
-</code></pre>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-smi">EventBits_t</span>  <span class="pl-en">xEventGroupClearBits</span>( <span class="pl-smi">EventGroupHandle_t</span>   <span class="pl-s1">xEventGroup</span>,
+                                   <span class="pl-k">const</span> <span class="pl-smi">EventBits_t</span>    <span class="pl-s1">uxBitsToClear</span>) </pre></div>
 <p>函数参数：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E6%B8%85%E9%99%A4%E4%BA%8B%E4%BB%B6%E6%A0%87%E5%BF%97%E4%BD%8D%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E6%B8%85%E9%99%A4%E4%BA%8B%E4%BB%B6%E6%A0%87%E5%BF%97%E4%BD%8D%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png" alt="" style="max-width: 100%;"></a></p>
 <p>函数返回值：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E6%B8%85%E9%99%A4%E4%BA%8B%E4%BB%B6%E6%A0%87%E5%BF%97%E4%BD%8D%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E6%B8%85%E9%99%A4%E4%BA%8B%E4%BB%B6%E6%A0%87%E5%BF%97%E4%BD%8D%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png" alt="" style="max-width: 100%;"></a></p>
 <h4>4、设置事件标志位函数</h4>
 <p>答：</p>
-<pre lang="C" class="notranslate"><code class="notranslate">EventBits_t   xEventGroupSetBits(  EventGroupHandle_t   xEventGroup,
-                                   const EventBits_t    uxBitsToSet ) 
-</code></pre>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-smi">EventBits_t</span>   <span class="pl-en">xEventGroupSetBits</span>(  <span class="pl-smi">EventGroupHandle_t</span>   <span class="pl-s1">xEventGroup</span>,
+                                   <span class="pl-k">const</span> <span class="pl-smi">EventBits_t</span>    <span class="pl-s1">uxBitsToSet</span> ) </pre></div>
 <p>函数参数：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E8%AE%BE%E7%BD%AE%E4%BA%8B%E4%BB%B6%E6%A0%87%E5%BF%97%E4%BD%8D%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E8%AE%BE%E7%BD%AE%E4%BA%8B%E4%BB%B6%E6%A0%87%E5%BF%97%E4%BD%8D%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png" alt="" style="max-width: 100%;"></a></p>
 <p>函数返回值：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E8%AE%BE%E7%BD%AE%E4%BA%8B%E4%BB%B6%E6%A0%87%E5%BF%97%E4%BD%8D%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E8%AE%BE%E7%BD%AE%E4%BA%8B%E4%BB%B6%E6%A0%87%E5%BF%97%E4%BD%8D%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png" alt="" style="max-width: 100%;"></a></p>
 <h4>5、等待事件标志位函数</h4>
 <p>答：</p>
-<pre lang="C" class="notranslate"><code class="notranslate">EventBits_t   xEventGroupWaitBits(   EventGroupHandle_t   xEventGroup,
-                                     const EventBits_t    uxBitsToWaitFor,
-                                     const BaseType_t     xClearOnExit,
-                                     const BaseType_t     xWaitForAllBits,
-                                     TickType_t           xTicksToWait  )
-</code></pre>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-smi">EventBits_t</span>   <span class="pl-en">xEventGroupWaitBits</span>(   <span class="pl-smi">EventGroupHandle_t</span>   <span class="pl-s1">xEventGroup</span>,
+                                     <span class="pl-k">const</span> <span class="pl-smi">EventBits_t</span>    <span class="pl-s1">uxBitsToWaitFor</span>,
+                                     <span class="pl-k">const</span> <span class="pl-smi">BaseType_t</span>     <span class="pl-s1">xClearOnExit</span>,
+                                     <span class="pl-k">const</span> <span class="pl-smi">BaseType_t</span>     <span class="pl-s1">xWaitForAllBits</span>,
+                                     <span class="pl-smi">TickType_t</span>           <span class="pl-s1">xTicksToWait</span>  )</pre></div>
 <p>函数参数：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E7%AD%89%E5%BE%85%E4%BA%8B%E4%BB%B6%E6%A0%87%E5%BF%97%E4%BD%8D%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E7%AD%89%E5%BE%85%E4%BA%8B%E4%BB%B6%E6%A0%87%E5%BF%97%E4%BD%8D%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png" alt="" style="max-width: 100%;"></a></p>
 <p>函数返回值：</p>
@@ -789,11 +754,10 @@ xQueueGenericSend((QueueHandle_t)( xSemaphore ), NULL, semGIVE_BLOCK_TIME, queue
 </ol>
 <h4>6、同步事件标志组函数</h4>
 <p>答：</p>
-<pre lang="C" class="notranslate"><code class="notranslate">EventBits_t     xEventGroupSync(   EventGroupHandle_t   xEventGroup,
-                                   const EventBits_t    uxBitsToSet,
-                                   const EventBits_t    uxBitsToWaitFor,
-                                   TickType_t           xTicksToWait) 
-</code></pre>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-smi">EventBits_t</span>     <span class="pl-en">xEventGroupSync</span>(   <span class="pl-smi">EventGroupHandle_t</span>   <span class="pl-s1">xEventGroup</span>,
+                                   <span class="pl-k">const</span> <span class="pl-smi">EventBits_t</span>    <span class="pl-s1">uxBitsToSet</span>,
+                                   <span class="pl-k">const</span> <span class="pl-smi">EventBits_t</span>    <span class="pl-s1">uxBitsToWaitFor</span>,
+                                   <span class="pl-smi">TickType_t</span>           <span class="pl-s1">xTicksToWait</span>) </pre></div>
 <p>函数参数：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%90%8C%E6%AD%A5%E4%BA%8B%E4%BB%B6%E6%A0%87%E5%BF%97%E7%BB%84%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%90%8C%E6%AD%A5%E4%BA%8B%E4%BB%B6%E6%A0%87%E5%BF%97%E7%BB%84%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png" alt="" style="max-width: 100%;"></a></p>
 <p>函数返回值：</p>
@@ -833,18 +797,17 @@ xQueueGenericSend((QueueHandle_t)( xSemaphore ), NULL, semGIVE_BLOCK_TIME, queue
 <h4>1、任务通知结构体</h4>
 <p>答：</p>
 <p>任务都有一个结构体---任务控制块，它里面有两个结构体成员变量：</p>
-<pre lang="C" class="notranslate"><code class="notranslate">typedef  struct  tskTaskControlBlock 
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-k">typedef</span>  <span class="pl-k">struct</span>  <span class="pl-s1">tskTaskControlBlock</span> 
 {
       ......
-      #if ( configUSE_TASK_NOTIFICATIONS  ==  1 )
-           volatile  uint32_t    ulNotifiedValue [ configTASK_NOTIFICATION_ARRAY_ENTRIES ];
-           volatile  uint8_t      ucNotifyState [ configTASK_NOTIFICATION_ARRAY_ENTRIES ];
-      endif
+      <span class="pl-k">#if</span> ( <span class="pl-s1">configUSE_TASK_NOTIFICATIONS</span>  <span class="pl-c1">==</span>  <span class="pl-c1">1</span> )
+           <span class="pl-k">volatile</span>  <span class="pl-smi">uint32_t</span>    <span class="pl-c1">ulNotifiedValue</span> [ <span class="pl-s1">configTASK_NOTIFICATION_ARRAY_ENTRIES</span> ];
+           <span class="pl-k">volatile</span>  <span class="pl-smi">uint8_t</span>      <span class="pl-c1">ucNotifyState</span> [ <span class="pl-s1">configTASK_NOTIFICATION_ARRAY_ENTRIES</span> ];
+      <span class="pl-smi">endif</span>
       ......
-} tskTCB;
+} <span class="pl-c1">tskTCB</span>;
 
-#define  configTASK_NOTIFICATION_ARRAY_ENTRIES	1  	/* 定义任务通知数组的大小, 默认: 1 */
-</code></pre>
+<span class="pl-k">#define</span>  <span class="pl-s1">configTASK_NOTIFICATION_ARRAY_ENTRIES</span>	1  	<span class="pl-c">/* 定义任务通知数组的大小, 默认: 1 */</span></pre></div>
 <ul>
 <li>一个是uint32_t类型，用来表示任务通知值。</li>
 <li>一个是uint16_t类型，用来表示任务通知状态。</li>
@@ -859,10 +822,9 @@ xQueueGenericSend((QueueHandle_t)( xSemaphore ), NULL, semGIVE_BLOCK_TIME, queue
 </ol>
 <h4>3、任务通知状态</h4>
 <p>答：任务通知状态共有3种。</p>
-<pre lang="C" class="notranslate"><code class="notranslate">#define     taskNOT_WAITING_NOTIFICATION    ( ( uint8_t ) 0 )        /* 任务未等待通知 */
-#define     taskWAITING_NOTIFICATION        ( ( uint8_t ) 1 )        /* 任务在等待通知 */
-#define     taskNOTIFICATION_RECEIVED       ( ( uint8_t ) 2 )        /* 任务在等待接收 */
-</code></pre>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-k">#define</span>     <span class="pl-s1">taskNOT_WAITING_NOTIFICATION</span>    ( ( uint8_t ) 0 )        <span class="pl-c">/* 任务未等待通知 */</span>
+<span class="pl-k">#define</span>     <span class="pl-s1">taskWAITING_NOTIFICATION</span>        ( ( uint8_t ) 1 )        <span class="pl-c">/* 任务在等待通知 */</span>
+<span class="pl-k">#define</span>     <span class="pl-s1">taskNOTIFICATION_RECEIVED</span>       ( ( uint8_t ) 2 )        <span class="pl-c">/* 任务在等待接收 */</span></pre></div>
 <ul>
 <li>任务未等待通知：任务通知默认的初始化状态。</li>
 <li>等待通知：接收方已经准备好了(调用了接收任务通知函数)，等待发送方给个通知。</li>
@@ -880,46 +842,43 @@ xQueueGenericSend((QueueHandle_t)( xSemaphore ), NULL, semGIVE_BLOCK_TIME, queue
 <p>答：</p>
 <p>所有发送任务通知函数：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%8F%91%E9%80%81%E4%BB%BB%E5%8A%A1%E9%80%9A%E7%9F%A5%E5%87%BD%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%8F%91%E9%80%81%E4%BB%BB%E5%8A%A1%E9%80%9A%E7%9F%A5%E5%87%BD%E6%95%B0.png" alt="" style="max-width: 100%;"></a></p>
-<pre lang="c" class="notranslate"><code class="notranslate">#define     xTaskNotifyAndQuery( xTaskToNotify,  ulValue,  eAction,  pulPreviousNotifyValue )
-            xTaskGenericNotify( ( xTaskToNotify ), 
-					          ( tskDEFAULT_INDEX_TO_NOTIFY ), 
-					          ( ulValue ), 
-					          ( eAction ),
-					          ( pulPreviousNotifyValue ) )
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-k">#define</span>     <span class="pl-en">xTaskNotifyAndQuery</span>( <span class="pl-s1">xTaskToNotify</span>,  <span class="pl-s1">ulValue</span>,  <span class="pl-s1">eAction</span>,  <span class="pl-s1">pulPreviousNotifyValue</span> )
+            <span class="pl-en">xTaskGenericNotify</span>( ( <span class="pl-s1">xTaskToNotify</span> ), 
+					          ( <span class="pl-s1">tskDEFAULT_INDEX_TO_NOTIFY</span> ), 
+					          ( <span class="pl-s1">ulValue</span> ), 
+					          ( <span class="pl-s1">eAction</span> ),
+					          ( <span class="pl-s1">pulPreviousNotifyValue</span> ) )
 
-#define     xTaskNotify  (xTaskToNotify ,  ulValue ,  eAction)
-            xTaskGenericNotify(  ( xTaskToNotify ) ,  
-                                 ( tskDEFAULT_INDEX_TO_NOTIFY ) ,  
-                                 ( ulValue ) ,
-                                 ( eAction ) , 
-                                   NULL    )
+<span class="pl-k">#define</span>     <span class="pl-s1">xTaskNotify</span>  (xTaskToNotify ,  ulValue ,  eAction)
+            <span class="pl-en">xTaskGenericNotify</span>(  ( <span class="pl-s1">xTaskToNotify</span> ) ,  
+                                 ( <span class="pl-s1">tskDEFAULT_INDEX_TO_NOTIFY</span> ) ,  
+                                 ( <span class="pl-s1">ulValue</span> ) ,
+                                 ( <span class="pl-s1">eAction</span> ) , 
+                                   <span class="pl-c1">NULL</span>    )
  
-#define     xTaskNotifyGive(  xTaskToNotify  )
-            xTaskGenericNotify(  ( xTaskToNotify ) ,
-                                 ( tskDEFAULT_INDEX_TO_NOTIFY ) ,
-                                 ( 0 ) ,
-                                 eIncrement ,
-                                 NULL )
-</code></pre>
+<span class="pl-k">#define</span>     <span class="pl-en">xTaskNotifyGive</span>(  <span class="pl-s1">xTaskToNotify</span>  )
+            <span class="pl-en">xTaskGenericNotify</span>(  ( <span class="pl-s1">xTaskToNotify</span> ) ,
+                                 ( <span class="pl-s1">tskDEFAULT_INDEX_TO_NOTIFY</span> ) ,
+                                 ( <span class="pl-c1">0</span> ) ,
+                                 <span class="pl-s1">eIncrement</span> ,
+                                 <span class="pl-c1">NULL</span> )</pre></div>
 <p>关键函数：</p>
-<pre lang="c" class="notranslate"><code class="notranslate">BaseType_t     xTaskGenericNotify(  TaskHandle_t     xTaskToNotify,
-                                    UBaseType_t      uxIndexToNotify,
-                                    uint32_t         ulValue,
-                                    eNotifyAction    eAction,
-                                    uint32_t *       pulPreviousNotificationValue  )
-</code></pre>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-smi">BaseType_t</span>     <span class="pl-en">xTaskGenericNotify</span>(  <span class="pl-smi">TaskHandle_t</span>     <span class="pl-s1">xTaskToNotify</span>,
+                                    <span class="pl-smi">UBaseType_t</span>      <span class="pl-s1">uxIndexToNotify</span>,
+                                    <span class="pl-smi">uint32_t</span>         <span class="pl-s1">ulValue</span>,
+                                    <span class="pl-smi">eNotifyAction</span>    <span class="pl-s1">eAction</span>,
+                                    <span class="pl-smi">uint32_t</span> <span class="pl-c1">*</span>       <span class="pl-s1">pulPreviousNotificationValue</span>  )</pre></div>
 <p>发送任务通知的关键函数的参数：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%8F%91%E9%80%81%E4%BB%BB%E5%8A%A1%E9%80%9A%E7%9F%A5%E5%85%B3%E9%94%AE%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%8F%91%E9%80%81%E4%BB%BB%E5%8A%A1%E9%80%9A%E7%9F%A5%E5%85%B3%E9%94%AE%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png" alt="" style="max-width: 100%;"></a></p>
 <p>任务通知方式枚举：</p>
-<pre lang="c" class="notranslate"><code class="notranslate">typedef  enum
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-k">typedef</span>  <span class="pl-k">enum</span>
 {    
-     eNoAction = 0,              /* 无操作 */
-     eSetBits                    /* 更新指定bit */
-     eIncrement                  /* 通知值加一 */
-     eSetValueWithOverwrite      /* 覆写的方式更新通知值 */
-     eSetValueWithoutOverwrite   /* 不覆写通知值 */
-} eNotifyAction;
-</code></pre>
+     <span class="pl-s1">eNoAction</span> <span class="pl-c1">=</span> <span class="pl-c1">0</span>,              <span class="pl-c">/* 无操作 */</span>
+     <span class="pl-s1">eSetBits</span>                    <span class="pl-c">/* 更新指定bit */</span>
+     <span class="pl-s1">eIncrement</span>                  <span class="pl-c">/* 通知值加一 */</span>
+     <span class="pl-s1">eSetValueWithOverwrite</span>      <span class="pl-c">/* 覆写的方式更新通知值 */</span>
+     <span class="pl-s1">eSetValueWithoutOverwrite</span>   <span class="pl-c">/* 不覆写通知值 */</span>
+} <span class="pl-smi">eNotifyAction</span>;</pre></div>
 <h4>3、接收任务通知函数</h4>
 <p>答：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E6%8E%A5%E6%94%B6%E4%BB%BB%E5%8A%A1%E9%80%9A%E7%9F%A5%E5%87%BD%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E6%8E%A5%E6%94%B6%E4%BB%BB%E5%8A%A1%E9%80%9A%E7%9F%A5%E5%87%BD%E6%95%B0.png" alt="" style="max-width: 100%;"></a></p>
@@ -929,33 +888,30 @@ xQueueGenericSend((QueueHandle_t)( xSemaphore ), NULL, semGIVE_BLOCK_TIME, queue
 <li>当任务通知用于事件标志组或队列时，使用函数 xTaskNotifyWait() 来获取。</li>
 </ul>
 <p>ulTaskNotifyTake()函数：</p>
-<pre lang="c" class="notranslate"><code class="notranslate">#define     ulTaskNotifyTake( xClearCountOnExit  ,   xTicksToWait )
-            ulTaskGenericNotifyTake( ( tskDEFAULT_INDEX_TO_NOTIFY ),
-                                     ( xClearCountOnExit ),
-                                     ( xTicksToWait ) )
-</code></pre>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-k">#define</span>     <span class="pl-en">ulTaskNotifyTake</span>( <span class="pl-s1">xClearCountOnExit</span>  ,   <span class="pl-s1">xTicksToWait</span> )
+            <span class="pl-en">ulTaskGenericNotifyTake</span>( ( <span class="pl-s1">tskDEFAULT_INDEX_TO_NOTIFY</span> ),
+                                     ( <span class="pl-s1">xClearCountOnExit</span> ),
+                                     ( <span class="pl-s1">xTicksToWait</span> ) )</pre></div>
 <p>此函数用于接收任务通知值，可以设置在退出此函数的时候将任务通知值清零或者减一。</p>
 <p>函数参数：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E6%8E%A5%E6%94%B6%E4%BB%BB%E5%8A%A1%E9%80%9A%E7%9F%A5%E5%80%BC%E5%87%BD%E6%95%B01%E5%8F%82%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E6%8E%A5%E6%94%B6%E4%BB%BB%E5%8A%A1%E9%80%9A%E7%9F%A5%E5%80%BC%E5%87%BD%E6%95%B01%E5%8F%82%E6%95%B0.png" alt="" style="max-width: 100%;"></a></p>
 <p>函数返回值：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E6%8E%A5%E6%94%B6%E4%BB%BB%E5%8A%A1%E9%80%9A%E7%9F%A5%E5%80%BC%E5%87%BD%E6%95%B01%E8%BF%94%E5%9B%9E%E5%80%BC.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E6%8E%A5%E6%94%B6%E4%BB%BB%E5%8A%A1%E9%80%9A%E7%9F%A5%E5%80%BC%E5%87%BD%E6%95%B01%E8%BF%94%E5%9B%9E%E5%80%BC.png" alt="" style="max-width: 100%;"></a></p>
 <p>xTaskNotifyWait()函数：</p>
-<pre lang="C" class="notranslate"><code class="notranslate">#define     xTaskNotifyWait(    ulBitsToClearOnEntry,
-                                ulBitsToClearOnExit,
-                                pulNotificationValue,
-                                xTicksToWait) 
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-k">#define</span>     <span class="pl-en">xTaskNotifyWait</span>(    <span class="pl-s1">ulBitsToClearOnEntry</span>,
+                                <span class="pl-s1">ulBitsToClearOnExit</span>,
+                                <span class="pl-s1">pulNotificationValue</span>,
+                                <span class="pl-s1">xTicksToWait</span>) 
             xTaskGenericNotifyWait(   tskDEFAULT_INDEX_TO_NOTIFY,
-                                      ( ulBitsToClearOnEntry ),
-                                      ( ulBitsToClearOnExit ),
-                                      ( pulNotificationValue ),
-                                      ( xTicksToWait )         ) 
-</code></pre>
-<pre lang="c" class="notranslate"><code class="notranslate">BaseType_t     xTaskGenericNotifyWait(     UBaseType_t     uxIndexToWaitOn,
-                                           uint32_t        ulBitsToClearOnEntry,
-                                           uint32_t        ulBitsToClearOnExit,
-                                           uint32_t *      pulNotificationValue,
-                                           TickType_t      xTicksToWait	    ); 
-</code></pre>
+                                      ( <span class="pl-s1">ulBitsToClearOnEntry</span> ),
+                                      ( <span class="pl-s1">ulBitsToClearOnExit</span> ),
+                                      ( <span class="pl-s1">pulNotificationValue</span> ),
+                                      ( <span class="pl-s1">xTicksToWait</span> )         ) </pre></div>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-smi">BaseType_t</span>     <span class="pl-en">xTaskGenericNotifyWait</span>(     <span class="pl-smi">UBaseType_t</span>     <span class="pl-s1">uxIndexToWaitOn</span>,
+                                           <span class="pl-smi">uint32_t</span>        <span class="pl-s1">ulBitsToClearOnEntry</span>,
+                                           <span class="pl-smi">uint32_t</span>        <span class="pl-s1">ulBitsToClearOnExit</span>,
+                                           <span class="pl-smi">uint32_t</span> <span class="pl-c1">*</span>      <span class="pl-s1">pulNotificationValue</span>,
+                                           <span class="pl-smi">TickType_t</span>      <span class="pl-s1">xTicksToWait</span>	    ); </pre></div>
 <p>函数参数：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E6%8E%A5%E6%94%B6%E4%BB%BB%E5%8A%A1%E9%80%9A%E7%9F%A5%E5%80%BC%E5%87%BD%E6%95%B02%E5%8F%82%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E6%8E%A5%E6%94%B6%E4%BB%BB%E5%8A%A1%E9%80%9A%E7%9F%A5%E5%80%BC%E5%87%BD%E6%95%B02%E5%8F%82%E6%95%B0.png" alt="" style="max-width: 100%;"></a></p>
 <p>函数返回值：</p>
@@ -1040,58 +996,53 @@ xQueueGenericSend((QueueHandle_t)( xSemaphore ), NULL, semGIVE_BLOCK_TIME, queue
 <h3>四、软件定时器结构体成员介绍</h3>
 <h4>1、软件定时器结构体介绍</h4>
 <p>答：</p>
-<pre lang="c" class="notranslate"><code class="notranslate">typedef   struct
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-k">typedef</span>   <span class="pl-k">struct</span>
 {
-       const char *                  pcTimerName              /* 软件定时器名字 */
-       ListItem_t                    xTimerListItem           /* 软件定时器列表项 */
-       TickType_t                    xTimerPeriodInTicks;     /* 软件定时器的周期 */
-       void *                        pvTimerID                /* 软件定时器的ID */
-       TimerCallbackFunction_t       pxCallbackFunction;      /* 软件定时器的回调函数 */
-       #if ( configUSE_TRACE_FACILITY == 1 )
-              UBaseType_t 			uxTimerNumber            /*  软件定时器的编号，调试用  */
-       #endif
-       uint8_t                        ucStatus;               /*  软件定时器的状态  */
-} xTIMER;
-</code></pre>
+       <span class="pl-k">const</span> <span class="pl-smi">char</span> <span class="pl-c1">*</span>                  <span class="pl-c1">pcTimerName</span>              <span class="pl-c">/* 软件定时器名字 */</span>
+       <span class="pl-smi">ListItem_t</span>                    <span class="pl-c1">xTimerListItem</span>           <span class="pl-c">/* 软件定时器列表项 */</span>
+       <span class="pl-smi">TickType_t</span>                    <span class="pl-c1">xTimerPeriodInTicks</span>;     <span class="pl-c">/* 软件定时器的周期 */</span>
+       <span class="pl-smi">void</span> <span class="pl-c1">*</span>                        <span class="pl-c1">pvTimerID</span>                <span class="pl-c">/* 软件定时器的ID */</span>
+       <span class="pl-smi">TimerCallbackFunction_t</span>       <span class="pl-c1">pxCallbackFunction</span>;      <span class="pl-c">/* 软件定时器的回调函数 */</span>
+       <span class="pl-k">#if</span> ( <span class="pl-s1">configUSE_TRACE_FACILITY</span> <span class="pl-c1">==</span> <span class="pl-c1">1</span> )
+              <span class="pl-smi">UBaseType_t</span> 			<span class="pl-c1">uxTimerNumber</span>            <span class="pl-c">/*  软件定时器的编号，调试用  */</span>
+       <span class="pl-k">#endif</span>
+       <span class="pl-smi">uint8_t</span>                        <span class="pl-c1">ucStatus</span>;               <span class="pl-c">/*  软件定时器的状态  */</span>
+} <span class="pl-smi">xTIMER</span>;</pre></div>
 <h3>五、FreeRTOS软件定时器相关API函数</h3>
 <h4>1、软件定时器相关函数</h4>
 <p>答：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E8%BD%AF%E4%BB%B6%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E8%BD%AF%E4%BB%B6%E5%AE%9A%E6%97%B6%E5%99%A8%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0.png" alt="" style="max-width: 100%;"></a></p>
 <h4>2、创建软件定时器函数</h4>
 <p>答：</p>
-<pre lang="c" class="notranslate"><code class="notranslate">TimerHandle_t   xTimerCreate(     const char * const        pcTimerName,
-                                  const TickType_t          xTimerPeriodInTicks,
-                                  const UBaseType_t         uxAutoReload,
-                                  void * const              pvTimerID,
-                                  TimerCallbackFunction_t   pxCallbackFunction  ); 
-</code></pre>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-smi">TimerHandle_t</span>   <span class="pl-en">xTimerCreate</span>(     <span class="pl-k">const</span> <span class="pl-smi">char</span> <span class="pl-c1">*</span> <span class="pl-k">const</span>        <span class="pl-s1">pcTimerName</span>,
+                                  <span class="pl-k">const</span> <span class="pl-smi">TickType_t</span>          <span class="pl-s1">xTimerPeriodInTicks</span>,
+                                  <span class="pl-k">const</span> <span class="pl-smi">UBaseType_t</span>         <span class="pl-s1">uxAutoReload</span>,
+                                  <span class="pl-smi">void</span> <span class="pl-c1">*</span> <span class="pl-k">const</span>              <span class="pl-s1">pvTimerID</span>,
+                                  <span class="pl-smi">TimerCallbackFunction_t</span>   <span class="pl-s1">pxCallbackFunction</span>  ); </pre></div>
 <p>函数参数：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%9B%E5%BB%BA%E8%BD%AF%E4%BB%B6%E5%AE%9A%E6%97%B6%E5%99%A8%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%9B%E5%BB%BA%E8%BD%AF%E4%BB%B6%E5%AE%9A%E6%97%B6%E5%99%A8%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png" alt="" style="max-width: 100%;"></a></p>
 <p>函数返回值：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%9B%E5%BB%BA%E8%BD%AF%E4%BB%B6%E5%AE%9A%E6%97%B6%E5%99%A8%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%88%9B%E5%BB%BA%E8%BD%AF%E4%BB%B6%E5%AE%9A%E6%97%B6%E5%99%A8%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png" alt="" style="max-width: 100%;"></a></p>
 <h4>3、开启软件定时器函数</h4>
 <p>答：</p>
-<pre lang="C" class="notranslate"><code class="notranslate">BaseType_t     xTimerStart(   TimerHandle_t        xTimer,
-                              const TickType_t     xTicksToWait  ); 
-</code></pre>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-smi">BaseType_t</span>     <span class="pl-en">xTimerStart</span>(   <span class="pl-smi">TimerHandle_t</span>        <span class="pl-s1">xTimer</span>,
+                              <span class="pl-k">const</span> <span class="pl-smi">TickType_t</span>     <span class="pl-s1">xTicksToWait</span>  ); </pre></div>
 <p>函数参数：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%BC%80%E5%90%AF%E8%BD%AF%E4%BB%B6%E5%AE%9A%E6%97%B6%E5%99%A8%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%BC%80%E5%90%AF%E8%BD%AF%E4%BB%B6%E5%AE%9A%E6%97%B6%E5%99%A8%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png" alt="" style="max-width: 100%;"></a></p>
 <p>函数返回值：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%BC%80%E5%90%AF%E8%BD%AF%E4%BB%B6%E5%AE%9A%E6%97%B6%E5%99%A8%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%BC%80%E5%90%AF%E8%BD%AF%E4%BB%B6%E5%AE%9A%E6%97%B6%E5%99%A8%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png" alt="" style="max-width: 100%;"></a></p>
 <h4>4、停止软件定时器函数</h4>
 <p>答：</p>
-<pre lang="C" class="notranslate"><code class="notranslate">BaseType_t     xTimerStop(   TimerHandle_t      xTimer,
-                             const TickType_t 	xTicksToWait   ); 
-</code></pre>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-smi">BaseType_t</span>     <span class="pl-en">xTimerStop</span>(   <span class="pl-smi">TimerHandle_t</span>      <span class="pl-s1">xTimer</span>,
+                             <span class="pl-k">const</span> <span class="pl-smi">TickType_t</span> 	<span class="pl-s1">xTicksToWait</span>   ); </pre></div>
 <p>函数参数：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%81%9C%E6%AD%A2%E8%BD%AF%E4%BB%B6%E5%AE%9A%E6%97%B6%E5%99%A8%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%81%9C%E6%AD%A2%E8%BD%AF%E4%BB%B6%E5%AE%9A%E6%97%B6%E5%99%A8%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png" alt="" style="max-width: 100%;"></a></p>
 <p>函数返回值：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%81%9C%E6%AD%A2%E8%BD%AF%E4%BB%B6%E5%AE%9A%E6%97%B6%E5%99%A8%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%81%9C%E6%AD%A2%E8%BD%AF%E4%BB%B6%E5%AE%9A%E6%97%B6%E5%99%A8%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png" alt="" style="max-width: 100%;"></a></p>
 <h4>5、复位软件定时器函数</h4>
 <p>答：</p>
-<pre lang="c" class="notranslate"><code class="notranslate">BaseType_t   xTimerReset( TimerHandle_t        xTimer,
-                          const TickType_t     xTicksToWait); 
-</code></pre>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-smi">BaseType_t</span>   <span class="pl-en">xTimerReset</span>( <span class="pl-smi">TimerHandle_t</span>        <span class="pl-s1">xTimer</span>,
+                          <span class="pl-k">const</span> <span class="pl-smi">TickType_t</span>     <span class="pl-s1">xTicksToWait</span>); </pre></div>
 <p>该函数将使软件定时器重新启动，复位后的软件定时器以复位是的时刻作为开启时刻重新定时。</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%A4%8D%E4%BD%8D%E8%BD%AF%E4%BB%B6%E5%AE%9A%E6%97%B6%E5%99%A8%E5%87%BD%E6%95%B0%E6%95%88%E6%9E%9C.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%A4%8D%E4%BD%8D%E8%BD%AF%E4%BB%B6%E5%AE%9A%E6%97%B6%E5%99%A8%E5%87%BD%E6%95%B0%E6%95%88%E6%9E%9C.png" alt="" style="max-width: 100%;"></a></p>
 <p>函数参数：</p>
@@ -1100,10 +1051,9 @@ xQueueGenericSend((QueueHandle_t)( xSemaphore ), NULL, semGIVE_BLOCK_TIME, queue
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%A4%8D%E4%BD%8D%E8%BD%AF%E4%BB%B6%E5%AE%9A%E6%97%B6%E5%99%A8%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%A4%8D%E4%BD%8D%E8%BD%AF%E4%BB%B6%E5%AE%9A%E6%97%B6%E5%99%A8%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png" alt="" style="max-width: 100%;"></a></p>
 <h4>6、更改软件定时器超时时间函数</h4>
 <p>答：</p>
-<pre lang="c" class="notranslate"><code class="notranslate">BaseType_t   xTimerChangePeriod( TimerHandle_t      xTimer,
-                                 const TickType_t   xNewPeriod,
-                                 const TickType_t   xTicksToWait );
-</code></pre>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-smi">BaseType_t</span>   <span class="pl-en">xTimerChangePeriod</span>( <span class="pl-smi">TimerHandle_t</span>      <span class="pl-s1">xTimer</span>,
+                                 <span class="pl-k">const</span> <span class="pl-smi">TickType_t</span>   <span class="pl-s1">xNewPeriod</span>,
+                                 <span class="pl-k">const</span> <span class="pl-smi">TickType_t</span>   <span class="pl-s1">xTicksToWait</span> );</pre></div>
 <p>函数参数：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E6%9B%B4%E6%94%B9%E8%BD%AF%E4%BB%B6%E5%AE%9A%E6%97%B6%E5%99%A8%E8%B6%85%E6%97%B6%E6%97%B6%E9%97%B4%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E6%9B%B4%E6%94%B9%E8%BD%AF%E4%BB%B6%E5%AE%9A%E6%97%B6%E5%99%A8%E8%B6%85%E6%97%B6%E6%97%B6%E9%97%B4%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png" alt="" style="max-width: 100%;"></a></p>
 <p>函数返回值：</p>
@@ -1192,9 +1142,8 @@ xQueueGenericSend((QueueHandle_t)( xSemaphore ), NULL, semGIVE_BLOCK_TIME, queue
 <h5>heap_1的特点：</h5>
 <p>heap_1只实现了pvPortMalloc，没有实现vPortFree；也就是说，它只能申请内存，无法释放内存！如果你的工程，创建好的任务、队列、信号量等都不需要被删除，那么可以使用heap_1内存管理算法。</p>
 <p>heap_1的实现最为简单，管理的内存堆是一个数组，在申请内存的时候， heap_1 内存管理算法只是简单地从数组中分出合适大小的内存，内存堆数组的定义如下所示 ：</p>
-<pre lang="c" class="notranslate"><code class="notranslate">/* 定义一个大数组作为 FreeRTOS 管理的内存堆 */
-static uint8_t ucHeap[ configTOTAL_HEAP_SIZE ];
-</code></pre>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-c">/* 定义一个大数组作为 FreeRTOS 管理的内存堆 */</span>
+<span class="pl-k">static</span> <span class="pl-smi">uint8_t</span> <span class="pl-s1">ucHeap</span>[ <span class="pl-s1">configTOTAL_HEAP_SIZE</span> ];</pre></div>
 <h5>heap_1内存管理算法的分配过程如下图所示：</h5>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/heap_1%E7%AE%97%E6%B3%95%E8%BF%87%E7%A8%8B.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/heap_1%E7%AE%97%E6%B3%95%E8%BF%87%E7%A8%8B.png" alt="" style="max-width: 100%;"></a></p>
 <p>注意： heap_1内存管理算法，只能申请无法释放！</p>
@@ -1238,35 +1187,30 @@ static uint8_t ucHeap[ configTOTAL_HEAP_SIZE ];
 <p>heap_5 内存管理算法默认并没有定义内存堆 ， 需要用户手动指定内存区域的信息，对其进行初始化。</p>
 <h5>怎么指定一块内存？</h5>
 <p>使用如下结构体：</p>
-<pre lang="c" class="notranslate"><code class="notranslate">typedef struct HeapRegion
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-k">typedef</span> <span class="pl-k">struct</span> <span class="pl-smi">HeapRegion</span>
 {   
-     uint8_t *     pucStartAddress;          /* 内存区域的起始地址 */
-     size_t        xSizeInBytes;             /* 内存区域的大小，单位：字节 */
-} HeapRegion_t; 
-</code></pre>
+     <span class="pl-smi">uint8_t</span> <span class="pl-c1">*</span>     <span class="pl-c1">pucStartAddress</span>;          <span class="pl-c">/* 内存区域的起始地址 */</span>
+     <span class="pl-smi">size_t</span>        <span class="pl-c1">xSizeInBytes</span>;             <span class="pl-c">/* 内存区域的大小，单位：字节 */</span>
+} <span class="pl-smi">HeapRegion_t</span>; </pre></div>
 <h5>怎么指定多块且不连续的内存？</h5>
-<pre lang="c" class="notranslate"><code class="notranslate">Const  HeapRegion_t  xHeapRegions[] = 
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-smi">Const</span>  <span class="pl-s1">HeapRegion_t</span>  <span class="pl-s1">xHeapRegions</span>[] <span class="pl-c1">=</span> 
 {
-    {(uint8_t *)0x80000000, 0x10000 }, 	    /* 内存区域 1 */
-    { (uint8_t *)0x90000000, 0xA0000 }, 	/* 内存区域 2 */
-    { NULL, 0 }                             /* 数组终止标志 */
+    {(<span class="pl-smi">uint8_t</span> <span class="pl-c1">*</span>)<span class="pl-c1">0x80000000</span>, <span class="pl-c1">0x10000</span> }, 	    <span class="pl-c">/* 内存区域 1 */</span>
+    { (<span class="pl-smi">uint8_t</span> <span class="pl-c1">*</span>)<span class="pl-c1">0x90000000</span>, <span class="pl-c1">0xA0000</span> }, 	<span class="pl-c">/* 内存区域 2 */</span>
+    { <span class="pl-c1">NULL</span>, <span class="pl-c1">0</span> }                             <span class="pl-c">/* 数组终止标志 */</span>
 };
-vPortDefineHeapRegions(xHeapRegions); 
-</code></pre>
+<span class="pl-en">vPortDefineHeapRegions</span>(<span class="pl-s1">xHeapRegions</span>); </pre></div>
 <h5>适用场景：</h5>
 <p>在嵌入式系统中，那些内存的地址并不连续的场景。</p>
 <h3>三、FreeRTOS内存管理相关API函数</h3>
 <h4>1、FreeRTOS内存管理相关函数</h4>
 <p>答：</p>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%E7%9B%B8%E5%85%B3%E5%87%BD%E6%95%B0.png" alt="" style="max-width: 100%;"></a></p>
-<pre lang="C" class="notranslate"><code class="notranslate">void * pvPortMalloc( size_t xWantedSize );
-</code></pre>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-smi">void</span> <span class="pl-c1">*</span> <span class="pl-en">pvPortMalloc</span>( <span class="pl-smi">size_t</span> <span class="pl-s1">xWantedSize</span> );</pre></div>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/pvPortMalloc%E5%8F%82%E6%95%B0%E4%B8%8E%E8%BF%94%E5%9B%9E%E5%80%BC.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/pvPortMalloc%E5%8F%82%E6%95%B0%E4%B8%8E%E8%BF%94%E5%9B%9E%E5%80%BC.png" alt="" style="max-width: 100%;"></a></p>
-<pre lang="C" class="notranslate"><code class="notranslate">void vPortFree( void * pv );
-</code></pre>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-smi">void</span> <span class="pl-en">vPortFree</span>( <span class="pl-smi">void</span> <span class="pl-c1">*</span> <span class="pl-s1">pv</span> );</pre></div>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/vPortFree%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/vPortFree%E5%87%BD%E6%95%B0%E5%8F%82%E6%95%B0.png" alt="" style="max-width: 100%;"></a></p>
-<pre lang="C" class="notranslate"><code class="notranslate">size_t xPortGetFreeHeapSize( void );
-</code></pre>
+<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-smi">size_t</span> <span class="pl-en">xPortGetFreeHeapSize</span>( <span class="pl-smi">void</span> );</pre></div>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/xPortGetFreeHeapSize%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/xPortGetFreeHeapSize%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E%E5%80%BC.png" alt="" style="max-width: 100%;"></a></p></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 
@@ -1292,7 +1236,7 @@ if(""!=""){
 </script></div>
 </body>
 <script>
-var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z'};
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z', 'copy': 'M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z', 'check': 'M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z'};
 var utterancesLoad=0;
 
 let themeSettings={
@@ -1365,7 +1309,70 @@ function iFrameLoading(){
     }
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+    const createClipboardHTML = (codeContent, additionalClasses = '') => `
+        <pre class="notranslate"><code class="notranslate">${codeContent}</code></pre>
+        <div class="clipboard-container position-absolute right-0 top-0 ${additionalClasses}">
+            <clipboard-copy class="ClipboardButton btn m-2 p-0" role="button" style="display: inherit;">
+                <svg height="16" width="16" class="octicon octicon-copy m-2"><path d="${IconList["copy"]}"></path></svg>
+                <svg height="16" width="16" class="octicon octicon-check color-fg-success m-2 d-none"><path d="${IconList["check"]}"></path></svg>
+            </clipboard-copy>
+            <div class="copy-feedback">Copied!</div>
+        </div>
+    `;
 
+    const handleCodeElements = (selector = '') => {
+        document.querySelectorAll(selector).forEach(codeElement => {
+            const codeContent = codeElement.innerHTML;
+            const newStructure = document.createElement('div');
+            newStructure.className = 'snippet-clipboard-content position-relative overflow-auto';
+            newStructure.innerHTML = createClipboardHTML(codeContent);
+
+            const parentElement = codeElement.parentElement;
+            if (selector.includes('highlight')) {
+                parentElement.insertBefore(newStructure, codeElement.nextSibling);
+                parentElement.removeChild(codeElement);
+            } else {
+                parentElement.parentElement.replaceChild(newStructure, parentElement);
+            }
+        });
+    };
+
+    handleCodeElements('pre.notranslate > code.notranslate');
+    handleCodeElements('div.highlight > pre.notranslate');
+
+    let currentFeedback = null;
+    document.querySelectorAll('clipboard-copy').forEach(copyButton => {
+        copyButton.addEventListener('click', () => {
+            const codeContent = copyButton.closest('.snippet-clipboard-content').innerText;
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = codeContent;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempTextArea);
+
+            const copyIcon = copyButton.querySelector('.octicon-copy');
+            const checkIcon = copyButton.querySelector('.octicon-check');
+            const copyFeedback = copyButton.nextElementSibling;
+
+            if (currentFeedback && currentFeedback !== copyFeedback) {currentFeedback.style.display = 'none';}
+            currentFeedback = copyFeedback;
+
+            copyIcon.classList.add('d-none');
+            checkIcon.classList.remove('d-none');
+            copyFeedback.style.display = 'block';
+            copyButton.style.borderColor = 'var(--color-success-fg)';
+
+            setTimeout(() => {
+                copyIcon.classList.remove('d-none');
+                checkIcon.classList.add('d-none');
+                copyFeedback.style.display = 'none';
+                copyButton.style.borderColor = '';
+            }, 2000);
+        });
+    });
+});
 
 </script>
 
