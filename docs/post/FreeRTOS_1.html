@@ -379,7 +379,7 @@
 <meta property="og:url" content="https://Aloner63.github.io/post/FreeRTOS_1.html">
 <meta property="og:image" content="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/1340761045.jpeg">
 <title>FreeRTOS_1</title>
-<link href="//unpkg.com/@wooorm/starry-night@2.1.1/style/both.css" rel="stylesheet" />
+
 
 
 </head>
@@ -1044,18 +1044,20 @@ xTaskCreate(taskFunc, "Worker", 1000, NULL, 1, &amp;worker2Handle);
 <h4><a id="user-content-critical-section-protection-functions"></a>4.临界段代码保护函数</h4>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%B8%B4%E7%95%8C%E6%AE%B5%E4%BF%9D%E6%8A%A4%E5%87%BD%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%B8%B4%E7%95%8C%E6%AE%B5%E4%BF%9D%E6%8A%A4%E5%87%BD%E6%95%B0.png" alt="临界段保护函数" style="max-width: 100%;"></a></p>
 <p>任务级临界区调用格式示例：</p>
-<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-en">taskENTER_CRITICAL</span>();
+<pre lang="c" class="notranslate"><code class="notranslate">taskENTER_CRITICAL();
 {
-	... ... <span class="pl-c">/* 临界区 */</span>
+	... ... /* 临界区 */
 }
-<span class="pl-en">taskENTER_CRITICAL</span>()</pre></div>
+taskENTER_CRITICAL()
+</code></pre>
 <p>中断级临界区调用格式示例：</p>
-<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-smi">uint32_t</span> <span class="pl-s1">save_status</span>;
-<span class="pl-s1">save_status</span> <span class="pl-c1">=</span> <span class="pl-en">taskENTER_CRITICAL_FROM_ISR</span>();
+<pre lang="c" class="notranslate"><code class="notranslate">uint32_t save_status;
+save_status = taskENTER_CRITICAL_FROM_ISR();
 {
-	... ... <span class="pl-c">/* 临界区 */</span>
+	... ... /* 临界区 */
 }
-<span class="pl-en">taskENTER_CRITICAL_FROM_ISR</span>(<span class="pl-s1">save_status</span>);</pre></div>
+taskENTER_CRITICAL_FROM_ISR(save_status);
+</code></pre>
 <h4><a id="user-content-critical-section-function-features"></a>5.临界段代码保护函数使用特点</h4>
 <ol>
 <li>成对使用。</li>
@@ -1066,11 +1068,12 @@ xTaskCreate(taskFunc, "Worker", 1000, NULL, 1, &amp;worker2Handle);
 <h4><a id="user-content-scheduler-suspend-resume-functions-1"></a>1.任务调度器挂起和恢复函数</h4>
 <p><a target="_blank" rel="noopener noreferrer nofollow" href="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6%E5%99%A8%E6%8C%82%E8%B5%B7%E5%92%8C%E6%81%A2%E5%A4%8D%E5%87%BD%E6%95%B0.png"><img src="https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/freertos/%E4%BB%BB%E5%8A%A1%E8%B0%83%E5%BA%A6%E5%99%A8%E6%8C%82%E8%B5%B7%E5%92%8C%E6%81%A2%E5%A4%8D%E5%87%BD%E6%95%B0.png" alt="任务调度器挂起和恢复函数" style="max-width: 100%;"></a></p>
 <p>使用格式示范：</p>
-<div class="highlight highlight-source-c"><pre class="notranslate"><span class="pl-en">vTaskSuspendAll</span>();
+<pre lang="c" class="notranslate"><code class="notranslate">vTaskSuspendAll();
 {
-	... ... <span class="pl-c">/* 内容 */</span>
+	... ... /* 内容 */
 }
-<span class="pl-en">vTaskSuspendAll</span>();</pre></div>
+vTaskSuspendAll();
+</code></pre>
 <h4><a id="user-content-scheduler-suspend-resume-features"></a>2.任务调度器挂起和恢复的特点</h4>
 <ol>
 <li>与临界区不一样的是，挂起任务调度器，未关闭中断。</li>
