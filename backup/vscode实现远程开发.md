@@ -59,6 +59,8 @@ Host ubuntu
 生成秘钥对
 ![](https://raw.githubusercontent.com/Aloner63/mymm/typora/typora/image-20250311180242242.png)
 
-- 打开生成的秘钥保存路径，拷贝 `id_rsa.pub` 内容，添加到到云服务器的 `~/.ssh/authorized_keys` 文件后面。
+- 打开生成的秘钥保存路径，拷贝 `id_rsa.pub` 内容，添加到到云服务器的 `~/.ssh/authorized_keys` 文件后面（注意空格和中文换行符）。
+
+注意：密钥登录的总开关要打开（/etc/ssh/sshd_config 中的PubkeyAuthentication）
 
 重新连接，不需要密码
